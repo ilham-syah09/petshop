@@ -2,16 +2,20 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-function gambar($idMenu)
+function gambar($idBaranag)
 {
 	$CI = &get_instance();
 
-	$CI->db->where('idMenu', $idMenu);
+	$CI->db->where('idBarang', $idBaranag);
 
 	$CI->db->order_by('gambar', 'RANDOM');
 	$data = $CI->db->get('gambar')->row();
 
-	return $data->gambar;
+	if ($data) {
+		return $data->gambar;
+	} else {
+		return '';
+	}
 }
 
 function hari($hari)

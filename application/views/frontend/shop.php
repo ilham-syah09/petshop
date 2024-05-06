@@ -1,169 +1,261 @@
-<!-- Shop Start -->
-<div class="container-fluid pt-5">
-	<div class="row px-xl-5">
-		<!-- Shop Sidebar Start -->
-		<div class="col-lg-3 col-md-12">
-			<!-- Price Start -->
-			<div class="border-bottom mb-4 pb-4">
-				<h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
-				<form>
-					<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="price-1" value="1" <?= ($filter == 1) ? 'checked' : ''; ?>>
-						<label class="custom-control-label" for="price-1">All Price</label>
-						<span class="badge border font-weight-normal"><?= $countProduct[1]; ?></span>
+<div class="ltn__product-area ltn__product-gutter">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8 order-lg-2 mb-120">
+				<div class="ltn__shop-options">
+					<ul>
+						<li>
+							<div class="showing-product-number text-right">
+								<span> <?= 'Showing ' . count($products) . ' of ' . $total_rows . ' result'; ?></span>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="tab-content">
+					<div class="tab-pane fade active show" id="liton_product_grid">
+						<div class="ltn__product-tab-content-inner ltn__product-grid-view">
+							<div class="row">
+								<!-- ltn__product-item -->
+								<?php foreach ($products as $product) : ?>
+									<div class="col-xl-4 col-sm-6 col-6">
+										<div class="ltn__product-item ltn__product-item-3 text-center">
+											<div class="product-img">
+												<a href="<?= base_url('detail/' . $product->id); ?>"><img src="<?= base_url('upload/gambar/' . gambar($product->id)); ?>" alt="<?= $product->nama_barang; ?>"></a>
+												<div class="product-hover-action">
+													<ul>
+														<li>
+															<a href="#" title="Quick View" data-toggle="modal" data-target="<?= '#quick_view_modal_' . $product->id; ?>">
+																<i class="far fa-eye"></i>
+															</a>
+														</li>
+														<?php if ($product->stok > 0) : ?>
+															<li>
+																<a href="#" title="Add to Cart" data-toggle="modal" onclick="addToCart(`<?= $product->id; ?>`, <?= $product->stok; ?>, 'no_cek')">
+																	<i class="fas fa-shopping-cart"></i>
+																</a>
+															</li>
+														<?php endif; ?>
+													</ul>
+												</div>
+											</div>
+											<div class="product-info">
+												<div class="product-ratting">
+													<ul>
+														<li><a href="#"><i class="fas fa-star"></i></a></li>
+														<li><a href="#"><i class="fas fa-star"></i></a></li>
+														<li><a href="#"><i class="fas fa-star"></i></a></li>
+														<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+														<li><a href="#"><i class="far fa-star"></i></a></li>
+													</ul>
+												</div>
+												<h2 class="product-title"><a href="<?= base_url('detail/' . $product->id); ?>"><?= $product->nama_barang; ?></a></h2>
+												<div class="product-price">
+													<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>
+												</div>
+											</div>
+										</div>
+									</div>
+								<?php endforeach; ?>
+							</div>
+						</div>
 					</div>
-					<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="price-2" value="2" <?= ($filter == 2) ? 'checked' : ''; ?>>
-						<label class="custom-control-label" for="price-2">
-							< Rp. 30.000</label>
-								<span class="badge border font-weight-normal"><?= $countProduct[2]; ?></span>
+				</div>
+				<div class="ltn__pagination-area text-center">
+					<div class="ltn__pagination">
+						<?= $paging; ?>
 					</div>
-					<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="price-3" value="3" <?= ($filter == 3) ? 'checked' : ''; ?>>
-						<label class="custom-control-label" for="price-3">Rp. 30.000 - Rp. 50.000</label>
-						<span class="badge border font-weight-normal"><?= $countProduct[3]; ?></span>
-					</div>
-					<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" class="custom-control-input" id="price-4" value="4" <?= ($filter == 4) ? 'checked' : ''; ?>>
-						<label class="custom-control-label" for="price-4">> Rp. 50.000</label>
-						<span class="badge border font-weight-normal"><?= $countProduct[4]; ?></span>
-					</div>
-					<div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-						<input type="checkbox" disabled class="custom-control-input" id="by-search" value="4" <?= ($filter != 1 && $filter != 2 && $filter != 3 && $filter != 4) ? 'checked' : ''; ?>>
-						<label class="custom-control-label" for="by-search">By search</label>
-					</div>
-				</form>
+				</div>
 			</div>
-			<!-- Price End -->
-		</div>
-		<!-- Shop Sidebar End -->
+			<div class="col-lg-4 mb-120">
+				<aside class="sidebar ltn__shop-sidebar">
+					<!-- Category Widget -->
+					<div class="widget ltn__menu-widget">
+						<h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
+						<ul>
+							<?php foreach ($kategori as $kat) : ?>
+								<li class="<?= ($kat->id == $kategori_id) ? 'product-price' : ''; ?>"><a href="<?= base_url('shop/') . $kat->id; ?>"><?= $kat->kategori; ?> <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
 
-		<!-- Shop Product Start -->
-		<div class="col-lg-9 col-md-12">
-			<div class="row pb-3">
-				<div class="col-12 pb-1">
-					<div class="row">
-						<div class="col-12">
-							<div class="d-flex align-items-center justify-content-between mb-4">
-								<div class="input-group">
-									<input type="text" class="form-control" placeholder="Search by name" id="input-search" value="<?= ($filter != 1 && $filter != 2 && $filter != 3 && $filter != 4) ? $filter : ''; ?>" autocomplete="off">
-									<div class="input-group-append">
-										<span class="input-group-text bg-transparent text-primary" id="btn-search">
-											<i class="fa fa-search"></i>
-										</span>
+					<!-- Top Rated Product Widget -->
+					<div class="widget ltn__top-rated-product-widget">
+						<h4 class="ltn__widget-title ltn__widget-title-border">Most Popular Products</h4>
+						<ul>
+							<?php foreach ($productsPopuler as $product) : ?>
+								<li>
+									<div class="top-rated-product-item clearfix">
+										<div class="top-rated-product-img">
+											<a href="<?= base_url('detail/' . $product->id); ?>">
+												<img src="<?= base_url('upload/gambar/' . gambar($product->id)); ?>" alt="<?= $product->nama_barang; ?>">
+											</a>
+										</div>
+										<div class="top-rated-product-info">
+											<div class="product-ratting">
+												<ul>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+												</ul>
+											</div>
+											<h6><a href="<?= base_url('detail/' . $product->id); ?>"><?= $product->nama_barang; ?></a></h6>
+											<div class="product-price">
+												<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>
+											</div>
+										</div>
+									</div>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- MODAL AREA START (Quick View Modal) -->
+<?php foreach ($products as $product) : ?>
+	<div class="modal fade" id="<?= 'quick_view_modal_' . $product->id; ?>" tabindex="-1">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						<!-- <i class="fas fa-times"></i> -->
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="ltn__quick-view-modal-inner">
+						<div class="modal-product-item">
+							<div class="row">
+								<div class="col-lg-6 col-12">
+									<div class="modal-product-img">
+										<img src="<?= base_url('upload/gambar/' . gambar($product->id)); ?>" alt="<?= $product->nama_barang; ?>">
+									</div>
+								</div>
+								<div class="col-lg-6 col-12">
+									<div class="modal-product-info">
+										<div class="product-ratting">
+											<ul>
+												<li><a href="#"><i class="fas fa-star"></i></a></li>
+												<li><a href="#"><i class="fas fa-star"></i></a></li>
+												<li><a href="#"><i class="fas fa-star"></i></a></li>
+												<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+												<li><a href="#"><i class="far fa-star"></i></a></li>
+												<li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
+											</ul>
+										</div>
+										<h3><?= $product->nama_barang; ?></h3>
+										<p><?= $product->deskripsi; ?></p>
+										<div class="product-price">
+											<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>
+										</div>
+										<div class="ltn__product-details-menu-2">
+											<ul>
+												<li>
+													<div class="cart-plus-minus">
+														<input type="text" value="1" name="qtybutton" class="cart-plus-minus-box" id="<?= 'qty_' . $product->id; ?>">
+													</div>
+												</li>
+												<li>
+													<a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart" data-toggle="modal" onclick="addToCart(`<?= $product->id; ?>`, <?= $product->stok; ?>, 'cek')">
+														<i class="fas fa-shopping-cart"></i>
+														<span>ADD TO CART</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<hr>
+										<div class="ltn__social-media">
+											<ul>
+												<li>Stok <?= $product->stok; ?></li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<?php foreach ($products as $product) : ?>
-					<div class="col-lg-4 col-6 pb-1">
-						<div class="card product-item border-0 mb-4">
-							<div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-								<img class="img-fluid w-100" src="<?= base_url('upload/gambar/' . gambar($product->id)); ?>" alt="<?= $product->nama_menu; ?>">
-							</div>
-							<div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-								<h6 class="text-truncate mb-3"><?= $product->nama_menu; ?></h6>
-								<div class="d-flex justify-content-center">
-									<h6><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></h6>
+			</div>
+		</div>
+	</div>
+<?php endforeach; ?>
+<!-- MODAL AREA END -->
+
+<!-- MODAL AREA START (Add To Cart Modal) -->
+<?php foreach ($products as $product) : ?>
+	<div class="modal fade" id="<?= 'add_to_cart_modal_' . $product->id; ?>" tabindex="-1">
+		<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="ltn__quick-view-modal-inner">
+						<div class="modal-product-item">
+							<div class="row">
+								<div class="col-12">
+									<div class="modal-product-info">
+										<h5><a href="product-details.html"><?= $product->nama_barang; ?></a></h5>
+										<p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Cart</p>
+										<div class="btn-wrapper">
+											<a href="<?= base_url('cart'); ?>" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+											<a href="<?= base_url('checkout'); ?>" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="card-footer d-flex justify-content-between bg-light border">
-								<a href="<?= base_url('detail/' . $product->id); ?>" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-								<a href="javascript:void(0)" class="btn btn-sm text-dark p-0"><i class="text-primary mr-1"><?= $product->stok; ?></i>Stock</a>
-								<?php if ($product->stok > 0) : ?>
-									<form action="<?= base_url('addToCart'); ?>" method="POST">
-										<input type="hidden" name="idMenu" value="<?= $product->id; ?>">
-										<button type="submit" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</button>
-									</form>
-								<?php else : ?>
-									<a href="javascript:void(0)" class="btn btn-sm text-muted p-0" data-toggle="tooltip" title="Sold Out"><i class="fas fa-shopping-cart text-muted mr-1"></i><del>Add To Cart</del></a>
-								<?php endif; ?>
 							</div>
 						</div>
 					</div>
-				<?php endforeach; ?>
-
-				<div class="col-12 pb-1 d-flex justify-content-between">
-					<div class="text-primary my-auto">
-						<?= 'Total product : ' . $total_rows; ?>
-					</div>
-					<nav aria-label="Page navigation">
-						<?= $paging; ?>
-					</nav>
 				</div>
 			</div>
 		</div>
-		<!-- Shop Product End -->
 	</div>
-</div>
-<!-- Shop End -->
+<?php endforeach; ?>
+<!-- MODAL AREA END -->
 
 <script>
-	$('#price-1').on('click', function() {
-		$('#price-2').prop('checked', false);
-		$('#price-3').prop('checked', false);
-		$('#price-4').prop('checked', false);
+	function addToCart(id, stok, qty) {
+		if (qty == 'cek') {
+			qty = $(`#qty_${id}`).val();
 
-		let filter = $(this).val();
+			if (qty == 0) {
+				toastr.warning('Quantity cannot be empty');
 
-		setTimeout(function() {
-			document.location.href = `<?= base_url('shop/' . $kategori_ini); ?>/${filter}`;
-		}, 1000);
-	});
+				return 0;
+			} else if (qty > stok) {
+				toastr.warning('Quantity must not exceed stock');
 
-	$('#price-2').on('click', function() {
-		$('#price-1').prop('checked', false);
-		$('#price-3').prop('checked', false);
-		$('#price-4').prop('checked', false);
-
-		let filter = $(this).val();
-
-		setTimeout(function() {
-			document.location.href = `<?= base_url('shop/' . $kategori_ini); ?>/${filter}`;
-		}, 1000);
-	});
-
-	$('#price-3').on('click', function() {
-		$('#price-2').prop('checked', false);
-		$('#price-1').prop('checked', false);
-		$('#price-4').prop('checked', false);
-
-		let filter = $(this).val();
-
-		setTimeout(function() {
-			document.location.href = `<?= base_url('shop/' . $kategori_ini); ?>/${filter}`;
-		}, 1000);
-	});
-
-	$('#price-4').on('click', function() {
-		$('#price-2').prop('checked', false);
-		$('#price-3').prop('checked', false);
-		$('#price-1').prop('checked', false);
-
-		let filter = $(this).val();
-
-		setTimeout(function() {
-			document.location.href = `<?= base_url('shop/' . $kategori_ini); ?>/${filter}`;
-		}, 1000);
-	});
-
-	$('#input-search').on('keypress', function(e) {
-		if (e.which == 13) {
-			search();
+				return 0;
+			}
+		} else {
+			qty = null;
 		}
-	});
 
-	$('#btn-search').on('click', function() {
-		search();
-	});
+		let dataJson = {
+			idBarang: id,
+			qty,
+			stok
+		}
 
-	const search = () => {
-		const product = $('#input-search').val();
-
-		setTimeout(function() {
-			document.location.href = `<?= base_url('shop/' . $kategori_ini); ?>/${product}`;
-		}, 500);
+		$.ajax({
+			url: '<?= base_url('addToCart'); ?>',
+			type: 'get',
+			dataType: 'json',
+			data: dataJson,
+			success: function(result) {
+				if (result.status == 'gagal') {
+					toastr.error(result.msg);
+				} else {
+					$(`#add_to_cart_modal_${id}`).modal('toggle');
+				}
+			}
+		});
 	}
 </script>

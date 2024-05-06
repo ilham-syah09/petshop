@@ -1,3 +1,30 @@
+<style>
+	.tombol {
+		background-color: red;
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+	.btn_plus_min {
+		background-color: #000;
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+</style>
 <div class="liton__shoping-cart-area mb-120">
 	<div class="container">
 		<div class="row">
@@ -5,93 +32,65 @@
 				<div class="shoping-cart-inner">
 					<div class="shoping-cart-table table-responsive">
 						<table class="table">
+							<thead>
+								<tr>
+									<th>Products</th>
+									<th>Price</th>
+									<th>Quantity</th>
+									<th>Total</th>
+									<th>Action</th>
+								</tr>
+							</thead>
 							<tbody>
-								<tr>
-									<td class="cart-product-remove">x</td>
-									<td class="cart-product-image">
-										<a href="product-details.html"><img src="img/product/1.png" alt="#"></a>
-									</td>
-									<td class="cart-product-info">
-										<h4><a href="product-details.html">Vegetables Juices</a></h4>
-									</td>
-									<td class="cart-product-price">$149.00</td>
-									<td class="cart-product-quantity">
-										<div class="cart-plus-minus">
-											<input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-										</div>
-									</td>
-									<td class="cart-product-subtotal">$298.00</td>
-								</tr>
-								<tr>
-									<td class="cart-product-remove">x</td>
-									<td class="cart-product-image">
-										<a href="product-details.html"><img src="img/product/2.png" alt="#"></a>
-									</td>
-									<td class="cart-product-info">
-										<h4><a href="product-details.html">Orange Sliced Mix</a></h4>
-									</td>
-									<td class="cart-product-price">$85.00</td>
-									<td class="cart-product-quantity">
-										<div class="cart-plus-minus">
-											<input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-										</div>
-									</td>
-									<td class="cart-product-subtotal">$170.00</td>
-								</tr>
-								<tr>
-									<td class="cart-product-remove">x</td>
-									<td class="cart-product-image">
-										<a href="product-details.html"><img src="img/product/3.png" alt="#"></a>
-									</td>
-									<td class="cart-product-info">
-										<h4><a href="product-details.html">Red Hot Tomato</a></h4>
-									</td>
-									<td class="cart-product-price">$75.00</td>
-									<td class="cart-product-quantity">
-										<div class="cart-plus-minus">
-											<input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
-										</div>
-									</td>
-									<td class="cart-product-subtotal">$150.00</td>
-								</tr>
-								<tr class="cart-coupon-row">
-									<td colspan="6">
-										<div class="cart-coupon">
-											<input type="text" name="cart-coupon" placeholder="Coupon code">
-											<button type="submit" class="btn theme-btn-2 btn-effect-2">Apply Coupon</button>
-										</div>
-									</td>
-									<td>
-										<button type="submit" class="btn theme-btn-2 btn-effect-2-- disabled">Update Cart</button>
-									</td>
-								</tr>
+								<?php $total = 0;; ?>
+								<?php foreach ($cart as $c) : ?>
+									<?php $total += ($c->harga * $c->total); ?>
+									<tr>
+										<td>
+											<a href="<?= base_url('detail/') . $c->idBarang; ?>" target="detail"><?= $c->nama_barang; ?></a>
+										</td>
+										<td><?= 'Rp. ' . number_format($c->harga, 0, ',', '.'); ?></td>
+										<td>
+											<div class="btn-group">
+												<button type="button" class="btn_plus_min btn_minus" data-id="<?= $c->id; ?>">-</button>
+												<input type="text" value="<?= $c->total; ?>" data-stok="<?= $c->stok; ?>" data-id="<?= $c->id; ?>" data-harga="<?= $c->harga; ?>" name="qtybutton" class="cart-plus-minus-box input_total">
+												<button type="button" class="btn_plus_min btn_plus" data-id="<?= $c->id; ?>">+</button>
+											</div>
+										</td>
+										<td class="subTotal">
+											<span class="harga"><?= 'Rp. ' . number_format(($c->harga * $c->total), 0, ',', '.'); ?></span>
+										</td>
+										<td>
+											<form action="<?= base_url('deleteCart'); ?>" method="POST">
+												<input type="hidden" name="id" value="<?= $c->id; ?>">
+												<button type="submit" class="tombol" data-toggle="tooltip" title="Delete"><i class="fa fa-times"></i></button>
+											</form>
+										</td>
+									</tr>
+								<?php endforeach; ?>
 							</tbody>
 						</table>
 					</div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="shoping-cart-inner">
 					<div class="shoping-cart-total mt-50">
 						<h4>Cart Totals</h4>
 						<table class="table">
 							<tbody>
 								<tr>
 									<td>Cart Subtotal</td>
-									<td>$618.00</td>
-								</tr>
-								<tr>
-									<td>Shipping and Handing</td>
-									<td>$15.00</td>
-								</tr>
-								<tr>
-									<td>Vat</td>
-									<td>$00.00</td>
+									<td id="subTotal"><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></td>
 								</tr>
 								<tr>
 									<td><strong>Order Total</strong></td>
-									<td><strong>$633.00</strong></td>
+									<td id="total"><strong><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></strong></td>
 								</tr>
 							</tbody>
 						</table>
 						<div class="btn-wrapper text-right">
-							<a href="checkout.html" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
+							<button class="theme-btn-1 btn btn-effect-1 btn-block" onclick="window.location.href='<?php echo base_url('checkout') ?>'">Proceed to checkout</button>
 						</div>
 					</div>
 				</div>
@@ -99,3 +98,124 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	let input_total = $('.input_total');
+	let btn_plus = $('.btn_plus');
+	let subTotal = $('.subTotal');
+
+	let totalSebelumnya = 1;
+
+	$(btn_plus).each(function(i) {
+		$(btn_plus[i]).click(function() {
+			let id = $(this).data('id');
+
+			let harga = $(input_total[i]).data('harga');
+			let stok = $(input_total[i]).data('stok');
+			let tot = $(input_total[i]).val();
+
+			let total = parseInt(tot) + 1;
+
+			if (total > stok) {
+				total = stok;
+				toastr.warning('Orders cannot exceed stock');
+
+				$(input_total[i]).val(total);
+
+				$('#to-checkout').prop('disabled', false);
+				return 0;
+			}
+
+			$(input_total[i]).val(total);
+
+			updateQty(id, total, harga, i);
+			$('#to-checkout').prop('disabled', false);
+		});
+	});
+
+	let btn_minus = $('.btn_minus');
+
+	$(btn_minus).each(function(i) {
+		$(btn_minus[i]).click(function() {
+			let id = $(this).data('id');
+
+			let harga = $(input_total[i]).data('harga');
+			let tot = $(input_total[i]).val();
+			let total = parseInt(tot) - 1;
+
+			if (total < 1) {
+				total = 1;
+				toastr.warning('The minimum order cannot be less than one');
+
+				$(input_total[i]).val(total);
+				$('#to-checkout').prop('disabled', false);
+
+				return 0;
+			}
+
+			$(input_total[i]).val(total);
+			$('#to-checkout').prop('disabled', false);
+
+			updateQty(id, total, harga, i);
+		});
+	});
+
+	$(input_total).each(function(i) {
+		$(input_total[i]).change(function() {
+			let total = $(this).val();
+
+			let id = $(this).data('id');
+			let harga = $(this).data('harga');
+			let stok = $(this).data('stok');
+
+			if (total > stok) {
+				total = stok;
+				toastr.warning('Orders cannot exceed stock');
+
+				$(this).val(total);
+				$('#to-checkout').prop('disabled', true);
+			}
+
+			$('#to-checkout').prop('disabled', false);
+
+			if (total == '') {
+				$(this).val(totalSebelumnya);
+
+				return 0;
+			} else if (total == 0) {
+				$(this).val(totalSebelumnya);
+
+				return 0;
+			}
+
+			updateQty(id, total, harga, i);
+		});
+	});
+
+	$(input_total).each(function(i) {
+		$(input_total).click(function() {
+			totalSebelumnya = $(this).val();
+			$('#to-checkout').prop('disabled', true);
+		});
+	})
+
+	const updateQty = (id, total, harga, i) => {
+		$.ajax({
+			url: `<?= base_url('updateQuantity'); ?>`,
+			type: 'post',
+			dataType: 'json',
+			data: {
+				id,
+				total,
+				harga
+			},
+			success: function(res) {
+				$('#subTotal').text(res.total);
+				$('#total').html(`<strong>${res.total}</strong>`);
+				$(subTotal[i]).text(res.subTotal);
+
+				toastr.success('Successfully updated product quantity');
+			}
+		});
+	}
+</script>

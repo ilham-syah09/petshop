@@ -19,7 +19,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 |
 | Please see the user guide for complete details: 
 |
-| https: //codeigniter.com/userguide3/general/routing.html
+| https:   //codeigniter.com/userguide3/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
@@ -86,4 +86,4 @@ $route['getListProgres'] = 'frontend/getListProgres';
 $route['message']        = 'frontend/message';
 $route['review']         = 'frontend/review';
 $route['changeProfile']  = 'frontend/changeProfile';
-$route['changePassword']  = 'frontend/changePassword';
+$route['changePassword'] = 'frontend/changePassword';

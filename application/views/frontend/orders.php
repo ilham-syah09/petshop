@@ -1,3 +1,56 @@
+<style>
+	.tombol-upload {
+		background-color: green;
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+	.tombol-progres {
+		background-color: skyblue;
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+	.tombol-detail {
+		background-color: blue;
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+
+	.tombol-view {
+		background-color: yellow;
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
+</style>
 <!-- Cart Start -->
 <div class="container-fluid pt-5">
 	<div class="row px-xl-5">
@@ -5,8 +58,7 @@
 			<table class="table table-bordered text-center mb-0">
 				<thead class="bg-secondary text-dark">
 					<tr>
-						<th>Opsi</th>
-						<th>Delivery/ Pick-up Schedule</th>
+						<th>Order Date</th>
 						<th>Address</th>
 						<th>Note</th>
 						<th>Action</th>
@@ -15,20 +67,19 @@
 				<tbody>
 					<?php foreach ($orders as $order) : ?>
 						<tr>
-							<td><?= $order->opsi; ?></td>
-							<td><?= date('d M Y', strtotime($order->tanggal)) . ' - ' . $order->jam; ?></td>
+							<td><?= date('d M Y - H:i:s', strtotime($order->createdAt)); ?></td>
 							<td><?= $order->alamat; ?></td>
 							<td><?= $order->catatan; ?></td>
 							<td class="align-middle">
-								<button type="button" class="btn btn-sm btn-primary detail_btn" data-toggle="modal" title="Detail Product" data-target="#detailProduct" data-idkhusus="<?= $order->idKhusus; ?>" data-link="<?= base_url('print/' . $order->idKhusus); ?>"><i class="fa fa-info"></i></button>
+								<button type="button" class="tombol-detail detail_btn" data-toggle="modal" title="Detail Product" data-target="#detailProduct" data-idkhusus="<?= $order->idKhusus; ?>" data-link="<?= base_url('print/' . $order->idKhusus); ?>"><i class="fa fa-info"></i></button>
 								<?php if ($order->statusPembayaran == 0) : ?>
-									<button type="button" class="btn btn-sm btn-success upload_btn" data-toggle="modal" title="Upload transfer invoice" data-target="#uploadBerkas" data-idkhusus="<?= $order->idKhusus; ?>"><i class="fa fa-upload"></i></button>
+									<button type="button" class="tombol-upload upload_btn" data-toggle="modal" title="Upload transfer invoice" data-target="#uploadBerkas" data-idkhusus="<?= $order->idKhusus; ?>"><i class="fa fa-upload"></i></button>
 								<?php endif; ?>
 								<?php if ($order->buktiPembayaran != null) : ?>
-									<button type="button" class="btn btn-sm btn-warning view_btn" data-toggle="modal" title="View transfer invoice" data-target="#viewFile" data-file="<?= $order->buktiPembayaran; ?>"><i class="fa fa-eye"></i></button>
+									<button type="button" class="tombol-view view_btn" data-toggle="modal" title="View transfer invoice" data-target="#viewFile" data-file="<?= $order->buktiPembayaran; ?>"><i class="fa fa-eye"></i></button>
 								<?php endif; ?>
 								<?php if ($order->statusPembayaran == 1) : ?>
-									<button type="button" class="btn btn-sm btn-info progres_btn" data-toggle="modal" title="View Progress Order" data-target="#progresModal" data-idkhusus="<?= $order->idKhusus; ?>"><i class="fa fa-circle-notch"></i></button>
+									<button type="button" class="tombol-progres progres_btn" data-toggle="modal" title="View Progress Order" data-target="#progresModal" data-idkhusus="<?= $order->idKhusus; ?>"><i class="fa fa-circle-notch"></i></button>
 								<?php endif; ?>
 							</td>
 						</tr>
@@ -79,7 +130,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<a class="btn btn-primary" target="_blank" id="cetak-btn">Print</a>
+				<a class="btn btn-primary" target="print" id="cetak-btn">Print</a>
 			</div>
 		</div>
 	</div>
@@ -230,37 +281,16 @@
 							$("#tabel_detail").append(
 								"<tr class='tr_isi'>" +
 								"<td class='text-center'>" + (i + 1) + "</td>" +
-								"<td>" + res.data[i].nama_menu + "</td>" +
+								"<td>" + res.data[i].nama_barang + "</td>" +
 								"<td>" + res.data[i].total + "</td>" +
 								"<td>" + rupiah.format(res.data[i].harga) + "</td>" +
 								"<td>" + rupiah.format(harga) + "</td>" +
-								`<td><a href="<?= base_url('detail/'); ?>${res.data[i].idBarang}" class="badge badge-info"><i class="fa fa-eye"></a></td>` +
+								`<td><a href="<?= base_url('detail/'); ?>${res.data[i].idBarang}" class="badge badge-info" target="detail"><i class="fa fa-eye"></a></td>` +
 								"<tr>"
 							);
 						});
 
-						if (res.data[0].opsi == 'Delivery') {
-							$("#tabel_detail").append(
-								"<tr class='tr_ongkir'>" +
-								"<td colspan='3' class='text-center'>Shipping</td>" +
-								"<td>" + res.data[0].kecamatan + "</td>" +
-								"<td>" + rupiah.format(res.data[0].ongkir) + "</td>" +
-								"<td></td>" +
-								"<tr>"
-							);
-
-							finalHarga = rupiah.format(Number(totalHarga) + Number(res.data[0].ongkir));
-						} else {
-							$("#tabel_detail").append(
-								"<tr class='tr_ongkir'>" +
-								"<td colspan='4' class='text-center'>" + res.data[0].opsi + "</td>" +
-								"<td>Rp. 0</td>" +
-								"<td></td>" +
-								"<tr>"
-							);
-
-							finalHarga = rupiah.format(Number(totalHarga));
-						}
+						finalHarga = rupiah.format(Number(totalHarga));
 
 						$("#tabel_detail").append(
 							"<tr class='tr_total'>" +
@@ -339,7 +369,7 @@
 					} else {
 						$("#tabel-progres").append(
 							"<tr class='tr_isi-progres'>" +
-							"<td colspan='2' class='text-center'>Empty</td>" +
+							"<td colspan='3' class='text-center'>Empty</td>" +
 							"<tr>");
 					}
 				},

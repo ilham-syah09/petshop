@@ -59,7 +59,7 @@ if (!defined('ENVIRONMENT')) {
 	$domain = strtolower($_SERVER['HTTP_HOST']);
 
 	switch ($domain) {
-		case 'citrabakery.my.id':
+		case 'petshop.my.id':
 			define('ENVIRONMENT', 'production');
 			break;
 		default:

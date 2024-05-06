@@ -31,8 +31,21 @@ class Frontend extends CI_Controller
     private function _authentication()
     {
         if (empty($this->session->userdata('log_user'))) {
-            $this->session->set_flashdata('toastr-error', 'Silahkan login dahulu!');
+            $this->session->set_flashdata('toastr-error', 'Please log in first!');
             redirect('auth', 'refresh');
+        }
+    }
+
+    private function _authenticationJson()
+    {
+        if (empty($this->session->userdata('log_user'))) {
+            $response = [
+                'status' => 'gagal',
+                'msg'    => 'Please log in first!'
+            ];
+
+            echo json_encode($response);
+            die;
         }
     }
 
@@ -42,96 +55,41 @@ class Frontend extends CI_Controller
             'title'           => 'Home | Petshop',
             'page'            => 'frontend/home',
             'kategori'        => $this->front->getKategori(),
-            'products'        => $this->front->getPopularProducts(),
-            'productKategori' => $this->front->getProductKategori()
+            'productsPopuler' => $this->front->getPopularProducts(),
+            'productRandom'   => $this->front->getProductRandom(null, 6),
         ];
 
         $this->load->view('frontend/index', $data);
     }
 
-    public function shop($id = null, $filter = null, $page = null)
+    public function shop($id = null, $page = null)
     {
         if (!$id) {
             $kategori = $this->front->getKategori();
             $id       = $kategori[0]->id;
         }
 
-        $like = null;
-
-        if ($filter == 1) {
-            $filter = 1;
-            $where = [
-                'kategori_id' => $id
-            ];
-        } elseif ($filter == 2) {
-            $where = [
-                'kategori_id' => $id,
-                'harga <'     => 30000
-            ];
-        } elseif ($filter == 3) {
-            $where = [
-                'kategori_id' => $id,
-                'harga >='    => 30000,
-                'harga <='    => 50000
-            ];
-        } elseif ($filter == 4) {
-            $where = [
-                'kategori_id' => $id,
-                'harga >'     => 50000
-            ];
-        } else {
-            if ($filter != null) {
-                $where = [
-                    'kategori_id' => $id
-                ];
-
-                $like = $filter;
-            } else {
-                $filter = 1;
-                $where = [
-                    'kategori_id' => $id
-                ];
-            }
-        }
-
-        $countProductByPrice = [
-            1 => $this->front->getCountProduct([
-                'kategori_id' => $id
-            ]),
-            2 => $this->front->getCountProduct([
-                'kategori_id' => $id,
-                'harga <'     => 30000
-            ]),
-            3 => $this->front->getCountProduct([
-                'kategori_id' => $id,
-                'harga >='    => 30000,
-                'harga <='    => 50000
-            ]),
-            4 => $this->front->getCountProduct([
-                'kategori_id' => $id,
-                'harga >'     => 50000
-            ]),
+        $where = [
+            'kategori_id' => $id
         ];
-
-        // echo json_encode($where);
-        // die;
 
         $per_page = 6;
 
-        $products = $this->front->getProductsShop($where, $per_page, $this->_paging_offset($page, $per_page), $like);
+        $products = $this->front->getProductsShop($where, $per_page, $this->_paging_offset($page, $per_page));
 
-        $total_rows = $this->front->getCountProduct($where, $like);
+        $total_rows = $this->front->getCountProduct($where);
 
         $data = [
-            'title'        => 'Shop | Citra Bakery',
-            'page'         => 'frontend/shop',
-            'kategori'     => $this->front->getKategori(),
-            'products'     => $products,
-            'kategori_ini' => $id,
-            'filter'       => $filter,
-            'countProduct' => $countProductByPrice,
-            'paging'       => $this->_paging(base_url('shop/') . $id . '/' . $filter, $total_rows, $per_page),
-            'total_rows'   => $total_rows
+            'title'           => 'Shop | Petshop',
+            'page'            => 'frontend/shop',
+            'kategori'        => $this->front->getKategori(),
+            'productsPopuler' => $this->front->getPopularProducts(),
+            'products'        => $products,
+            'kategori_ini'    => $id,
+            'paging'          => $this->_paging(base_url('shop/') . $id, $total_rows, $per_page),
+            'total_rows'      => $total_rows,
+            'per_page'        => $per_page,
+            'kategori_id'     => $id
         ];
 
         $this->load->view('frontend/index', $data);
@@ -142,6 +100,10 @@ class Frontend extends CI_Controller
         $product = $this->front->getProduct([
             'barang.id' => $id
         ]);
+
+        $this->db->where('id', $product->kategori_id);
+
+        $kategori = $this->db->get('kategori')->row();
 
         $gambar = $this->front->getGambar([
             'idBarang' => $id
@@ -157,18 +119,28 @@ class Frontend extends CI_Controller
 
         $rating = [
             'rating' => round($rating->rating, 1),
-            'total' => $rating->total
+            'total'  => $rating->total
         ];
 
+        $productRandom = $this->front->getProductRandom([
+            'id <>' => $id,
+            'kategori_id' => $kategori->id
+        ], 8);
+
+        // echo json_encode($productRandom);
+        // die;
+
         $data = [
-            'title'    => 'Shop Detail | Citra Bakery',
-            'page'     => 'frontend/detail',
-            'kategori' => $this->front->getKategori(),
-            'product'  => $product,
-            'gambar'   => $gambar,
-            'products' => $this->front->getProductRandom($id),
-            'review'   => $review,
-            'rating'   => $rating
+            'title'             => 'Shop Detail | Citra Bakery',
+            'page'              => 'frontend/detail',
+            'kategori'          => $this->front->getKategori(),
+            'kategori_sekarang' => $kategori,
+            'product'           => $product,
+            'gambar'            => $gambar,
+            'products'          => $productRandom,
+            'productsPopuler'   => $this->front->getPopularProducts(),
+            'review'            => $review,
+            'rating'            => $rating
         ];
 
         $this->load->view('frontend/index', $data);
@@ -244,50 +216,65 @@ class Frontend extends CI_Controller
 
     public function addToCart()
     {
-        $this->_authentication();
+        $this->_authenticationJson();
 
         $menu = $this->front->getMenu([
-            'id' => $this->input->post('idBarang')
+            'id' => $this->input->get('idBarang')
         ]);
 
         $cek = $this->front->checkCart([
-            'idUser' => $this->dt_user->id,
-            'idBarang' => $this->input->post('idBarang'),
-            'status' => 0
+            'idUser'   => $this->dt_user->id,
+            'idBarang' => $this->input->get('idBarang'),
+            'status'   => 0
         ]);
 
         if ($cek) {
-            $this->session->set_flashdata('toastr-error', 'The product is already in your cart');
-            redirect($_SERVER['HTTP_REFERER'], 'refresh');
-        }
-
-        if ($menu->stok < 1) {
-            $this->session->set_flashdata('toastr-error', 'Product is sold out');
-            redirect($_SERVER['HTTP_REFERER'], 'refresh');
-        }
-
-        if ($this->input->post('total') == null) {
-            $data = [
-                'idUser' => $this->dt_user->id,
-                'idBarang' => $this->input->post('idBarang')
+            $response = [
+                'status' => 'gagal',
+                'msg'    => 'The product is already in your cart'
             ];
         } else {
-            $data = [
-                'idUser' => $this->dt_user->id,
-                'idBarang' => $this->input->post('idBarang'),
-                'total'  => $this->input->post('total')
-            ];
+            if ($menu->stok < 1) {
+                $response = [
+                    'status' => 'gagal',
+                    'msg'    => 'Product is sold out'
+                ];
+            } elseif ($menu->stok < $this->input->get('qty')) {
+                $response = [
+                    'status' => 'gagal',
+                    'msg'    => 'Quantity must not exceed stock'
+                ];
+            } else {
+                if ($this->input->get('qty') == null) {
+                    $data = [
+                        'idUser'   => $this->dt_user->id,
+                        'idBarang' => $this->input->get('idBarang')
+                    ];
+                } else {
+                    $data = [
+                        'idUser'   => $this->dt_user->id,
+                        'idBarang' => $this->input->get('idBarang'),
+                        'total'    => $this->input->get('qty')
+                    ];
+                }
+
+                $insert = $this->db->insert('keranjang', $data);
+
+                if ($insert) {
+                    $response = [
+                        'status' => 'sukses',
+                        'msg'    => 'The product has been successfully added to your cart'
+                    ];
+                } else {
+                    $response = [
+                        'status' => 'sukses',
+                        'msg'    => 'Product failed to add to your cart'
+                    ];
+                }
+            }
         }
 
-        $insert = $this->db->insert('keranjang', $data);
-
-        if ($insert) {
-            $this->session->set_flashdata('toastr-success', 'The product has been successfully added to your cart');
-        } else {
-            $this->session->set_flashdata('toastr-error', 'Product failed to add to your cart');
-        }
-
-        redirect($_SERVER['HTTP_REFERER'], 'refresh');
+        echo json_encode($response);
     }
 
     public function deleteCart()
@@ -310,7 +297,7 @@ class Frontend extends CI_Controller
     {
         $this->_authentication();
 
-        $id = $this->input->post('id');
+        $id    = $this->input->post('id');
         $total = $this->input->post('total');
         $harga = $this->input->post('harga');
 
@@ -347,10 +334,10 @@ class Frontend extends CI_Controller
 
         $alamat           = $this->input->post('alamat');
         $catatan          = $this->input->post('catatan');
-        $tanggal          = $this->input->post('tanggal');
-        $jam              = $this->input->post('jam');
-        $opsi             = $this->input->post('opsi');
-        $idOngkir         = $this->input->post('idOngkir');
+        // $tanggal          = $this->input->post('tanggal');
+        // $jam              = $this->input->post('jam');
+        // $opsi             = $this->input->post('opsi');
+        // $idOngkir         = $this->input->post('idOngkir');
         $metodePembayaran = $this->input->post('payment');
         $totalBiaya       = $this->input->post('total');
 
@@ -359,7 +346,7 @@ class Frontend extends CI_Controller
             'keranjang.status' => 0
         ]);
 
-        $data = [];
+        $data     = [];
         $idKhusus = $this->dt_user->id . '-' . date('YmdHis');
 
         foreach ($cart as $c) {
@@ -373,11 +360,11 @@ class Frontend extends CI_Controller
                 'idKeranjang'      => $c->id,
                 'alamat'           => $alamat,
                 'catatan'          => $catatan,
-                'idOngkir'         => $idOngkir,
+                // 'idOngkir'         => $idOngkir,
                 'metodePembayaran' => $metodePembayaran,
-                'tanggal'          => $tanggal,
-                'jam'              => $jam,
-                'opsi'             => $opsi,
+                // 'tanggal'          => $tanggal,
+                // 'jam'              => $jam,
+                // 'opsi'             => $opsi,
                 'idKhusus'         => $idKhusus,
                 'totalBiaya'       => $totalBiaya
             ]);
@@ -400,7 +387,7 @@ class Frontend extends CI_Controller
 
         $result = [
             'data' => $this->front->getListProduct([
-                'orders.idUser' => $this->dt_user->id,
+                'orders.idUser'   => $this->dt_user->id,
                 'orders.idKhusus' => $this->input->get('idKhusus'),
             ])
         ];
@@ -414,7 +401,7 @@ class Frontend extends CI_Controller
 
         $data = [
             'pesanan' => $this->front->getListProduct([
-                'orders.idUser' => $this->dt_user->id,
+                'orders.idUser'   => $this->dt_user->id,
                 'orders.idKhusus' => $idKhusus,
             ])
         ];
@@ -448,7 +435,7 @@ class Frontend extends CI_Controller
                 $upload_data = $this->upload->data();
 
                 $data = [
-                    'buktiPembayaran'  => $upload_data['file_name']
+                    'buktiPembayaran' => $upload_data['file_name']
                 ];
             }
         } else {
@@ -458,7 +445,7 @@ class Frontend extends CI_Controller
         }
 
         $where = [
-            'idUser' => $this->dt_user->id,
+            'idUser'   => $this->dt_user->id,
             'idKhusus' => $this->input->post('idKhusus')
         ];
 
@@ -501,7 +488,7 @@ class Frontend extends CI_Controller
         $this->_authentication();
 
         $chart = $this->front->checkCart([
-            'idUser' => $this->dt_user->id,
+            'idUser'   => $this->dt_user->id,
             'idBarang' => $this->input->post('idBarang')
         ]);
 
@@ -515,7 +502,7 @@ class Frontend extends CI_Controller
             redirect($_SERVER['HTTP_REFERER'], 'refresh');
         } else {
             $this->db->where([
-                'idUser' => $this->dt_user->id,
+                'idUser'   => $this->dt_user->id,
                 'idBarang' => $this->input->post('idBarang')
             ]);
 
@@ -523,10 +510,10 @@ class Frontend extends CI_Controller
 
             if (!$cek) {
                 $data = [
-                    'idUser' => $this->dt_user->id,
+                    'idUser'   => $this->dt_user->id,
                     'idBarang' => $this->input->post('idBarang'),
-                    'rating' => $this->input->post('rating'),
-                    'review' => $this->input->post('review')
+                    'rating'   => $this->input->post('rating'),
+                    'review'   => $this->input->post('review')
                 ];
 
                 $insert = $this->db->insert('review', $data);
@@ -559,8 +546,8 @@ class Frontend extends CI_Controller
     public function message()
     {
         $data = [
-            'name' => $this->input->post('name'),
-            'email' => $this->input->post('email'),
+            'name'    => $this->input->post('name'),
+            'email'   => $this->input->post('email'),
             'subject' => $this->input->post('subject'),
             'message' => $this->input->post('message')
         ];
@@ -589,24 +576,24 @@ class Frontend extends CI_Controller
 
     private function _paging_tag()
     {
-        $config['full_tag_open']    = "<ul class='pagination justify-content-center mb-3 my-auto'>";
-        $config['full_tag_close']   = "</ul>";
-        $config['first_tag_open']   = "<li class='page-link'>";
-        $config['first_tag_close']  = "</li>";
-        $config['next_tag_open']    = "<li class='page-link'>";
-        $config['next_tag_close']   = "</li>";
-        $config['cur_tag_open']     = "<li class='page-link active bg-primary text-white'><a>";
-        $config['cur_tag_close']    = "</a></li>";
-        $config['num_tag_open']     = "<li class='page-link'>";
-        $config['num_tag_close']    = "</li>";
-        $config['prev_tag_open']    = "<li class='page-link'>";
-        $config['prev_tag_close']   = "</li>";
-        $config['last_tag_open']    = "<li class='page-link'>";
-        $config['last_tag_close']   = "</li>";
-        $config['first_link']       = "First";
-        $config['last_link']        = "Last";
-        $config['next_link']        = "&raquo;";
-        $config['prev_link']        = "&laquo;";
+        $config['full_tag_open']   = "<ul class='pagination justify-content-center mb-3 my-auto'>";
+        $config['full_tag_close']  = "</ul>";
+        $config['first_tag_open']  = "<li class='page-link'>";
+        $config['first_tag_close'] = "</li>";
+        $config['next_tag_open']   = "<li class='page-link'>";
+        $config['next_tag_close']  = "</li>";
+        $config['cur_tag_open']    = "<li class='page-link active'><a>";
+        $config['cur_tag_close']   = "</a></li>";
+        $config['num_tag_open']    = "<li class='page-link'>";
+        $config['num_tag_close']   = "</li>";
+        $config['prev_tag_open']   = "<li class='page-link'>";
+        $config['prev_tag_close']  = "</li>";
+        $config['last_tag_open']   = "<li class='page-link'>";
+        $config['last_tag_close']  = "</li>";
+        $config['first_link']      = "First";
+        $config['last_link']       = "Last";
+        $config['next_link']       = "&raquo;";
+        $config['prev_link']       = "&laquo;";
 
         return $config;
     }
@@ -614,12 +601,12 @@ class Frontend extends CI_Controller
     private function _paging($base_url, $total_rows, $per_page)
     {
         $this->load->library('pagination');
-        $config                             = $this->_paging_tag();
-        $config['base_url']                 = $base_url;
-        $config['total_rows']               = $total_rows;
-        $config['per_page']                 = $per_page;
-        $config['use_page_numbers']         = TRUE;
-        $config['reuse_query_string']       = TRUE;
+        $config                       = $this->_paging_tag();
+        $config['base_url']           = $base_url;
+        $config['total_rows']         = $total_rows;
+        $config['per_page']           = $per_page;
+        $config['use_page_numbers']   = TRUE;
+        $config['reuse_query_string'] = TRUE;
 
         $this->pagination->initialize($config);
 
@@ -629,8 +616,8 @@ class Frontend extends CI_Controller
     public function profile()
     {
         $data = [
-            'title'    => 'Profile | Citra Bakery',
-            'page'     => 'frontend/profile',
+            'title' => 'Profile | Citra Bakery',
+            'page'  => 'frontend/profile',
         ];
 
         $this->load->view('frontend/index', $data);
@@ -641,11 +628,11 @@ class Frontend extends CI_Controller
         $img = $_FILES['image']['name'];
 
         if ($img) {
-            $config['upload_path']      = 'upload/profile';
-            $config['allowed_types']    = 'jpg|jpeg|png';
-            $config['max_size']         = 2000;
-            $config['remove_spaces']    = TRUE;
-            $config['encrypt_name']     = TRUE;
+            $config['upload_path']   = 'upload/profile';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size']      = 2000;
+            $config['remove_spaces'] = TRUE;
+            $config['encrypt_name']  = TRUE;
 
             $this->load->library('upload', $config);
             $this->upload->initialize($config);
@@ -655,13 +642,13 @@ class Frontend extends CI_Controller
                 redirect('profile');
             } else {
                 $upload_data = $this->upload->data();
-                $previmage = $this->input->post('previmage');
+                $previmage   = $this->input->post('previmage');
 
                 $data = [
-                    'name'  => $this->input->post('name'),
-                    'noHp'  => $this->input->post('noHp'),
-                    'alamat'  => $this->input->post('alamat'),
-                    'image'     => $upload_data['file_name']
+                    'name'   => $this->input->post('name'),
+                    'noHp'   => $this->input->post('noHp'),
+                    'alamat' => $this->input->post('alamat'),
+                    'image'  => $upload_data['file_name']
                 ];
 
                 $this->db->where('id', $this->dt_user->id);
@@ -680,9 +667,9 @@ class Frontend extends CI_Controller
             }
         } else {
             $data = [
-                'name'  => $this->input->post('name'),
-                'noHp'  => $this->input->post('noHp'),
-                'alamat'  => $this->input->post('alamat'),
+                'name'   => $this->input->post('name'),
+                'noHp'   => $this->input->post('noHp'),
+                'alamat' => $this->input->post('alamat'),
             ];
 
             $this->db->where('id', $this->dt_user->id);
@@ -727,4 +714,4 @@ class Frontend extends CI_Controller
     }
 }
 
-  /* End of file Frontend.php */
+      /* End of file Frontend.php */

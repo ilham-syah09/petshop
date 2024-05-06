@@ -2,157 +2,126 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8 order-lg-2 mb-120">
-				<div class="ltn__shop-options">
-					<ul>
-						<li>
-							<div class="showing-product-number text-right">
-								<span>Showing 9 of 20 results</span>
-							</div>
-						</li>
-					</ul>
-				</div>
 				<div class="tab-content">
 					<div class="tab-pane fade active show" id="liton_product_grid">
 						<div class="ltn__product-tab-content-inner ltn__product-grid-view">
 							<div class="row">
 								<!-- ltn__product-item -->
-								<div class="col-xl-4 col-sm-6 col-6">
-									<div class="ltn__product-item ltn__product-item-3 text-center">
-										<div class="product-img">
-											<a href="product-details.html"><img src="<?= base_url(); ?>assets/user/img/product/1.png" alt="#"></a>
-											<div class="product-badge">
-												<ul>
-													<li class="sale-badge">New</li>
-												</ul>
+								<?php foreach ($productRandom as $product) : ?>
+									<div class="col-xl-4 col-sm-6 col-6">
+										<div class="ltn__product-item ltn__product-item-3 text-center">
+											<div class="product-img">
+												<a href="<?= base_url('detail/' . $product->id); ?>"><img src="<?= base_url('upload/gambar/' . gambar($product->id)); ?>" alt="<?= $product->nama_barang; ?>" alt="#"></a>
+												<div class="product-hover-action">
+													<ul>
+														<li>
+															<a href="#" title="Quick View" data-toggle="modal" data-target="<?= '#quick_view_modal_' . $product->id; ?>">
+																<i class="far fa-eye"></i>
+															</a>
+														</li>
+														<?php if ($product->stok > 0) : ?>
+															<li>
+																<a href="#" title="Add to Cart" data-toggle="modal" onclick="addToCart(`<?= $product->id; ?>`, <?= $product->stok; ?>, 'no_cek')">
+																	<i class="fas fa-shopping-cart"></i>
+																</a>
+															</li>
+														<?php endif; ?>
+													</ul>
+												</div>
 											</div>
-											<div class="product-hover-action">
-												<ul>
-													<li>
-														<a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
-															<i class="far fa-eye"></i>
-														</a>
-													</li>
-													<li>
-														<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
-															<i class="fas fa-shopping-cart"></i>
-														</a>
-													</li>
-													<li>
-														<a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-															<i class="far fa-heart"></i></a>
-													</li>
-												</ul>
-											</div>
-										</div>
-										<div class="product-info">
-											<div class="product-ratting">
-												<ul>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-													<li><a href="#"><i class="far fa-star"></i></a></li>
-												</ul>
-											</div>
-											<h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-											<div class="product-price">
-												<span>$149.00</span>
-												<del>$162.00</del>
+											<div class="product-info">
+												<div class="product-ratting">
+													<ul>
+														<li><a href="#"><i class="fas fa-star"></i></a></li>
+														<li><a href="#"><i class="fas fa-star"></i></a></li>
+														<li><a href="#"><i class="fas fa-star"></i></a></li>
+														<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+														<li><a href="#"><i class="far fa-star"></i></a></li>
+													</ul>
+												</div>
+												<h2 class="product-title"><a href="<?= base_url('detail/' . $product->id); ?>"><?= $product->nama_barang; ?></a></h2>
+												<div class="product-price">
+													<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>
+												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-
+								<?php endforeach; ?>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="ltn__pagination-area text-center">
-					<div class="ltn__pagination">
-						<ul>
-							<li><a href="#"><i class="fas fa-angle-double-left"></i></a></li>
-							<li><a href="#">1</a></li>
-							<li class="active"><a href="#">2</a></li>
-							<li><a href="#">3</a></li>
-							<li><a href="#">...</a></li>
-							<li><a href="#">10</a></li>
-							<li><a href="#"><i class="fas fa-angle-double-right"></i></a></li>
-						</ul>
-					</div>
-				</div>
 			</div>
-			<div class="col-lg-4  mb-120">
+			<div class="col-lg-4 mb-120">
 				<aside class="sidebar ltn__shop-sidebar">
 					<!-- Category Widget -->
 					<div class="widget ltn__menu-widget">
 						<h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
 						<ul>
-							<li><a href="#">Body <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
-							<li><a href="#">Interior <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
-							<li><a href="#">Lights <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
-							<li><a href="#">Parts <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
-							<li><a href="#">Tires <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
-							<li><a href="#">Uncategorized <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
-							<li><a href="#">Wheel <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+							<?php foreach ($kategori as $kat) : ?>
+								<li><a href="<?= base_url('shop/') . $kat->id; ?>"><?= $kat->kategori; ?> <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
+							<?php endforeach; ?>
 						</ul>
 					</div>
 
 					<!-- Top Rated Product Widget -->
 					<div class="widget ltn__top-rated-product-widget">
-						<h4 class="ltn__widget-title ltn__widget-title-border">Top Rated Product</h4>
+						<h4 class="ltn__widget-title ltn__widget-title-border">Most Popular Products</h4>
 						<ul>
-							<li>
-								<div class="top-rated-product-item clearfix">
-									<div class="top-rated-product-img">
-										<a href="product-details.html"><img src="<?= base_url(); ?>assets/user/img/product/1.png" alt="#"></a>
+							<?php foreach ($productsPopuler as $product) : ?>
+								<li>
+									<div class="top-rated-product-item clearfix">
+										<div class="top-rated-product-img">
+											<a href="<?= base_url('detail/' . $product->id); ?>"><img src="<?= base_url('upload/gambar/' . gambar($product->id)); ?>" alt="<?= $product->nama_barang; ?>" alt="#"></a>
+										</div>
+										<div class="top-rated-product-info">
+											<div class="product-ratting">
+												<ul>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+												</ul>
+											</div>
+											<h6><a href="<?= base_url('detail/' . $product->id); ?>"><?= $product->nama_barang; ?></a></h6>
+											<div class="product-price">
+												<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>
+											</div>
+										</div>
 									</div>
-									<div class="top-rated-product-info">
-										<div class="product-ratting">
-											<ul>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-											</ul>
-										</div>
-										<h6><a href="product-details.html">Mixel Solid Seat Cover</a></h6>
-										<div class="product-price">
-											<span>$49.00</span>
-											<del>$65.00</del>
-										</div>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</div>
+				</aside>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- MODAL AREA START (Quick View Modal) -->
+<?php foreach ($productRandom as $product) : ?>
+	<div class="modal fade" id="<?= 'quick_view_modal_' . $product->id; ?>" tabindex="-1">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+						<!-- <i class="fas fa-times"></i> -->
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="ltn__quick-view-modal-inner">
+						<div class="modal-product-item">
+							<div class="row">
+								<div class="col-lg-6 col-12">
+									<div class="modal-product-img">
+										<img src="<?= base_url('upload/gambar/' . gambar($product->id)); ?>" alt="<?= $product->nama_barang; ?>">
 									</div>
 								</div>
-							</li>
-							<li>
-								<div class="top-rated-product-item clearfix">
-									<div class="top-rated-product-img">
-										<a href="product-details.html"><img src="<?= base_url(); ?>assets/user/img/product/2.png" alt="#"></a>
-									</div>
-									<div class="top-rated-product-info">
-										<div class="product-ratting">
-											<ul>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-											</ul>
-										</div>
-										<h6><a href="product-details.html">Vegetables Juices</a></h6>
-										<div class="product-price">
-											<span>$49.00</span>
-											<del>$65.00</del>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="top-rated-product-item clearfix">
-									<div class="top-rated-product-img">
-										<a href="product-details.html"><img src="<?= base_url(); ?>assets/user/img/product/3.png" alt="#"></a>
-									</div>
-									<div class="top-rated-product-info">
+								<div class="col-lg-6 col-12">
+									<div class="modal-product-info">
 										<div class="product-ratting">
 											<ul>
 												<li><a href="#"><i class="fas fa-star"></i></a></li>
@@ -160,22 +129,117 @@
 												<li><a href="#"><i class="fas fa-star"></i></a></li>
 												<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
 												<li><a href="#"><i class="far fa-star"></i></a></li>
+												<li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
 											</ul>
 										</div>
-										<h6><a href="product-details.html">Coil Spring Conversion</a></h6>
+										<h3><?= $product->nama_barang; ?></h3>
+										<p><?= $product->deskripsi; ?></p>
 										<div class="product-price">
-											<span>$49.00</span>
-											<del>$65.00</del>
+											<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>
+										</div>
+										<div class="ltn__product-details-menu-2">
+											<ul>
+												<li>
+													<div class="cart-plus-minus">
+														<input type="text" value="1" name="qtybutton" class="cart-plus-minus-box" id="<?= 'qty_' . $product->id; ?>">
+													</div>
+												</li>
+												<li>
+													<a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart" data-toggle="modal" onclick="addToCart(`<?= $product->id; ?>`, <?= $product->stok; ?>, 'cek')">
+														<i class="fas fa-shopping-cart"></i>
+														<span>ADD TO CART</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<hr>
+										<div class="ltn__social-media">
+											<ul>
+												<li>Stok <?= $product->stok; ?></li>
+											</ul>
 										</div>
 									</div>
 								</div>
-							</li>
-						</ul>
+							</div>
+						</div>
 					</div>
-
-
-				</aside>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
+<?php endforeach; ?>
+<!-- MODAL AREA END -->
+
+<!-- MODAL AREA START (Add To Cart Modal) -->
+<?php foreach ($productRandom as $product) : ?>
+	<div class="modal fade" id="<?= 'add_to_cart_modal_' . $product->id; ?>" tabindex="-1">
+		<div class="modal-dialog modal-md" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<div class="ltn__quick-view-modal-inner">
+						<div class="modal-product-item">
+							<div class="row">
+								<div class="col-12">
+									<div class="modal-product-info">
+										<h5><a href="product-details.html"><?= $product->nama_barang; ?></a></h5>
+										<p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Cart</p>
+										<div class="btn-wrapper">
+											<a href="<?= base_url('cart'); ?>" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+											<a href="<?= base_url('checkout'); ?>" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<?php endforeach; ?>
+<!-- MODAL AREA END -->
+
+<script>
+	function addToCart(id, stok, qty) {
+		if (qty == 'cek') {
+			qty = $(`#qty_${id}`).val();
+
+			if (qty == 0) {
+				toastr.warning('Quantity cannot be empty');
+
+				return 0;
+			} else if (qty > stok) {
+				toastr.warning('Quantity must not exceed stock');
+
+				return 0;
+			}
+		} else {
+			qty = null;
+		}
+
+		let dataJson = {
+			idBarang: id,
+			qty,
+			stok
+		}
+
+		$.ajax({
+			url: '<?= base_url('addToCart'); ?>',
+			type: 'get',
+			dataType: 'json',
+			data: dataJson,
+			success: function(result) {
+				if (result.status == 'gagal') {
+					toastr.error(result.msg);
+				} else {
+					$(`#add_to_cart_modal_${id}`).modal('toggle');
+				}
+			}
+		});
+	}
+</script>

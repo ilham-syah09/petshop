@@ -7,64 +7,20 @@
 						<div class="col-md-6">
 							<div class="ltn__shop-details-img-gallery">
 								<div class="ltn__shop-details-large-img">
-									<div class="single-large-img">
-										<a href="img/product/1.png" data-rel="lightcase:myCollection">
-											<img src="img/product/1.png" alt="Image">
-										</a>
-									</div>
-									<div class="single-large-img">
-										<a href="img/product/2.png" data-rel="lightcase:myCollection">
-											<img src="img/product/2.png" alt="Image">
-										</a>
-									</div>
-									<div class="single-large-img">
-										<a href="img/product/3.png" data-rel="lightcase:myCollection">
-											<img src="img/product/3.png" alt="Image">
-										</a>
-									</div>
-									<div class="single-large-img">
-										<a href="img/product/4.png" data-rel="lightcase:myCollection">
-											<img src="img/product/4.png" alt="Image">
-										</a>
-									</div>
-									<div class="single-large-img">
-										<a href="img/product/5.png" data-rel="lightcase:myCollection">
-											<img src="img/product/5.png" alt="Image">
-										</a>
-									</div>
-									<div class="single-large-img">
-										<a href="img/product/6.png" data-rel="lightcase:myCollection">
-											<img src="img/product/6.png" alt="Image">
-										</a>
-									</div>
-									<div class="single-large-img">
-										<a href="img/product/7.png" data-rel="lightcase:myCollection">
-											<img src="img/product/7.png" alt="Image">
-										</a>
-									</div>
+									<?php foreach ($gambar as $i => $g) : ?>
+										<div class="single-large-img">
+											<a href="<?= base_url('upload/gambar/' . $g->gambar); ?>" data-rel="lightcase:myCollection">
+												<img src="<?= base_url('upload/gambar/' . $g->gambar); ?>" alt="Image">
+											</a>
+										</div>
+									<?php endforeach; ?>
 								</div>
 								<div class="ltn__shop-details-small-img slick-arrow-2">
-									<div class="single-small-img">
-										<img src="img/product/1.png" alt="Image">
-									</div>
-									<div class="single-small-img">
-										<img src="img/product/2.png" alt="Image">
-									</div>
-									<div class="single-small-img">
-										<img src="img/product/3.png" alt="Image">
-									</div>
-									<div class="single-small-img">
-										<img src="img/product/4.png" alt="Image">
-									</div>
-									<div class="single-small-img">
-										<img src="img/product/5.png" alt="Image">
-									</div>
-									<div class="single-small-img">
-										<img src="img/product/6.png" alt="Image">
-									</div>
-									<div class="single-small-img">
-										<img src="img/product/7.png" alt="Image">
-									</div>
+									<?php foreach ($gambar as $i => $g) : ?>
+										<div class="single-small-img">
+											<img src="<?= base_url('upload/gambar/' . $g->gambar); ?>" alt="Image">
+										</div>
+									<?php endforeach; ?>
 								</div>
 							</div>
 						</div>
@@ -80,51 +36,21 @@
 										<li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
 									</ul>
 								</div>
-								<h3>Vegetables Juices</h3>
+								<h3><?= $product->nama_barang; ?></h3>
 								<div class="product-price">
-									<span>$49.00</span>
-									<del>$65.00</del>
-								</div>
-								<div class="modal-product-meta ltn__product-details-menu-1">
-									<ul>
-										<li>
-											<strong>Categories:</strong>
-											<span>
-												<a href="#">Parts</a>
-												<a href="#">Car</a>
-												<a href="#">Seat</a>
-												<a href="#">Cover</a>
-											</span>
-										</li>
-									</ul>
+									<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>
 								</div>
 								<div class="ltn__product-details-menu-2">
 									<ul>
 										<li>
 											<div class="cart-plus-minus">
-												<input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+												<input type="text" value="1" name="qtybutton" class="cart-plus-minus-box" id="qty">
 											</div>
 										</li>
 										<li>
-											<a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
+											<a href="#" class="theme-btn-1 btn btn-effect-1" title="Add to Cart" data-toggle="modal" onclick="addToCart(`<?= $product->id; ?>`, <?= $product->stok; ?>, 'cek')">
 												<i class="fas fa-shopping-cart"></i>
 												<span>ADD TO CART</span>
-											</a>
-										</li>
-									</ul>
-								</div>
-								<div class="ltn__product-details-menu-3">
-									<ul>
-										<li>
-											<a href="#" class="" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-												<i class="far fa-heart"></i>
-												<span>Add to Wishlist</span>
-											</a>
-										</li>
-										<li>
-											<a href="#" class="" title="Compare" data-toggle="modal" data-target="#quick_view_modal">
-												<i class="fas fa-exchange-alt"></i>
-												<span>Compare</span>
 											</a>
 										</li>
 									</ul>
@@ -132,18 +58,8 @@
 								<hr>
 								<div class="ltn__social-media">
 									<ul>
-										<li>Share:</li>
-										<li><a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-										<li><a href="#" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-										<li><a href="#" title="Linkedin"><i class="fab fa-linkedin"></i></a></li>
-										<li><a href="#" title="Instagram"><i class="fab fa-instagram"></i></a></li>
-
+										<li>Stok <?= $product->stok; ?></li>
 									</ul>
-								</div>
-								<hr>
-								<div class="ltn__safe-checkout">
-									<h5>Guaranteed Safe Checkout</h5>
-									<img src="img/icons/payment-2.png" alt="Payment Image">
 								</div>
 							</div>
 						</div>
@@ -160,9 +76,7 @@
 					<div class="tab-content">
 						<div class="tab-pane fade active show" id="liton_tab_details_1_1">
 							<div class="ltn__shop-details-tab-content-inner">
-								<h4 class="title-2">Lorem ipsum dolor sit amet elit.</h4>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+								<p><?= $product->deskripsi; ?></p>
 							</div>
 						</div>
 						<div class="tab-pane fade" id="liton_tab_details_1_2">
@@ -295,82 +209,35 @@
 				<aside class="sidebar ltn__shop-sidebar ltn__right-sidebar">
 					<!-- Top Rated Product Widget -->
 					<div class="widget ltn__top-rated-product-widget">
-						<h4 class="ltn__widget-title ltn__widget-title-border">Top Rated Product</h4>
+						<h4 class="ltn__widget-title ltn__widget-title-border">Most Popular Products</h4>
 						<ul>
-							<li>
-								<div class="top-rated-product-item clearfix">
-									<div class="top-rated-product-img">
-										<a href="product-details.html"><img src="img/product/1.png" alt="#"></a>
-									</div>
-									<div class="top-rated-product-info">
-										<div class="product-ratting">
-											<ul>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-											</ul>
+							<?php foreach ($productsPopuler as $prod) : ?>
+								<li>
+									<div class="top-rated-product-item clearfix">
+										<div class="top-rated-product-img">
+											<a href="<?= base_url('detail/' . $prod->id); ?>">
+												<img src="<?= base_url('upload/gambar/' . gambar($prod->id)); ?>" alt="<?= $prod->nama_barang; ?>">
+											</a>
 										</div>
-										<h6><a href="product-details.html">Mixel Solid Seat Cover</a></h6>
-										<div class="product-price">
-											<span>$49.00</span>
-											<del>$65.00</del>
-										</div>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="top-rated-product-item clearfix">
-									<div class="top-rated-product-img">
-										<a href="product-details.html"><img src="img/product/2.png" alt="#"></a>
-									</div>
-									<div class="top-rated-product-info">
-										<div class="product-ratting">
-											<ul>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-											</ul>
-										</div>
-										<h6><a href="product-details.html">Vegetables Juices</a></h6>
-										<div class="product-price">
-											<span>$49.00</span>
-											<del>$65.00</del>
+										<div class="top-rated-product-info">
+											<div class="product-ratting">
+												<ul>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+													<li><a href="#"><i class="fas fa-star"></i></a></li>
+												</ul>
+											</div>
+											<h6><a href="<?= base_url('detail/' . $prod->id); ?>"><?= $prod->nama_barang; ?></a></h6>
+											<div class="product-price">
+												<span><?= 'Rp. ' . number_format($prod->harga, 0, ',', '.'); ?></span>
+											</div>
 										</div>
 									</div>
-								</div>
-							</li>
-							<li>
-								<div class="top-rated-product-item clearfix">
-									<div class="top-rated-product-img">
-										<a href="product-details.html"><img src="img/product/3.png" alt="#"></a>
-									</div>
-									<div class="top-rated-product-info">
-										<div class="product-ratting">
-											<ul>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-												<li><a href="#"><i class="far fa-star"></i></a></li>
-											</ul>
-										</div>
-										<h6><a href="product-details.html">Coil Spring Conversion</a></h6>
-										<div class="product-price">
-											<span>$49.00</span>
-											<del>$65.00</del>
-										</div>
-									</div>
-								</div>
-							</li>
+								</li>
+							<?php endforeach; ?>
 						</ul>
-					</div>
-					<!-- Banner Widget -->
-					<div class="widget ltn__banner-widget">
-						<a href="shop.html"><img src="img/banner/2.jpg" alt="#"></a>
 					</div>
 				</aside>
 			</div>
@@ -383,295 +250,125 @@
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="section-title-area ltn__section-title-2">
-					<h6 class="section-subtitle ltn__secondary-color">// cars</h6>
+					<h6 class="section-subtitle ltn__secondary-color"><?= $kategori_sekarang->kategori; ?></h6>
 					<h1 class="section-title">Related Products<span>.</span></h1>
 				</div>
 			</div>
 		</div>
 		<div class="row ltn__related-product-slider-one-active slick-arrow-1">
 			<!-- ltn__product-item -->
-			<div class="col-lg-12">
-				<div class="ltn__product-item ltn__product-item-3 text-center">
-					<div class="product-img">
-						<a href="product-details.html"><img src="img/product/7.png" alt="#"></a>
-						<div class="product-badge">
-							<ul>
-								<li class="sale-badge">New</li>
-							</ul>
+			<?php foreach ($products as $prod) : ?>
+				<div class="col-lg-12">
+					<div class="ltn__product-item ltn__product-item-3 text-center">
+						<div class="product-img">
+							<a href="<?= base_url('detail/' . $prod->id); ?>"><img src="<?= base_url('upload/gambar/' . gambar($prod->id)); ?>" alt="<?= $prod->nama_barang; ?>"></a>
+							<div class="product-hover-action">
+								<ul>
+									<li>
+										<a href="#" title="Quick View" data-toggle="modal" data-target="<?= '#quick_view_modal_' . $prod->id; ?>">
+											<i class="far fa-eye"></i>
+										</a>
+									</li>
+									<?php if ($prod->stok > 0) : ?>
+										<li>
+											<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
+												<i class="fas fa-shopping-cart"></i>
+											</a>
+										</li>
+									<?php endif; ?>
+								</ul>
+							</div>
 						</div>
-						<div class="product-hover-action">
-							<ul>
-								<li>
-									<a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
-										<i class="far fa-eye"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
-										<i class="fas fa-shopping-cart"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-										<i class="far fa-heart"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="product-info">
-						<div class="product-ratting">
-							<ul>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-								<li><a href="#"><i class="far fa-star"></i></a></li>
-							</ul>
-						</div>
-						<h2 class="product-title"><a href="product-details.html">Red Hot Tomato</a></h2>
-						<div class="product-price">
-							<span>$149.00</span>
-							<del>$162.00</del>
+						<div class="product-info">
+							<div class="product-ratting">
+								<ul>
+									<li><a href="#"><i class="fas fa-star"></i></a></li>
+									<li><a href="#"><i class="fas fa-star"></i></a></li>
+									<li><a href="#"><i class="fas fa-star"></i></a></li>
+									<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
+									<li><a href="#"><i class="far fa-star"></i></a></li>
+								</ul>
+							</div>
+							<h2 class="product-title"><a href="<?= base_url('detail/' . $prod->id); ?>"><?= $prod->nama_barang; ?></a></h2>
+							<div class="product-price">
+								<span><?= 'Rp. ' . number_format($prod->harga, 0, ',', '.'); ?></span>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<!-- ltn__product-item -->
-			<div class="col-lg-12">
-				<div class="ltn__product-item ltn__product-item-3 text-center">
-					<div class="product-img">
-						<a href="product-details.html"><img src="img/product/8.png" alt="#"></a>
-						<div class="product-badge">
-							<ul>
-								<li class="sale-badge">New</li>
-							</ul>
-						</div>
-						<div class="product-hover-action">
-							<ul>
-								<li>
-									<a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
-										<i class="far fa-eye"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
-										<i class="fas fa-shopping-cart"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-										<i class="far fa-heart"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="product-info">
-						<div class="product-ratting">
-							<ul>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-								<li><a href="#"><i class="far fa-star"></i></a></li>
-							</ul>
-						</div>
-						<h2 class="product-title"><a href="product-details.html">Vegetables Juices</a></h2>
-						<div class="product-price">
-							<span>$62.00</span>
-							<del>$85.00</del>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ltn__product-item -->
-			<div class="col-lg-12">
-				<div class="ltn__product-item ltn__product-item-3 text-center">
-					<div class="product-img">
-						<a href="product-details.html"><img src="img/product/9.png" alt="#"></a>
-						<div class="product-badge">
-							<ul>
-								<li class="sale-badge">New</li>
-							</ul>
-						</div>
-						<div class="product-hover-action">
-							<ul>
-								<li>
-									<a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
-										<i class="far fa-eye"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
-										<i class="fas fa-shopping-cart"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-										<i class="far fa-heart"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="product-info">
-						<div class="product-ratting">
-							<ul>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-								<li><a href="#"><i class="far fa-star"></i></a></li>
-							</ul>
-						</div>
-						<h2 class="product-title"><a href="product-details.html">Orange Fresh Juice</a></h2>
-						<div class="product-price">
-							<span>$75.00</span>
-							<del>$92.00</del>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ltn__product-item -->
-			<div class="col-lg-12">
-				<div class="ltn__product-item ltn__product-item-3 text-center">
-					<div class="product-img">
-						<a href="product-details.html"><img src="img/product/10.png" alt="#"></a>
-						<div class="product-badge">
-							<ul>
-								<li class="sale-badge">New</li>
-							</ul>
-						</div>
-						<div class="product-hover-action">
-							<ul>
-								<li>
-									<a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
-										<i class="far fa-eye"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
-										<i class="fas fa-shopping-cart"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-										<i class="far fa-heart"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="product-info">
-						<div class="product-ratting">
-							<ul>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-								<li><a href="#"><i class="far fa-star"></i></a></li>
-							</ul>
-						</div>
-						<h2 class="product-title"><a href="product-details.html">Poltry Farm Meat</a></h2>
-						<div class="product-price">
-							<span>$78.00</span>
-							<del>$85.00</del>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ltn__product-item -->
-			<div class="col-lg-12">
-				<div class="ltn__product-item ltn__product-item-3 text-center">
-					<div class="product-img">
-						<a href="product-details.html"><img src="img/product/5.png" alt="#"></a>
-						<div class="product-badge">
-							<ul>
-								<li class="sale-badge">New</li>
-							</ul>
-						</div>
-						<div class="product-hover-action">
-							<ul>
-								<li>
-									<a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
-										<i class="far fa-eye"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
-										<i class="fas fa-shopping-cart"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-										<i class="far fa-heart"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="product-info">
-						<div class="product-ratting">
-							<ul>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-								<li><a href="#"><i class="far fa-star"></i></a></li>
-							</ul>
-						</div>
-						<h2 class="product-title"><a href="product-details.html">Fresh Butter Cake</a></h2>
-						<div class="product-price">
-							<span>$150.00</span>
-							<del>$180.00</del>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ltn__product-item -->
-			<div class="col-lg-12">
-				<div class="ltn__product-item ltn__product-item-3 text-center">
-					<div class="product-img">
-						<a href="product-details.html"><img src="img/product/6.png" alt="#"></a>
-						<div class="product-badge">
-							<ul>
-								<li class="sale-badge">New</li>
-							</ul>
-						</div>
-						<div class="product-hover-action">
-							<ul>
-								<li>
-									<a href="#" title="Quick View" data-toggle="modal" data-target="#quick_view_modal">
-										<i class="far fa-eye"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Add to Cart" data-toggle="modal" data-target="#add_to_cart_modal">
-										<i class="fas fa-shopping-cart"></i>
-									</a>
-								</li>
-								<li>
-									<a href="#" title="Wishlist" data-toggle="modal" data-target="#liton_wishlist_modal">
-										<i class="far fa-heart"></i></a>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<div class="product-info">
-						<div class="product-ratting">
-							<ul>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star"></i></a></li>
-								<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-								<li><a href="#"><i class="far fa-star"></i></a></li>
-							</ul>
-						</div>
-						<h2 class="product-title"><a href="product-details.html">Orange Sliced Mix</a></h2>
-						<div class="product-price">
-							<span>$150.00</span>
-							<del>$180.00</del>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--  -->
+			<?php endforeach; ?>
 		</div>
 	</div>
 </div>
+
+<!-- MODAL AREA START (Add To Cart Modal) -->
+<div class="modal fade" id="add_to_cart_modal" tabindex="-1">
+	<div class="modal-dialog modal-md" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="ltn__quick-view-modal-inner">
+					<div class="modal-product-item">
+						<div class="row">
+							<div class="col-12">
+								<div class="modal-product-info">
+									<h5><a href="product-details.html"><?= $product->nama_barang; ?></a></h5>
+									<p class="added-cart"><i class="fa fa-check-circle"></i> Successfully added to your Cart</p>
+									<div class="btn-wrapper">
+										<a href="<?= base_url('cart'); ?>" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+										<a href="<?= base_url('checkout'); ?>" class="theme-btn-2 btn btn-effect-2">Checkout</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- MODAL AREA END -->
+
+<script>
+	function addToCart(id, stok, qty) {
+		if (qty == 'cek') {
+			qty = $(`#qty`).val();
+
+			if (qty == 0) {
+				toastr.warning('Quantity cannot be empty');
+
+				return 0;
+			} else if (qty > stok) {
+				toastr.warning('Quantity must not exceed stock');
+
+				return 0;
+			}
+		} else {
+			qty = null;
+		}
+
+		let dataJson = {
+			idBarang: id,
+			qty,
+			stok
+		}
+
+		$.ajax({
+			url: '<?= base_url('addToCart'); ?>',
+			type: 'get',
+			dataType: 'json',
+			data: dataJson,
+			success: function(result) {
+				if (result.status == 'gagal') {
+					toastr.error(result.msg);
+				} else {
+					$(`#add_to_cart_modal`).modal('toggle');
+				}
+			}
+		});
+	}
+</script>

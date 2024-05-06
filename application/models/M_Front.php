@@ -46,26 +46,27 @@ class M_Front extends CI_Model
 		return $this->db->get('gambar')->result();
 	}
 
-	public function getProductRandom($id)
+	public function getProductRandom($where = null, $jumlah = 6)
 	{
-		$this->db->where('id !=', $id);
+		if ($where) {
+			$this->db->where($where);
+		}
+
 		$this->db->order_by('nama_barang', 'RANDOM');
 
-		return $this->db->get('barang', 5)->result();
+		return $this->db->get('barang', $jumlah)->result();
 	}
 
-	public function getProductsShop($where, $limit = null, $offset = null, $like = null)
+	public function getProductsShop($where, $limit = null, $offset = null)
 	{
 		$this->db->where($where);
-		$this->db->like('nama_barang', $like);
 
 		return $this->db->get('barang', $limit, $offset)->result();
 	}
 
-	public function getCountProduct($where, $like = null)
+	public function getCountProduct($where)
 	{
 		$this->db->where($where);
-		$this->db->like('nama_barang', $like);
 
 		return $this->db->get('barang')->num_rows();
 	}
