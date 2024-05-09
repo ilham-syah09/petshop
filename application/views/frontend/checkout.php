@@ -57,32 +57,34 @@
 								</div>
 							</div>
 							<div class="card">
-								<h5 class="collapsed ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-1" aria-expanded="false" id="b_t">
+								<h5 class="collapsed ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-2" aria-expanded="false" id="b_t">
 									Bank Transfer
 								</h5>
-								<div id="faq-item-2-1" class="collapse" data-parent="#checkout_accordion_1">
+								<div id="faq-item-2-2" class="collapse" data-parent="#checkout_accordion_1">
 									<div class="card-body">
-										<tr>
-											<td>BRI</td>
-											<td>999301005602533</td>
-										</tr>
-										<tr>
-											<td>BCA</td>
-											<td>4071677832</td>
-										</tr>
-										<tr>
-											<td>BNI</td>
-											<td>12345678</td>
-										</tr>
+										<table>
+											<tr>
+												<td>BRI</td>
+												<td>999301005602533</td>
+											</tr>
+											<tr>
+												<td>BCA</td>
+												<td>4071677832</td>
+											</tr>
+											<tr>
+												<td>BNI</td>
+												<td>12345678</td>
+											</tr>
+										</table>
 									</div>
 								</div>
 							</div>
 							<!-- card -->
 							<div class="card">
-								<h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-2" aria-expanded="false" id="cod">
+								<h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false" id="cod">
 									Cash on delivery
 								</h5>
-								<div id="faq-item-2-2" class="collapse" data-parent="#checkout_accordion_1">
+								<div id="faq-item-2-3" class="collapse" data-parent="#checkout_accordion_1">
 									<div class="card-body">
 										<p>Pay with cash upon delivery.</p>
 									</div>

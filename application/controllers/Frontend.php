@@ -21,10 +21,10 @@ class Frontend extends CI_Controller
                 'idUser' => $this->dt_user->id
             ]));
 
-            $this->cart = count($this->front->getCart([
+            $this->cart = $this->front->getCart([
                 'keranjang.idUser' => $this->dt_user->id,
                 'keranjang.status' => 0
-            ]));
+            ]);
         }
     }
 
@@ -218,7 +218,7 @@ class Frontend extends CI_Controller
     {
         $this->_authenticationJson();
 
-        $menu = $this->front->getMenu([
+        $barang = $this->front->getBarang([
             'id' => $this->input->get('idBarang')
         ]);
 
@@ -234,12 +234,12 @@ class Frontend extends CI_Controller
                 'msg'    => 'The product is already in your cart'
             ];
         } else {
-            if ($menu->stok < 1) {
+            if ($barang->stok < 1) {
                 $response = [
                     'status' => 'gagal',
                     'msg'    => 'Product is sold out'
                 ];
-            } elseif ($menu->stok < $this->input->get('qty')) {
+            } elseif ($barang->stok < $this->input->get('qty')) {
                 $response = [
                     'status' => 'gagal',
                     'msg'    => 'Quantity must not exceed stock'
@@ -354,6 +354,10 @@ class Frontend extends CI_Controller
             $this->db->update('keranjang', [
                 'status' => 1
             ]);
+
+            $this->db->set('stok', 'stok - ' . $c->total, FALSE);
+            $this->db->where('id', $c->idBarang);
+            $this->db->update('barang');
 
             array_push($data, [
                 'idUser'           => $this->dt_user->id,
@@ -497,46 +501,23 @@ class Frontend extends CI_Controller
             redirect($_SERVER['HTTP_REFERER'], 'refresh');
         }
 
-        if ($this->input->post('rating') == 0 || $this->input->post('rating') == '') {
+        if ($this->input->post('rating') == 0 || $this->input->post('review') == '') {
             $this->session->set_flashdata('toastr-error', 'Please choose the rating correctly!!');
-            redirect($_SERVER['HTTP_REFERER'], 'refresh');
         } else {
-            $this->db->where([
+
+            $data = [
                 'idUser'   => $this->dt_user->id,
-                'idBarang' => $this->input->post('idBarang')
-            ]);
+                'idBarang' => $this->input->post('idBarang'),
+                'rating'   => $this->input->post('rating'),
+                'review'   => $this->input->post('review')
+            ];
 
-            $cek = $this->db->get('review')->row();
+            $insert = $this->db->insert('review', $data);
 
-            if (!$cek) {
-                $data = [
-                    'idUser'   => $this->dt_user->id,
-                    'idBarang' => $this->input->post('idBarang'),
-                    'rating'   => $this->input->post('rating'),
-                    'review'   => $this->input->post('review')
-                ];
-
-                $insert = $this->db->insert('review', $data);
-
-                if ($insert) {
-                    $this->session->set_flashdata('toastr-success', 'Review successfully sent');
-                } else {
-                    $this->session->set_flashdata('toastr-error', 'Review failed to send!!');
-                }
+            if ($insert) {
+                $this->session->set_flashdata('toastr-success', 'Review successfully sent');
             } else {
-                $data = [
-                    'rating' => $this->input->post('rating'),
-                    'review' => $this->input->post('review')
-                ];
-
-                $this->db->where('id', $cek->id);
-                $update = $this->db->update('review', $data);
-
-                if ($update) {
-                    $this->session->set_flashdata('toastr-success', 'Review successfully sent');
-                } else {
-                    $this->session->set_flashdata('toastr-error', 'Review failed to send!!');
-                }
+                $this->session->set_flashdata('toastr-error', 'Review failed to send!!');
             }
         }
 

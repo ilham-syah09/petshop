@@ -91,10 +91,13 @@
                                     <li>
                                         <a href="#"><i class="icon-user"></i></a>
                                         <ul>
-                                            <li><a href="<?= base_url('auth'); ?>">Sign in</a></li>
-                                            <li><a href="<?= base_url('auth/registrasi'); ?>">Register</a></li>
-                                            <li><a href="<?= base_url('auth/profile'); ?>">My Account</a></li>
-                                            <li><a href="wishlist.html">Wishlist</a></li>
+                                            <?php if (empty($this->session->userdata('log_user'))) : ?>
+                                                <li><a href="<?= base_url('auth'); ?>">Sign in</a></li>
+                                                <li><a href="<?= base_url('auth/registrasi'); ?>">Register</a></li>
+                                            <?php else : ?>
+                                                <li><a href="<?= base_url('auth/profile'); ?>">My Account</a></li>
+                                                <li><a href="<?= base_url('auth/logout'); ?>">Sign Out</a></li>
+                                            <?php endif; ?>
                                         </ul>
                                     </li>
                                 </ul>
@@ -103,7 +106,7 @@
                             <div class="mini-cart-icon">
                                 <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
                                     <i class="icon-shopping-cart"></i>
-                                    <sup>2</sup>
+                                    <sup><?= count($this->cart); ?></sup>
                                 </a>
                             </div>
                             <!-- mini-cart -->
@@ -132,30 +135,32 @@
                     <span class="ltn__utilize-menu-title">Cart</span>
                     <button class="ltn__utilize-close">×</button>
                 </div>
-                <div class="mini-cart-product-area ltn__scrollbar">
-                    <div class="mini-cart-item clearfix">
-                        <div class="mini-cart-img">
-                            <a href="#"><img src="<?= base_url(); ?>assets/user/img/product/1.png" alt="Image"></a>
-                            <span class="mini-cart-item-delete"><i class="icon-cancel"></i></span>
+                <?php if ($this->cart) : ?>
+                    <?php $total = 0;; ?>
+                    <div class="mini-cart-product-area ltn__scrollbar">
+                        <?php foreach ($this->cart as $cart) : ?>
+                            <?php $total += ($cart->harga * $cart->total); ?>
+                            <div class="mini-cart-item clearfix">
+                                <div class="mini-cart-img">
+                                    <a href="#"><img src="<?= base_url('upload/gambar/' . gambar($cart->idBarang)); ?>" alt="Image"></a>
+                                </div>
+                                <div class="mini-cart-info">
+                                    <h6><a href="#"><?= $cart->nama_barang; ?></a></h6>
+                                    <span class="mini-cart-quantity"><?= $cart->total; ?> x <?= 'Rp. ' . number_format($cart->harga, 0, ',', '.'); ?></span>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="mini-cart-footer">
+                        <div class="mini-cart-sub-total">
+                            <h5>Subtotal: <span><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></span></h5>
                         </div>
-                        <div class="mini-cart-info">
-                            <h6><a href="#">Red Hot Tomato</a></h6>
-                            <span class="mini-cart-quantity">1 x $65.00</span>
+                        <div class="btn-wrapper">
+                            <a href="<?= base_url('cart'); ?>" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                            <a href="<?= base_url('checkout'); ?>" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                         </div>
                     </div>
-
-                </div>
-                <div class="mini-cart-footer">
-                    <div class="mini-cart-sub-total">
-                        <h5>Subtotal: <span>$310.00</span></h5>
-                    </div>
-                    <div class="btn-wrapper">
-                        <a href="cart.html" class="theme-btn-1 btn btn-effect-1">View Cart</a>
-                        <a href="cart.html" class="theme-btn-2 btn btn-effect-2">Checkout</a>
-                    </div>
-                    <p>Free Shipping on All Orders Over $100!</p>
-                </div>
-
+                <?php endif; ?>
             </div>
         </div>
         <!-- Utilize Cart Menu End -->

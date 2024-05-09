@@ -40,13 +40,72 @@
 											</div>
 											<div class="product-info">
 												<div class="product-ratting">
+													<?php $getRating = getRating($product->id); ?>
 													<ul>
-														<li><a href="#"><i class="fas fa-star"></i></a></li>
-														<li><a href="#"><i class="fas fa-star"></i></a></li>
-														<li><a href="#"><i class="fas fa-star"></i></a></li>
-														<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-														<li><a href="#"><i class="far fa-star"></i></a></li>
+														<?php if ($getRating['total'] != 0) : ?>
+															<?php if ($getRating['rating'] < 1) : ?>
+																<li><i class="fas fa-star-half-alt"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] == 1) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] > 1 && $getRating['rating'] < 2) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star-half-alt"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] == 2) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] > 2 && $getRating['rating'] < 3) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star-half-alt"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] == 3) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] > 3 && $getRating['rating'] < 4) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star-half-alt"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] == 4) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="far fa-star"></i></li>
+															<?php elseif ($getRating['rating'] > 4 && $getRating['rating'] < 5) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star-half-alt"></i></li>
+															<?php elseif ($getRating['rating'] == 5) : ?>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+																<li><i class="fas fa-star"></i></li>
+															<?php endif; ?>
 													</ul>
+												<?php endif; ?>
 												</div>
 												<h2 class="product-title"><a href="<?= base_url('detail/' . $product->id); ?>"><?= $product->nama_barang; ?></a></h2>
 												<div class="product-price">
@@ -92,13 +151,72 @@
 										</div>
 										<div class="top-rated-product-info">
 											<div class="product-ratting">
-												<ul>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-												</ul>
+												<?php $getRating = getRating($product->id); ?>
+												<?php if ($getRating['total'] != 0) : ?>
+													<ul>
+														<?php if ($getRating['rating'] < 1) : ?>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 1) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 1 && $getRating['rating'] < 2) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 2) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 2 && $getRating['rating'] < 3) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 3) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 3 && $getRating['rating'] < 4) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 4) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 4 && $getRating['rating'] < 5) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+														<?php elseif ($getRating['rating'] == 5) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+														<?php endif; ?>
+													</ul>
+												<?php endif; ?>
 											</div>
 											<h6><a href="<?= base_url('detail/' . $product->id); ?>"><?= $product->nama_barang; ?></a></h6>
 											<div class="product-price">
@@ -139,14 +257,74 @@
 								<div class="col-lg-6 col-12">
 									<div class="modal-product-info">
 										<div class="product-ratting">
-											<ul>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star"></i></a></li>
-												<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-												<li><a href="#"><i class="far fa-star"></i></a></li>
-												<li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-											</ul>
+											<?php $getRating = getRating($product->id); ?>
+											<?php if ($getRating['total'] != 0) : ?>
+												<ul>
+													<?php if ($getRating['rating'] < 1) : ?>
+														<li><i class="fas fa-star-half-alt"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] == 1) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] > 1 && $getRating['rating'] < 2) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star-half-alt"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] == 2) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] > 2 && $getRating['rating'] < 3) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star-half-alt"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] == 3) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] > 3 && $getRating['rating'] < 4) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star-half-alt"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] == 4) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="far fa-star"></i></li>
+													<?php elseif ($getRating['rating'] > 4 && $getRating['rating'] < 5) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star-half-alt"></i></li>
+													<?php elseif ($getRating['rating'] == 5) : ?>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+														<li><i class="fas fa-star"></i></li>
+													<?php endif; ?>
+													&nbsp;
+													<li class="review-total"> ( <?= $getRating['rating'] . ' / ' . $getRating['total']; ?> Reviews )</li>
+												</ul>
+											<?php endif; ?>
 										</div>
 										<h3><?= $product->nama_barang; ?></h3>
 										<p><?= $product->deskripsi; ?></p>

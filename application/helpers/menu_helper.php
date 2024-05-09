@@ -2,11 +2,11 @@
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-function gambar($idBaranag)
+function gambar($idBarang)
 {
 	$CI = &get_instance();
 
-	$CI->db->where('idBarang', $idBaranag);
+	$CI->db->where('idBarang', $idBarang);
 
 	$CI->db->order_by('gambar', 'RANDOM');
 	$data = $CI->db->get('gambar')->row();
@@ -15,6 +15,27 @@ function gambar($idBaranag)
 		return $data->gambar;
 	} else {
 		return '';
+	}
+}
+
+function getRating($idBarang)
+{
+	$CI = &get_instance();
+	$CI->load->model('M_Front', 'front');
+
+	$rating = $CI->front->getRating([
+		'idBarang' => $idBarang
+	]);
+
+	if ($rating) {
+		$rating = [
+			'rating' => round($rating->rating, 1),
+			'total'  => $rating->total
+		];
+
+		return $rating;
+	} else {
+		return false;
 	}
 }
 

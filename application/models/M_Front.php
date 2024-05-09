@@ -78,7 +78,7 @@ class M_Front extends CI_Model
 		return $this->db->get('keranjang')->row();
 	}
 
-	public function getMenu($where)
+	public function getBarang($where)
 	{
 		$this->db->where($where);
 		return $this->db->get('barang')->row();

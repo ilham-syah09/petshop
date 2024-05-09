@@ -10,7 +10,7 @@
 									<?php foreach ($gambar as $i => $g) : ?>
 										<div class="single-large-img">
 											<a href="<?= base_url('upload/gambar/' . $g->gambar); ?>" data-rel="lightcase:myCollection">
-												<img src="<?= base_url('upload/gambar/' . $g->gambar); ?>" alt="Image">
+												<img src="<?= base_url('upload/gambar/' . $g->gambar); ?>" alt="<?= $product->nama_barang; ?>">
 											</a>
 										</div>
 									<?php endforeach; ?>
@@ -18,7 +18,7 @@
 								<div class="ltn__shop-details-small-img slick-arrow-2">
 									<?php foreach ($gambar as $i => $g) : ?>
 										<div class="single-small-img">
-											<img src="<?= base_url('upload/gambar/' . $g->gambar); ?>" alt="Image">
+											<img src="<?= base_url('upload/gambar/' . $g->gambar); ?>" alt="<?= $product->nama_barang; ?>">
 										</div>
 									<?php endforeach; ?>
 								</div>
@@ -28,12 +28,73 @@
 							<div class="modal-product-info shop-details-info pl-0">
 								<div class="product-ratting">
 									<ul>
-										<li><a href="#"><i class="fas fa-star"></i></a></li>
-										<li><a href="#"><i class="fas fa-star"></i></a></li>
-										<li><a href="#"><i class="fas fa-star"></i></a></li>
-										<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-										<li><a href="#"><i class="far fa-star"></i></a></li>
-										<li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
+										<?php if ($rating['total'] != 0) : ?>
+											<ul>
+												<?php if ($rating['rating'] < 1) : ?>
+													<li><i class="fas fa-star-half-alt"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] == 1) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] > 1 && $rating['rating'] < 2) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star-half-alt"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] == 2) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] > 2 && $rating['rating'] < 3) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star-half-alt"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] == 3) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] > 3 && $rating['rating'] < 4) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star-half-alt"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] == 4) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="far fa-star"></i></li>
+												<?php elseif ($rating['rating'] > 4 && $rating['rating'] < 5) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star-half-alt"></i></li>
+												<?php elseif ($rating['rating'] == 5) : ?>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+													<li><i class="fas fa-star"></i></li>
+												<?php endif; ?>
+												&nbsp;
+												<li class="review-total"> ( <?= $rating['rating'] . ' / ' . $rating['total']; ?> Reviews )</li>
+											</ul>
+										<?php endif; ?>
 									</ul>
 								</div>
 								<h3><?= $product->nama_barang; ?></h3>
@@ -83,117 +144,160 @@
 							<div class="ltn__shop-details-tab-content-inner">
 								<h4 class="title-2">Customer Reviews</h4>
 								<div class="product-ratting">
-									<ul>
-										<li><a href="#"><i class="fas fa-star"></i></a></li>
-										<li><a href="#"><i class="fas fa-star"></i></a></li>
-										<li><a href="#"><i class="fas fa-star"></i></a></li>
-										<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-										<li><a href="#"><i class="far fa-star"></i></a></li>
-										<li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-									</ul>
+									<?php if ($rating['total'] != 0) : ?>
+										<ul>
+											<?php if ($rating['rating'] < 1) : ?>
+												<li><i class="fas fa-star-half-alt"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] == 1) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] > 1 && $rating['rating'] < 2) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star-half-alt"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] == 2) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] > 2 && $rating['rating'] < 3) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star-half-alt"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] == 3) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] > 3 && $rating['rating'] < 4) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star-half-alt"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] == 4) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="far fa-star"></i></li>
+											<?php elseif ($rating['rating'] > 4 && $rating['rating'] < 5) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star-half-alt"></i></li>
+											<?php elseif ($rating['rating'] == 5) : ?>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+												<li><i class="fas fa-star"></i></li>
+											<?php endif; ?>
+											&nbsp;
+											<li class="review-total"> ( <?= $rating['rating'] . ' / ' . $rating['total']; ?> Reviews )</li>
+										</ul>
+									<?php endif; ?>
 								</div>
 								<hr>
 								<!-- comment-area -->
 								<div class="ltn__comment-area mb-30">
 									<div class="ltn__comment-inner">
 										<ul>
-											<li>
-												<div class="ltn__comment-item clearfix">
-													<div class="ltn__commenter-img">
-														<img src="img/testimonial/1.jpg" alt="Image">
-													</div>
-													<div class="ltn__commenter-comment">
-														<h6><a href="#">Adam Smit</a></h6>
-														<div class="product-ratting">
-															<ul>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-																<li><a href="#"><i class="far fa-star"></i></a></li>
-															</ul>
+											<?php foreach ($review as $rev) : ?>
+												<li>
+													<div class="ltn__comment-item clearfix">
+														<div class="ltn__commenter-img">
+															<img src="<?= base_url('upload/profile/' . $rev->image); ?>" alt="<?= $rev->name; ?>">
 														</div>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, omnis fugit corporis iste magnam ratione.</p>
-														<span class="ltn__comment-reply-btn">September 3, 2020</span>
-													</div>
-												</div>
-											</li>
-											<li>
-												<div class="ltn__comment-item clearfix">
-													<div class="ltn__commenter-img">
-														<img src="img/testimonial/3.jpg" alt="Image">
-													</div>
-													<div class="ltn__commenter-comment">
-														<h6><a href="#">Adam Smit</a></h6>
-														<div class="product-ratting">
-															<ul>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-																<li><a href="#"><i class="far fa-star"></i></a></li>
-															</ul>
+														<div class="ltn__commenter-comment">
+															<h6><a href="javascript:void(0)"><?= $rev->name; ?></a></h6>
+															<div class="product-ratting">
+																<ul>
+																	<?php if ($rev->rating == 1) : ?>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																	<?php elseif ($rev->rating == 2) : ?>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																	<?php elseif ($rev->rating == 3) : ?>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																	<?php elseif ($rev->rating == 4) : ?>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="far fa-star"></i></li>
+																	<?php elseif ($rev->rating == 5) : ?>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																		<li><i class="fas fa-star"></i></li>
+																	<?php endif; ?>
+																</ul>
+															</div>
+															<p><?= $rev->review; ?></p>
+															<span class="ltn__comment-reply-btn"><?= date('d M Y', strtotime($rev->createdAt)); ?></span>
 														</div>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, omnis fugit corporis iste magnam ratione.</p>
-														<span class="ltn__comment-reply-btn">September 2, 2020</span>
 													</div>
-												</div>
-											</li>
-											<li>
-												<div class="ltn__comment-item clearfix">
-													<div class="ltn__commenter-img">
-														<img src="img/testimonial/2.jpg" alt="Image">
-													</div>
-													<div class="ltn__commenter-comment">
-														<h6><a href="#">Adam Smit</a></h6>
-														<div class="product-ratting">
-															<ul>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star"></i></a></li>
-																<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-																<li><a href="#"><i class="far fa-star"></i></a></li>
-															</ul>
-														</div>
-														<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus, omnis fugit corporis iste magnam ratione.</p>
-														<span class="ltn__comment-reply-btn">September 2, 2020</span>
-													</div>
-												</div>
-											</li>
+												</li>
+											<?php endforeach; ?>
 										</ul>
 									</div>
 								</div>
 								<!-- comment-reply -->
 								<div class="ltn__comment-reply-area ltn__form-box mb-30">
-									<form action="#">
-										<h4 class="title-2">Add a Review</h4>
-										<div class="mb-30">
-											<div class="add-a-review">
-												<h6>Your Ratings:</h6>
-												<div class="product-ratting">
-													<ul>
-														<li><a href="#"><i class="fas fa-star"></i></a></li>
-														<li><a href="#"><i class="fas fa-star"></i></a></li>
-														<li><a href="#"><i class="fas fa-star"></i></a></li>
-														<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-														<li><a href="#"><i class="far fa-star"></i></a></li>
-													</ul>
-												</div>
+									<h4 class="title-2">Add a Review</h4>
+									<div class="mb-30">
+										<div class="add-a-review">
+											<h6>Your Ratings:</h6>
+											<div class="product-ratting">
+												<ul>
+													<li><i class="far fa-star" id="star-1"></i></li>
+													<li><i class="far fa-star" id="star-2"></i></li>
+													<li><i class="far fa-star" id="star-3"></i></li>
+													<li><i class="far fa-star" id="star-4"></i></li>
+													<li><i class="far fa-star" id="star-5"></i></li>
+												</ul>
 											</div>
 										</div>
+									</div>
+									<form action="<?= base_url('review'); ?>" method="POST">
+										<input type="hidden" name="idBarang" value="<?= $product->id; ?>">
+										<input type="hidden" name="rating" id="rating" value="0">
 										<div class="input-item input-item-textarea ltn__custom-icon">
-											<textarea placeholder="Type your comments...."></textarea>
+											<textarea name="review" placeholder="Type your comments...."></textarea>
 										</div>
 										<div class="input-item input-item-name ltn__custom-icon">
-											<input type="text" placeholder="Type your name....">
+											<input type="text" name="name" id="name" value="<?= ($this->dt_user) ? $this->dt_user->name : ''; ?>" readonly required>
 										</div>
 										<div class="input-item input-item-email ltn__custom-icon">
-											<input type="email" placeholder="Type your email....">
+											<input type="email" name="email" id="email" value="<?= ($this->dt_user) ? $this->dt_user->email : ''; ?>" readonly>
 										</div>
-										<div class="input-item input-item-website ltn__custom-icon">
-											<input type="text" name="website" placeholder="Type your website....">
-										</div>
-										<label class="mb-0"><input type="checkbox" name="agree"> Save my name, email, and website in this browser for the next time I comment.</label>
 										<div class="btn-wrapper">
 											<button class="btn theme-btn-1 btn-effect-1 text-uppercase" type="submit">Submit</button>
 										</div>
@@ -221,13 +325,72 @@
 										</div>
 										<div class="top-rated-product-info">
 											<div class="product-ratting">
-												<ul>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-													<li><a href="#"><i class="fas fa-star"></i></a></li>
-												</ul>
+												<?php $getRating = getRating($prod->id); ?>
+												<?php if ($getRating['total'] != 0) : ?>
+													<ul>
+														<?php if ($getRating['rating'] < 1) : ?>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 1) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 1 && $getRating['rating'] < 2) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 2) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 2 && $getRating['rating'] < 3) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 3) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 3 && $getRating['rating'] < 4) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] == 4) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="far fa-star"></i></li>
+														<?php elseif ($getRating['rating'] > 4 && $getRating['rating'] < 5) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star-half-alt"></i></li>
+														<?php elseif ($getRating['rating'] == 5) : ?>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+															<li><i class="fas fa-star"></i></li>
+														<?php endif; ?>
+													</ul>
+												<?php endif; ?>
 											</div>
 											<h6><a href="<?= base_url('detail/' . $prod->id); ?>"><?= $prod->nama_barang; ?></a></h6>
 											<div class="product-price">
@@ -281,13 +444,72 @@
 						</div>
 						<div class="product-info">
 							<div class="product-ratting">
-								<ul>
-									<li><a href="#"><i class="fas fa-star"></i></a></li>
-									<li><a href="#"><i class="fas fa-star"></i></a></li>
-									<li><a href="#"><i class="fas fa-star"></i></a></li>
-									<li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-									<li><a href="#"><i class="far fa-star"></i></a></li>
-								</ul>
+								<?php $getRating = getRating($prod->id); ?>
+								<?php if ($getRating['total'] != 0) : ?>
+									<ul>
+										<?php if ($getRating['rating'] < 1) : ?>
+											<li><i class="fas fa-star-half-alt"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] == 1) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] > 1 && $getRating['rating'] < 2) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star-half-alt"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] == 2) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] > 2 && $getRating['rating'] < 3) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star-half-alt"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] == 3) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] > 3 && $getRating['rating'] < 4) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star-half-alt"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] == 4) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="far fa-star"></i></li>
+										<?php elseif ($getRating['rating'] > 4 && $getRating['rating'] < 5) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star-half-alt"></i></li>
+										<?php elseif ($getRating['rating'] == 5) : ?>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+											<li><i class="fas fa-star"></i></li>
+										<?php endif; ?>
+									</ul>
+								<?php endif; ?>
 							</div>
 							<h2 class="product-title"><a href="<?= base_url('detail/' . $prod->id); ?>"><?= $prod->nama_barang; ?></a></h2>
 							<div class="product-price">
@@ -371,4 +593,99 @@
 			}
 		});
 	}
+
+	$('#star-1').click(function() {
+		$(this).removeClass('far');
+		$(this).addClass('fas');
+
+		$('#star-2').removeClass('fas');
+		$('#star-2').addClass('far');
+
+		$('#star-3').removeClass('fas');
+		$('#star-3').addClass('far');
+
+		$('#star-4').removeClass('fas');
+		$('#star-4').addClass('far');
+
+		$('#star-5').removeClass('fas');
+		$('#star-5').addClass('far');
+
+		$('#rating').val(1);
+	});
+
+	$('#star-2').click(function() {
+		$('#star-1').removeClass('far');
+		$('#star-1').addClass('fas');
+
+		$(this).removeClass('far');
+		$(this).addClass('fas');
+
+		$('#star-3').removeClass('fas');
+		$('#star-3').addClass('far');
+
+		$('#star-4').removeClass('fas');
+		$('#star-4').addClass('far');
+
+		$('#star-5').removeClass('fas');
+		$('#star-5').addClass('far');
+
+		$('#rating').val(2);
+	});
+
+	$('#star-3').click(function() {
+		$('#star-1').removeClass('far');
+		$('#star-1').addClass('fas');
+
+		$('#star-2').removeClass('far');
+		$('#star-2').addClass('fas');
+
+		$(this).removeClass('far');
+		$(this).addClass('fas');
+
+		$('#star-4').removeClass('fas');
+		$('#star-4').addClass('far');
+
+		$('#star-5').removeClass('fas');
+		$('#star-5').addClass('far');
+
+		$('#rating').val(3);
+	});
+
+	$('#star-4').click(function() {
+		$('#star-1').removeClass('far');
+		$('#star-1').addClass('fas');
+
+		$('#star-2').removeClass('far');
+		$('#star-2').addClass('fas');
+
+		$('#star-3').removeClass('far');
+		$('#star-3').addClass('fas');
+
+		$(this).removeClass('far');
+		$(this).addClass('fas');
+
+		$('#star-5').removeClass('fas');
+		$('#star-5').addClass('far');
+
+		$('#rating').val(4);
+	});
+
+	$('#star-5').click(function() {
+		$('#star-1').removeClass('far');
+		$('#star-1').addClass('fas');
+
+		$('#star-2').removeClass('far');
+		$('#star-2').addClass('fas');
+
+		$('#star-3').removeClass('far');
+		$('#star-3').addClass('fas');
+
+		$('#star-4').removeClass('far');
+		$('#star-4').addClass('fas');
+
+		$(this).removeClass('far');
+		$(this).addClass('fas');
+
+		$('#rating').val(5);
+	});
 </script>
