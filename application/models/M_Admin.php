@@ -142,6 +142,13 @@ class M_Admin extends CI_Model
 
         return $this->db->get('orders')->result();
     }
+
+    public function getPesanMasuk()
+    {
+        $this->db->order_by('createdAt', 'desc');
+
+        return $this->db->get('pesan')->result();
+    }
 }
 
 /* End of file M_Admin.php */

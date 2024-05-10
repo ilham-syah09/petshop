@@ -80,6 +80,14 @@
                          </p>
                      </a>
                  </li>
+                 <li class="nav-item">
+                     <a href="<?= base_url('admin/pesan'); ?>" class="nav-link">
+                         <i class="nav-icon fas fa-message"></i>
+                         <p>
+                             Pesan Masuk
+                         </p>
+                     </a>
+                 </li>
                  <li class="nav-header">Progress</li>
                  <li class="nav-item">
                      <a href="<?= base_url('admin/progress'); ?>" class="nav-link">
