@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 04, 2024 at 08:54 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.1
+-- Host: localhost
+-- Generation Time: May 10, 2024 at 04:51 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -37,7 +36,7 @@ CREATE TABLE `barang` (
   `stok` int(7) NOT NULL DEFAULT 0,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `barang`
@@ -45,7 +44,9 @@ CREATE TABLE `barang` (
 
 INSERT INTO `barang` (`id`, `kategori_id`, `nama_barang`, `deskripsi`, `harga`, `stok`, `createdAt`, `updatedAt`) VALUES
 (1, 2, 'Royal Canin 1Kg', 'Royal Canin untuk pakan kucing berat 1 Kilogram\r\n', 12000, 10, '2024-03-19 12:29:42', '2024-03-19 12:37:38'),
-(2, 1, 'Kandang Macan', 'Kandang untuk anak macan ukuran 2m x 2m', 1000000, 2, '2024-03-19 12:39:20', '2024-03-19 12:39:29');
+(2, 1, 'Kandang Macan', 'Kandang untuk anak macan ukuran 2m x 2m', 1000000, 2, '2024-03-19 12:39:20', '2024-03-19 12:39:29'),
+(14, 2, 'Royal Canin 2Kg', 'Royal Canin untuk pakan kucing berat 2 Kilogram\r\n', 22000, 5, '2024-03-19 12:29:42', '2024-05-09 14:46:48'),
+(15, 1, 'Kandang Kucing Kanggora', 'Kandang untuk kucing Kanggora ukuran 1m x 1m', 450000, 17, '2024-05-09 14:02:02', '2024-05-09 14:46:48');
 
 -- --------------------------------------------------------
 
@@ -59,7 +60,7 @@ CREATE TABLE `gambar` (
   `gambar` text NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `gambar`
@@ -67,7 +68,9 @@ CREATE TABLE `gambar` (
 
 INSERT INTO `gambar` (`id`, `idBarang`, `gambar`, `createdAt`, `updatedAt`) VALUES
 (1, 1, 'af14a1d7b4cf967fce8461a0c9fd66c5.png', '2024-03-19 12:38:09', NULL),
-(2, 2, '1cc1b6bf3342f677eb4d76b2a4bb5f67.png', '2024-03-19 12:58:18', NULL);
+(3, 2, 'fa6abbcf542ecbcb0d3f56cdbbfb98d7.png', '2024-05-04 07:15:36', NULL),
+(18, 14, 'af14a1d7b4cf967fce8461a0c9fd66c5.png', '2024-03-19 12:38:09', NULL),
+(19, 15, 'fa6abbcf542ecbcb0d3f56cdbbfb98d7.png', '2024-05-04 07:15:36', '2024-05-09 14:03:28');
 
 -- --------------------------------------------------------
 
@@ -80,7 +83,7 @@ CREATE TABLE `kategori` (
   `kategori` varchar(100) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `kategori`
@@ -104,21 +107,17 @@ CREATE TABLE `keranjang` (
   `status` int(1) NOT NULL DEFAULT 0,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
--- Table structure for table `ongkir`
+-- Dumping data for table `keranjang`
 --
 
-CREATE TABLE `ongkir` (
-  `id` int(11) NOT NULL,
-  `kecamatan` varchar(50) NOT NULL,
-  `harga` int(11) NOT NULL,
-  `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
-  `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `keranjang` (`id`, `idUser`, `idBarang`, `total`, `status`, `createdAt`, `updatedAt`) VALUES
+(5, 2, 2, 1, 1, '2024-04-30 09:49:20', '2024-05-10 02:01:12'),
+(12, 2, 14, 4, 1, '2024-04-30 12:54:38', '2024-05-10 02:01:16'),
+(13, 3, 15, 2, 1, '2024-05-09 14:04:20', '2024-05-09 14:46:48'),
+(14, 3, 14, 3, 1, '2024-05-09 14:07:50', '2024-05-09 14:46:48');
 
 -- --------------------------------------------------------
 
@@ -130,20 +129,28 @@ CREATE TABLE `orders` (
   `id` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
   `idKeranjang` int(11) NOT NULL,
-  `alamat` text NOT NULL,
-  `catatan` text NOT NULL,
+  `alamat` text DEFAULT NULL,
+  `catatan` text DEFAULT NULL,
   `idOngkir` int(11) DEFAULT NULL,
   `metodePembayaran` int(1) NOT NULL,
   `statusPembayaran` int(1) NOT NULL DEFAULT 0,
   `buktiPembayaran` text DEFAULT NULL,
-  `tanggal` date NOT NULL,
-  `jam` time NOT NULL,
-  `opsi` varchar(20) NOT NULL,
+  `jam` time DEFAULT NULL,
   `idKhusus` varchar(29) NOT NULL,
   `totalBiaya` int(11) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `idUser`, `idKeranjang`, `alamat`, `catatan`, `idOngkir`, `metodePembayaran`, `statusPembayaran`, `buktiPembayaran`, `jam`, `idKhusus`, `totalBiaya`, `createdAt`, `updatedAt`) VALUES
+(1, 2, 5, 'Tegal Selatan', 'Biasa ouw', NULL, 3, 1, '8e8a4dc68a64b6bbd51fb2c163d57f63.jpg', NULL, '2-20240506214832', 1088000, '2024-04-30 14:48:32', '2024-05-10 02:01:28'),
+(2, 2, 12, 'Tegal Selatan', 'Biasa ouw', NULL, 3, 1, '8e8a4dc68a64b6bbd51fb2c163d57f63.jpg', NULL, '2-20240506214832', 1088000, '2024-04-30 14:48:32', '2024-05-10 02:01:36'),
+(5, 3, 13, 'Gas', 'gas', NULL, 2, 1, '1d6c208f2677c389dc5f69129d1d058c.jpeg', NULL, '3-20240509214648', 966000, '2024-05-09 14:46:48', '2024-05-10 01:35:55'),
+(6, 3, 14, 'Gas', 'gas', NULL, 2, 1, '1d6c208f2677c389dc5f69129d1d058c.jpeg', NULL, '3-20240509214648', 966000, '2024-05-09 14:46:48', '2024-05-10 01:35:55');
 
 -- --------------------------------------------------------
 
@@ -158,7 +165,14 @@ CREATE TABLE `pesan` (
   `subject` varchar(100) NOT NULL,
   `message` text NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `pesan`
+--
+
+INSERT INTO `pesan` (`id`, `name`, `email`, `subject`, `message`, `createdAt`) VALUES
+(1, 'Giacomo', 'giacomo@gmail.com', 'mbuh', 'coba bae', '2024-05-10 02:31:24');
 
 -- --------------------------------------------------------
 
@@ -173,7 +187,16 @@ CREATE TABLE `progres` (
   `status` varchar(100) NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp(),
   `updatedAt` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `progres`
+--
+
+INSERT INTO `progres` (`id`, `idUser`, `idKhusus`, `status`, `createdAt`, `updatedAt`) VALUES
+(1, 3, '3-20240509214648', 'Sedang diproses', '2024-05-10 01:35:55', NULL),
+(2, 3, '3-20240509214648', 'Sedang diantar', '2024-05-10 01:53:47', NULL),
+(3, 3, '3-20240509214648', 'Sudah diterima pembeli', '2024-05-10 01:54:40', NULL);
 
 -- --------------------------------------------------------
 
@@ -184,11 +207,22 @@ CREATE TABLE `progres` (
 CREATE TABLE `review` (
   `id` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
-  `idMenu` int(11) NOT NULL,
+  `idBarang` int(11) NOT NULL,
   `rating` int(1) NOT NULL,
   `review` text NOT NULL,
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+--
+-- Dumping data for table `review`
+--
+
+INSERT INTO `review` (`id`, `idUser`, `idBarang`, `rating`, `review`, `createdAt`) VALUES
+(1, 2, 2, 4, 'Bagus, semoga awet buat macan saya', '2024-04-30 13:34:16'),
+(2, 2, 2, 5, 'Kedua kalinya, sangat memuaskan belanja disini, tq min', '2024-05-09 13:36:35'),
+(3, 2, 14, 4, 'Enak..', '2024-05-09 13:38:32'),
+(4, 3, 15, 3, 'Bagus, tp kekecilan buat 10 kucing, bintang 3 dulu ya hehe', '2024-05-09 14:49:36'),
+(5, 3, 14, 5, 'Kucing saya dokoh, mantap', '2024-05-09 14:50:38');
 
 -- --------------------------------------------------------
 
@@ -207,14 +241,16 @@ CREATE TABLE `user` (
   `role` int(1) NOT NULL,
   `is_active` int(1) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `noHp`, `password`, `image`, `alamat`, `role`, `is_active`, `created_at`) VALUES
-(1, 'superadmin', 'superadmin@gmail.com', NULL, '$2y$10$7pyTCt1Y3lkAo4duy7Y8YekrA2.lkYPVVfNMgsEv7HQ3DEMyyiyde', 'default.jpg', NULL, 1, 1, '2023-03-07 04:17:36');
+(1, 'superadmin', 'superadmin@gmail.com', NULL, '$2y$10$7pyTCt1Y3lkAo4duy7Y8YekrA2.lkYPVVfNMgsEv7HQ3DEMyyiyde', 'default.jpg', NULL, 1, 1, '2023-03-07 04:17:36'),
+(2, 'Ilham Syah', 'ilham@gmail.com', '081912340981', '$2y$10$cfpT5/laPHn0.hA2XAmJPO1WzQ64b8o.L8BC1LoqtoqOvdvMPvp0i', 'default.jpg', 'Wong Tegal', 2, 1, '2024-05-04 09:31:30'),
+(3, 'Putra', 'putra@gmail.com', '081912340981', '$2y$10$cfpT5/laPHn0.hA2XAmJPO1WzQ64b8o.L8BC1LoqtoqOvdvMPvp0i', 'default.jpg', NULL, 2, 1, '2024-05-04 09:31:30');
 
 -- --------------------------------------------------------
 
@@ -227,7 +263,7 @@ CREATE TABLE `user_token` (
   `email` varchar(128) NOT NULL,
   `token` varchar(128) NOT NULL,
   `date_created` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -255,12 +291,6 @@ ALTER TABLE `kategori`
 -- Indexes for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `ongkir`
---
-ALTER TABLE `ongkir`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -307,13 +337,13 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `gambar`
 --
 ALTER TABLE `gambar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `kategori`
@@ -325,43 +355,37 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `ongkir`
---
-ALTER TABLE `ongkir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `progres`
 --
 ALTER TABLE `progres`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user_token`

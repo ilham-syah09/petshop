@@ -26,6 +26,8 @@ class Frontend extends CI_Controller
                 'keranjang.status' => 0
             ]);
         }
+
+        $this->kategori = $this->front->getKategori();
     }
 
     private function _authentication()
@@ -189,7 +191,6 @@ class Frontend extends CI_Controller
             'title'    => 'Checkout | Citra Bakery',
             'page'     => 'frontend/checkout',
             'kategori' => $this->front->getKategori(),
-            'ongkir'   => $this->front->getOngkir(),
             'cart'     => $cart
         ];
 

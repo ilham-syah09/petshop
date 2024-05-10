@@ -60,8 +60,9 @@
                                             <li><a href="contact.html">About</a></li>
                                             <li class="menu-icon"><a href="#">Shop</a>
                                                 <ul>
-                                                    <li><a href="shop.html">Shop</a></li>
-                                                    <li><a href="shop-grid.html">Shop Detail</a></li>
+                                                    <?php foreach ($this->kategori as $kat) : ?>
+                                                        <li><a href="<?= base_url('shop/') . $kat->id; ?>"><?= $kat->kategori; ?></a></li>
+                                                    <?php endforeach; ?>
                                                 </ul>
                                             </li>
                                             <li class="menu-icon"><a href="#">Orders</a>
@@ -73,8 +74,8 @@
                                             </li>
                                             <li class="menu-icon"><a href="#">Grooming</a>
                                                 <ul>
-                                                    <li><a href="shop.html">List Booked</a></li>
-                                                    <li><a href="shop-grid.html">Booking Grooming</a></li>
+                                                    <li><a href="<?= base_url('booked'); ?>">List Booked</a></li>
+                                                    <li><a href="<?= base_url('grooming'); ?>">Booking Grooming</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="<?= base_url('contact'); ?>">Contact</a></li>
@@ -95,21 +96,23 @@
                                                 <li><a href="<?= base_url('auth'); ?>">Sign in</a></li>
                                                 <li><a href="<?= base_url('auth/registrasi'); ?>">Register</a></li>
                                             <?php else : ?>
-                                                <li><a href="<?= base_url('auth/profile'); ?>">My Account</a></li>
+                                                <li><a href="<?= base_url('profile'); ?>">My Account</a></li>
                                                 <li><a href="<?= base_url('auth/logout'); ?>">Sign Out</a></li>
                                             <?php endif; ?>
                                         </ul>
                                     </li>
                                 </ul>
                             </div>
-                            <!-- mini-cart -->
-                            <div class="mini-cart-icon">
-                                <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
-                                    <i class="icon-shopping-cart"></i>
-                                    <sup><?= count($this->cart); ?></sup>
-                                </a>
-                            </div>
-                            <!-- mini-cart -->
+                            <?php if ($this->session->userdata('log_user')) : ?>
+                                <!-- mini-cart -->
+                                <div class="mini-cart-icon">
+                                    <a href="#ltn__utilize-cart-menu" class="ltn__utilize-toggle">
+                                        <i class="icon-shopping-cart"></i>
+                                        <sup><?= count($this->cart); ?></sup>
+                                    </a>
+                                </div>
+                                <!-- mini-cart -->
+                            <?php endif; ?>
                             <!-- Mobile Menu Button -->
                             <div class="mobile-menu-toggle d-xl-none">
                                 <a href="#ltn__utilize-mobile-menu" class="ltn__utilize-toggle">

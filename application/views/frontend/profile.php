@@ -31,7 +31,6 @@
                                  <label>No Hp</label>
                                  <input class="form-control" type="text" value="<?= $this->dt_user->noHp; ?>" name="noHp">
                              </div>
-
                              <div class="col-md-12 form-group">
                                  <label>Alamat</label>
                                  <textarea name="alamat" class="form-control"><?= $this->dt_user->alamat; ?></textarea>

@@ -36,7 +36,7 @@ class Omset extends CI_Controller
 		}
 
 		// tahunan
-		$this->db->select('YEAR(tanggal) as tahun');
+		$this->db->select('YEAR(createdAt) as tahun');
 		$this->db->group_by('tahun');
 		$this->db->order_by('tahun', 'asc');
 
@@ -47,7 +47,7 @@ class Omset extends CI_Controller
 		if ($tahun) {
 			foreach ($tahun as $th) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
-				$this->db->where('YEAR(tanggal)', $th->tahun);
+				$this->db->where('YEAR(createdAt)', $th->tahun);
 
 				$this->db->group_by('idKhusus');
 				$tahunan = $this->db->get('orders')->result();
@@ -66,8 +66,8 @@ class Omset extends CI_Controller
 		}
 
 		// bulanan
-		$this->db->select('MONTH(tanggal) as bulan');
-		$this->db->where('YEAR(tanggal)', $th_ini);
+		$this->db->select('MONTH(createdAt) as bulan');
+		$this->db->where('YEAR(createdAt)', $th_ini);
 		$this->db->group_by('bulan');
 		$this->db->order_by('bulan', 'asc');
 
@@ -79,8 +79,8 @@ class Omset extends CI_Controller
 			foreach ($bulan as $bl) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
 				$this->db->group_start();
-				$this->db->where('YEAR(tanggal)', $th_ini);
-				$this->db->where('MONTH(tanggal)', $bl->bulan);
+				$this->db->where('YEAR(createdAt)', $th_ini);
+				$this->db->where('MONTH(createdAt)', $bl->bulan);
 				$this->db->group_end();
 				$this->db->group_by('idKhusus');
 				$bulanan = $this->db->get('orders')->result();
@@ -99,10 +99,10 @@ class Omset extends CI_Controller
 		}
 
 		// harian
-		$this->db->select('tanggal');
+		$this->db->select('DATE(createdAt) as tanggal');
 		$this->db->group_start();
-		$this->db->where('YEAR(tanggal)', $th_ini);
-		$this->db->where('MONTH(tanggal)', $bln_ini);
+		$this->db->where('YEAR(createdAt)', $th_ini);
+		$this->db->where('MONTH(createdAt)', $bln_ini);
 		$this->db->group_end();
 		$this->db->group_by('tanggal');
 		$this->db->order_by('tanggal', 'asc');
@@ -114,7 +114,7 @@ class Omset extends CI_Controller
 		if ($hari) {
 			foreach ($hari as $hr) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
-				$this->db->where('tanggal', $hr->tanggal);
+				$this->db->where('DATE(createdAt)', $hr->tanggal);
 				$this->db->group_by('idKhusus');
 				$harian = $this->db->get('orders')->result();
 
@@ -156,9 +156,9 @@ class Omset extends CI_Controller
 		$pdf->Image('assets/logo/logo.png', 18, 9, 18, 18);
 
 		$pdf->SetFont('Times', 'B', 12);
-		$pdf->Cell(190, 6, 'CITRA BAKERY', 0, 1, 'C');
-		$pdf->Cell(190, 6, 'Jl. Surabayan No. 46 Kota Tegal Kecamatan Tegal Timur', 0, 1, 'C');
-		$pdf->Cell(190, 6, '08156900053', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Pet Shop', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Jl. kita solusi', 0, 1, 'C');
+		$pdf->Cell(190, 6, '081234567898', 0, 1, 'C');
 
 		$pdf->SetLineWidth(1);
 		$pdf->Line(10, 30, 200, 30);
@@ -175,7 +175,7 @@ class Omset extends CI_Controller
 		$pdf->Cell(50, 10, 'TAHUN', 1, 0, 'C');
 		$pdf->Cell(120, 10, 'PEMASUKAN', 1, 1, 'C');
 
-		$this->db->select('YEAR(tanggal) as tahun');
+		$this->db->select('YEAR(createdAt) as tahun');
 		$this->db->group_by('tahun');
 		$this->db->order_by('tahun', 'asc');
 
@@ -186,7 +186,7 @@ class Omset extends CI_Controller
 		if ($tahun) {
 			foreach ($tahun as $th) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
-				$this->db->where('YEAR(tanggal)', $th->tahun);
+				$this->db->where('YEAR(createdAt)', $th->tahun);
 
 				$this->db->group_by('idKhusus');
 				$tahunan = $this->db->get('orders')->result();
@@ -233,7 +233,7 @@ class Omset extends CI_Controller
 		$pdf->Cell(1, 5, '', 0, 1);
 
 		$pdf->Cell(128.6, 5, '', 0, 0);
-		$pdf->Cell(64.3, 5, '( SPV Citra Bakery )', 0, 0);
+		$pdf->Cell(64.3, 5, '( SPV Pet Shop )', 0, 0);
 
 		$pdf->Output('Rekap-semua-omset.pdf', 'I');
 	}
@@ -248,9 +248,9 @@ class Omset extends CI_Controller
 		$pdf->Image('assets/logo/logo.png', 18, 9, 18, 18);
 
 		$pdf->SetFont('Times', 'B', 12);
-		$pdf->Cell(190, 6, 'CITRA BAKERY', 0, 1, 'C');
-		$pdf->Cell(190, 6, 'Jl. Surabayan No. 46 Kota Tegal Kecamatan Tegal Timur', 0, 1, 'C');
-		$pdf->Cell(190, 6, '08156900053', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Pet Shop', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Jl. kita solusi', 0, 1, 'C');
+		$pdf->Cell(190, 6, '081234567898', 0, 1, 'C');
 
 		$pdf->SetLineWidth(1);
 		$pdf->Line(10, 30, 200, 30);
@@ -267,8 +267,8 @@ class Omset extends CI_Controller
 		$pdf->Cell(50, 10, 'TAHUN', 1, 0, 'C');
 		$pdf->Cell(120, 10, 'PEMASUKAN', 1, 1, 'C');
 
-		$this->db->select('MONTH(tanggal) as bulan');
-		$this->db->where('YEAR(tanggal)', $th_ini);
+		$this->db->select('MONTH(createdAt) as bulan');
+		$this->db->where('YEAR(createdAt)', $th_ini);
 		$this->db->group_by('bulan');
 		$this->db->order_by('bulan', 'asc');
 
@@ -280,8 +280,8 @@ class Omset extends CI_Controller
 			foreach ($bulan as $bl) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
 				$this->db->group_start();
-				$this->db->where('YEAR(tanggal)', $th_ini);
-				$this->db->where('MONTH(tanggal)', $bl->bulan);
+				$this->db->where('YEAR(createdAt)', $th_ini);
+				$this->db->where('MONTH(createdAt)', $bl->bulan);
 				$this->db->group_end();
 				$this->db->group_by('idKhusus');
 				$bulanan = $this->db->get('orders')->result();
@@ -329,7 +329,7 @@ class Omset extends CI_Controller
 		$pdf->Cell(1, 5, '', 0, 1);
 
 		$pdf->Cell(128.6, 5, '', 0, 0);
-		$pdf->Cell(64.3, 5, '( SPV Citra Bakery )', 0, 0);
+		$pdf->Cell(64.3, 5, '( SPV Pet SHop )', 0, 0);
 
 		$pdf->Output('Rekap-omset-tahun-' . $th_ini . '.pdf', 'I');
 	}
@@ -344,9 +344,9 @@ class Omset extends CI_Controller
 		$pdf->Image('assets/logo/logo.png', 18, 9, 18, 18);
 
 		$pdf->SetFont('Times', 'B', 12);
-		$pdf->Cell(190, 6, 'CITRA BAKERY', 0, 1, 'C');
-		$pdf->Cell(190, 6, 'Jl. Surabayan No. 46 Kota Tegal Kecamatan Tegal Timur', 0, 1, 'C');
-		$pdf->Cell(190, 6, '08156900053', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Pet Shop', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Jl. kita solusi', 0, 1, 'C');
+		$pdf->Cell(190, 6, '081234567898', 0, 1, 'C');
 
 		$pdf->SetLineWidth(1);
 		$pdf->Line(10, 30, 200, 30);
@@ -363,10 +363,10 @@ class Omset extends CI_Controller
 		$pdf->Cell(50, 10, 'TAHUN', 1, 0, 'C');
 		$pdf->Cell(120, 10, 'PEMASUKAN', 1, 1, 'C');
 
-		$this->db->select('tanggal');
+		$this->db->select('DATE(createdAt) as tanggal');
 		$this->db->group_start();
-		$this->db->where('YEAR(tanggal)', $th_ini);
-		$this->db->where('MONTH(tanggal)', $bln_ini);
+		$this->db->where('YEAR(createdAt)', $th_ini);
+		$this->db->where('MONTH(createdAt)', $bln_ini);
 		$this->db->group_end();
 		$this->db->group_by('tanggal');
 		$this->db->order_by('tanggal', 'asc');
@@ -378,7 +378,7 @@ class Omset extends CI_Controller
 		if ($hari) {
 			foreach ($hari as $hr) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
-				$this->db->where('tanggal', $hr->tanggal);
+				$this->db->where('DATE(createdAt)', $hr->tanggal);
 				$this->db->group_by('idKhusus');
 				$harian = $this->db->get('orders')->result();
 
@@ -425,7 +425,7 @@ class Omset extends CI_Controller
 		$pdf->Cell(1, 5, '', 0, 1);
 
 		$pdf->Cell(128.6, 5, '', 0, 0);
-		$pdf->Cell(64.3, 5, '( SPV Citra Bakery )', 0, 0);
+		$pdf->Cell(64.3, 5, '( SPV Pet Shop )', 0, 0);
 
 		$pdf->Output('Rekap-omset-tahun-' . $th_ini . '.pdf', 'I');
 	}

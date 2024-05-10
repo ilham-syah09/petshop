@@ -39,6 +39,8 @@ class M_Admin extends CI_Model
 
     public function getCountOrders()
     {
+        $this->db->group_by('idKhusus');
+
         return $this->db->get('orders')->num_rows();
     }
 
@@ -75,11 +77,10 @@ class M_Admin extends CI_Model
 
     public function getListPesanan($where)
     {
-        $this->db->select('barang.nama_barang, barang.harga, keranjang.total, orders.idKhusus, orders.statusPembayaran, orders.createdAt, orders.metodePembayaran, orders.buktiPembayaran, orders.opsi, user.name, user.noHp, ongkir.kecamatan, ongkir.harga as ongkir');
+        $this->db->select('barang.nama_barang, barang.harga, keranjang.total, orders.idKhusus, orders.statusPembayaran, orders.createdAt, orders.metodePembayaran, orders.buktiPembayaran, user.name, user.noHp');
         $this->db->join('user', 'user.id = orders.idUser', 'inner');
         $this->db->join('keranjang', 'keranjang.id = orders.idKeranjang', 'inner');
         $this->db->join('barang', 'barang.id = keranjang.idBarang', 'inner');
-        $this->db->join('ongkir', 'ongkir.id = orders.idOngkir', 'left');
 
         $this->db->where($where);
 
@@ -111,16 +112,9 @@ class M_Admin extends CI_Model
         return $this->db->get('progres')->result();
     }
 
-    public function getOngkir()
-    {
-        $this->db->order_by('kecamatan', 'asc');
-
-        return $this->db->get('ongkir')->result();
-    }
-
     public function getTahunIni()
     {
-        $this->db->select('YEAR(tanggal) as tahun');
+        $this->db->select('YEAR(createdAt) as tahun');
         $this->db->order_by('tahun', 'desc');
         $this->db->limit(1);
 
@@ -130,8 +124,8 @@ class M_Admin extends CI_Model
 
     public function getBulanIni($tahun)
     {
-        $this->db->select('MONTH(tanggal) as bulan');
-        $this->db->where('YEAR(tanggal)', $tahun);
+        $this->db->select('MONTH(createdAt) as bulan');
+        $this->db->where('YEAR(createdAt)', $tahun);
 
         $this->db->order_by('bulan', 'desc');
         $this->db->limit(1);
@@ -142,7 +136,7 @@ class M_Admin extends CI_Model
 
     public function getTahun()
     {
-        $this->db->select('YEAR(tanggal) as tahun');
+        $this->db->select('YEAR(createdAt) as tahun');
         $this->db->group_by('tahun');
         $this->db->order_by('tahun', 'desc');
 

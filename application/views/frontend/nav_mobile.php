@@ -19,25 +19,26 @@
 
                 <li><a href="#">Shop</a>
                     <ul class="sub-menu">
-                        <li><a href="shop.html">Shop</a></li>
-                        <li><a href="shop-grid.html">Shop Detail</a></li>
+                        <?php foreach ($this->kategori as $kat) : ?>
+                            <li><a href="<?= base_url('shop/') . $kat->id; ?>"><?= $kat->kategori; ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
                 </li>
                 <li><a href="#">Orders</a>
                     <ul class="sub-menu">
-                        <li><a href="shop.html">Shopping Cart</a></li>
-                        <li><a href="shop-grid.html">Checkout</a></li>
-                        <li><a href="shop-grid.html">List Order</a></li>
+                        <li><a href="<?= base_url('cart'); ?>">Shopping Cart</a></li>
+                        <li><a href="javascript:void(0)">Checkout</a></li>
+                        <li><a href="<?= base_url('orders'); ?>">List Order</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Grooming</a>
                     <ul class="sub-menu">
-                        <li><a href="shop.html">List Booked</a></li>
-                        <li><a href="shop-grid.html">Booking Grooming</a></li>
+                        <li><a href="<?= base_url('booked'); ?>">List Booked</a></li>
+                        <li><a href="<?= base_url('grooming'); ?>">Booking Grooming</a></li>
                     </ul>
                 </li>
 
-                <li><a href="Contact">Contact</a></li>
+                <li><a href="<?= base_url('contact'); ?>">Contact</a></li>
             </ul>
         </div>
         <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
@@ -50,24 +51,17 @@
                         My Account
                     </a>
                 </li>
-                <li>
-                    <a href="wishlist.html" title="Wishlist">
-                        <span class="utilize-btn-icon">
-                            <i class="far fa-heart"></i>
-                            <sup>3</sup>
-                        </span>
-                        Wishlist
-                    </a>
-                </li>
-                <li>
-                    <a href="cart.html" title="Shoping Cart">
-                        <span class="utilize-btn-icon">
-                            <i class="fas fa-shopping-cart"></i>
-                            <sup>5</sup>
-                        </span>
-                        Shoping Cart
-                    </a>
-                </li>
+                <?php if ($this->session->userdata('log_user')) : ?>
+                    <li>
+                        <a href="<?= base_url('cart'); ?>" title="Shoping Cart">
+                            <span class="utilize-btn-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <sup><?= count($this->cart); ?></sup>
+                            </span>
+                            Shoping Cart
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

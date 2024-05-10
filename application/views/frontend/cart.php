@@ -73,28 +73,30 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-4">
-				<div class="shoping-cart-inner">
-					<div class="shoping-cart-total mt-50">
-						<h4>Cart Totals</h4>
-						<table class="table">
-							<tbody>
-								<tr>
-									<td>Cart Subtotal</td>
-									<td id="subTotal"><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></td>
-								</tr>
-								<tr>
-									<td><strong>Order Total</strong></td>
-									<td id="total"><strong><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></strong></td>
-								</tr>
-							</tbody>
-						</table>
-						<div class="btn-wrapper text-right">
-							<button class="theme-btn-1 btn btn-effect-1 btn-block" onclick="window.location.href='<?php echo base_url('checkout') ?>'">Proceed to checkout</button>
+			<?php if (count($cart) > 0) : ?>
+				<div class="col-lg-4">
+					<div class="shoping-cart-inner">
+						<div class="shoping-cart-total mt-50">
+							<h4>Cart Totals</h4>
+							<table class="table">
+								<tbody>
+									<tr>
+										<td>Cart Subtotal</td>
+										<td id="subTotal"><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></td>
+									</tr>
+									<tr>
+										<td><strong>Order Total</strong></td>
+										<td id="total"><strong><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></strong></td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="btn-wrapper text-right">
+								<button class="theme-btn-1 btn btn-effect-1 btn-block" onclick="window.location.href='<?php echo base_url('checkout') ?>'">Proceed to checkout</button>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>

@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= base_url('admin/kategori'); ?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('admin'); ?>">Home</a></li>
                         <li class="breadcrumb-item active"><?= $title; ?></li>
                     </ol>
                 </div><!-- /.col -->
@@ -251,7 +251,7 @@
                             $("#tabel_detail").append(
                                 "<tr class='tr_isi'>" +
                                 "<td class='text-center'>" + (i + 1) + "</td>" +
-                                "<td>" + res.data[i].nama_menu + "</td>" +
+                                "<td>" + res.data[i].nama_barang + "</td>" +
                                 "<td>" + res.data[i].harga + "</td>" +
                                 "<td>" + res.data[i].total + "</td>" +
                                 "<td>" + rupiah.format(harga) + "</td>" +
@@ -259,26 +259,7 @@
                             );
                         });
 
-                        if (res.data[0].opsi == 'Delivery') {
-                            $("#tabel_detail").append(
-                                "<tr class='tr_ongkir'>" +
-                                "<td colspan='3' class='text-center'>Shipping</td>" +
-                                "<td>" + res.data[0].kecamatan + "</td>" +
-                                "<td>" + rupiah.format(res.data[0].ongkir) + "</td>" +
-                                "<tr>"
-                            );
-
-                            finalHarga = rupiah.format(Number(totalHarga) + Number(res.data[0].ongkir));
-                        } else {
-                            $("#tabel_detail").append(
-                                "<tr class='tr_ongkir'>" +
-                                "<td colspan='4' class='text-center'>" + res.data[0].opsi + "</td>" +
-                                "<td>Rp. 0</td>" +
-                                "<tr>"
-                            );
-
-                            finalHarga = rupiah.format(Number(totalHarga));
-                        }
+                        finalHarga = rupiah.format(Number(totalHarga));
 
                         $("#tabel_detail").append(
                             "<tr class='tr_total'>" +

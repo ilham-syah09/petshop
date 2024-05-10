@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>Invoice Order | Citra Bakery</title>
+	<title>Invoice Order | Petshop</title>
 
 	<!-- Invoice styling -->
 	<style>
@@ -135,7 +135,7 @@
                                                 color: #00466a;
                                                 text-decoration: none;
                                                 font-weight: 600;
-                                            ">Citra Bakery</a>
+                                            ">PetShop</a>
 								</div>
 							</td>
 							<td>
@@ -166,7 +166,15 @@
 		<table>
 			<tr class="heading">
 				<td>Payment Method</td>
-				<td><?= ($pesanan[0]->metodePembayaran == 1) ? 'QRIS' : 'Tranfer Bank'; ?></td>
+				<?php if ($pesanan[0]->metodePembayaran == 1) {
+					$p = 'QRIS';
+				} elseif ($pesanan[0]->metodePembayaran == 2) {
+					$p = 'Bank Transfer';
+				} else {
+					$p = 'Cash on Delivery';
+				}
+				?>
+				<td><?= $p; ?></td>
 			</tr>
 		</table>
 		<table>
@@ -174,17 +182,17 @@
 				<tr>
 					<td>Barcode</td>
 					<td>
-						<img width="100" src="<?= base_url('upload/gambar/sample-qris.png'); ?>" alt="Code QR">
+						<img width="200" src="<?= base_url('upload/gambar/sample-qris.png'); ?>" alt="Code QR">
 					</td>
 				</tr>
-			<?php else : ?>
-				<tr>
-					<td>BSI</td>
-					<td>12345678</td>
-				</tr>
+			<?php elseif ($pesanan[0]->metodePembayaran == 2) : ?>
 				<tr>
 					<td>BRI</td>
-					<td>12345678</td>
+					<td>999301005602533</td>
+				</tr>
+				<tr>
+					<td>BCA</td>
+					<td>4071677832</td>
 				</tr>
 				<tr>
 					<td>BNI</td>
@@ -207,30 +215,14 @@
 				<?php $totalHarga += ($psn->harga * $psn->total); ?>
 				<tr>
 					<td><?= $i + 1; ?></td>
-					<td><?= $psn->nama_menu; ?></td>
+					<td><?= $psn->nama_barang; ?></td>
 					<td><?= 'Rp. ' . number_format($psn->harga, 0, ',', '.'); ?></td>
 					<td><?= $psn->total; ?></td>
 					<td align="right"><?= 'Rp. ' . number_format(($psn->harga * $psn->total), 0, ',', '.'); ?></td>
 				</tr>
 			<?php endforeach; ?>
-			<?php if ($pesanan[0]->opsi == 'Delivery') : ?>
-				<tr class="heading">
-					<td colspan="5">Shipping</td>
-				</tr>
-				<tr>
-					<td colspan="4"><?= $pesanan[0]->kecamatan; ?></td>
-					<td><?= "Rp. " . number_format($pesanan[0]->ongkir, 0, ',', '.'); ?></td>
-				</tr>
 
-				<?php $finalHarga = 'Rp. ' . number_format(($pesanan[0]->ongkir + $totalHarga), 0, ',', '.');; ?>
-			<?php else : ?>
-				<tr class="heading">
-					<td colspan="4"><?= $pesanan[0]->opsi; ?></td>
-					<td>Rp. 0</td>
-				</tr>
-
-				<?php $finalHarga = 'Rp. ' . number_format(($totalHarga), 0, ',', '.');; ?>
-			<?php endif; ?>
+			<?php $finalHarga = 'Rp. ' . number_format(($totalHarga), 0, ',', '.');; ?>
 
 			<tr class="heading">
 				<td>Total</td>
@@ -263,8 +255,8 @@
 							</td>
 
 							<td>
-								Citra Bakery Corp.<br />
-								admin@citrabakery.com
+								PetShop Corp.<br />
+								admin@petshop.com
 							</td>
 						</tr>
 					</table>

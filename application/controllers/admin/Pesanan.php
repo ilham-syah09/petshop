@@ -82,7 +82,7 @@ class Pesanan extends CI_Controller
             $this->session->set_flashdata('toastr-error', 'Status pembayaran gagal diupdate');
         }
 
-        redirect('admin/pesanan', 'refresh');
+        redirect($_SERVER['HTTP_REFERER'], 'refresh');
     }
 
     public function cetak($idUser, $idKhusus)

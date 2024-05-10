@@ -135,7 +135,7 @@
                                                 color: #00466a;
                                                 text-decoration: none;
                                                 font-weight: 600;
-                                            ">Petshop</a>
+                                            ">PetShop</a>
 								</div>
 							</td>
 							<td>
@@ -255,7 +255,7 @@
 							</td>
 
 							<td>
-								Petshop Corp.<br />
+								PetShop Corp.<br />
 								admin@petshop.com
 							</td>
 						</tr>

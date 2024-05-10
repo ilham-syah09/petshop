@@ -9,7 +9,7 @@
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="<?= base_url('admin/kategori'); ?>">Home</a></li>
+                        <li class="breadcrumb-item"><a href="<?= base_url('admin'); ?>">Home</a></li>
                         <li class="breadcrumb-item active"><?= $title; ?></li>
                     </ol>
                 </div><!-- /.col -->
@@ -44,7 +44,6 @@
                                             <th>Alamat</th>
                                             <th>Bukti Bayar</th>
                                             <th>Status Pembayaran</th>
-                                            <th>Keterangan</th>
                                             <th>Total Biaya</th>
                                             <th>Action</th>
                                         </tr>
@@ -62,7 +61,7 @@
                                                 <td><?= $psn->alamat; ?></td>
                                                 <td>
                                                     <?php if ($psn->buktiPembayaran != null) : ?>
-                                                        <a href="<?= base_url('upload/bukti/' . $psn->buktiPembayaran); ?>" target="_blank">
+                                                        <a href="<?= base_url('upload/bukti/' . $psn->buktiPembayaran); ?>" target="bukti_pembayaran">
                                                             <img src="<?= base_url('upload/bukti/' . $psn->buktiPembayaran); ?>" alt="<?= $psn->buktiPembayaran; ?>" class="img-thumbnail" width="180">
                                                         </a>
                                                     <?php else : ?>
@@ -76,7 +75,6 @@
                                                         <span class="badge badge-success">Lunas</span>
                                                     <?php endif; ?>
                                                 </td>
-                                                <td><?= $psn->opsi . ' | ' . date('d M Y', strtotime($psn->tanggal)) . ' - ' . $psn->jam; ?></td>
                                                 <td><?= 'Rp. ' . number_format($psn->totalBiaya, 0, ',', '.'); ?></td>
                                                 <td>
                                                     <a href="#" class="badge badge-info detail_btn" data-toggle="modal" data-target="#detailPesanan" data-iduser="<?= $psn->idUser; ?>" data-idkhusus="<?= $psn->idKhusus; ?>" data-link="<?= base_url('admin/pesanan/cetak/' . $psn->idUser . '/' . $psn->idKhusus); ?>">Detail</a>
@@ -127,7 +125,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center">#</th>
-                                                <th>Nama Menu</th>
+                                                <th>Nama Barang</th>
                                                 <th>Jumlah Pesanan</th>
                                                 <th>Harga</th>
                                                 <th>Total Harga</th>
@@ -239,7 +237,7 @@
                             $("#tabel_detail").append(
                                 "<tr class='tr_isi'>" +
                                 "<td class='text-center'>" + (i + 1) + "</td>" +
-                                "<td>" + res.data[i].nama_menu + "</td>" +
+                                "<td>" + res.data[i].nama_barang + "</td>" +
                                 "<td>" + res.data[i].harga + "</td>" +
                                 "<td>" + res.data[i].total + "</td>" +
                                 "<td>" + rupiah.format(harga) + "</td>" +
@@ -247,26 +245,7 @@
                             );
                         });
 
-                        if (res.data[0].opsi == 'Delivery') {
-                            $("#tabel_detail").append(
-                                "<tr class='tr_ongkir'>" +
-                                "<td colspan='3' class='text-center'>Pengiriman</td>" +
-                                "<td>" + res.data[0].kecamatan + "</td>" +
-                                "<td>" + rupiah.format(res.data[0].ongkir) + "</td>" +
-                                "<tr>"
-                            );
-
-                            finalHarga = rupiah.format(Number(totalHarga) + Number(res.data[0].ongkir));
-                        } else {
-                            $("#tabel_detail").append(
-                                "<tr class='tr_ongkir'>" +
-                                "<td colspan='4' class='text-center'>" + res.data[0].opsi + "</td>" +
-                                "<td>Rp. 0</td>" +
-                                "<tr>"
-                            );
-
-                            finalHarga = rupiah.format(Number(totalHarga));
-                        }
+                        finalHarga = rupiah.format(Number(totalHarga));
 
                         $("#tabel_detail").append(
                             "<tr class='tr_total'>" +

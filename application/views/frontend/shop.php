@@ -326,7 +326,7 @@
 												</ul>
 											<?php endif; ?>
 										</div>
-										<h3><?= $product->nama_barang; ?></h3>
+										<h3><a href="<?= base_url('detail/' . $product->id); ?>"><?= $product->nama_barang; ?></a></h3>
 										<p><?= $product->deskripsi; ?></p>
 										<div class="product-price">
 											<span><?= 'Rp. ' . number_format($product->harga, 0, ',', '.'); ?></span>

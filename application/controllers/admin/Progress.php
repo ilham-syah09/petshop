@@ -30,7 +30,7 @@ class Progress extends CI_Controller
             'page'    => 'admin/progress',
             'pesanan' => $this->admin->getPesanan([
                 'orders.statusPembayaran' => 1,
-                'orders.tanggal' => $date
+                'DATE(orders.createdAt)'  => $date
             ]),
             'date'    => $date
         ];
@@ -62,7 +62,8 @@ class Progress extends CI_Controller
 
         $this->db->insert('progres', $data);
         $this->session->set_flashdata('toastr-success', 'Berhasil tambah progres');
-        redirect('admin/progress');
+
+        redirect($_SERVER['HTTP_REFERER'], 'refresh');
     }
 }
 
