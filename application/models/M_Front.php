@@ -116,9 +116,10 @@ class M_Front extends CI_Model
 
 	public function getListProduct($where)
 	{
-		$this->db->select('barang.nama_barang, barang.harga, keranjang.idBarang, keranjang.total, orders.idKhusus, orders.statusPembayaran, orders.createdAt, orders.metodePembayaran, orders.buktiPembayaran');
+		$this->db->select('barang.nama_barang, barang.harga, keranjang.idBarang, keranjang.total, orders.idKhusus, orders.statusPembayaran, orders.createdAt, orders.metodePembayaran, orders.buktiPembayaran, ongkir.kecamatan, ongkir.harga as ongkir');
 		$this->db->join('keranjang', 'keranjang.id = orders.idKeranjang', 'inner');
 		$this->db->join('barang', 'barang.id = keranjang.idBarang', 'inner');
+		$this->db->join('ongkir', 'ongkir.id = orders.idOngkir', 'left');
 
 		$this->db->where($where);
 
@@ -152,6 +153,36 @@ class M_Front extends CI_Model
 		$this->db->where($where);
 
 		return $this->db->get('review')->row();
+	}
+
+	public function getOngkir()
+	{
+		$this->db->order_by('kecamatan', 'asc');
+
+		return $this->db->get('ongkir')->result();
+	}
+
+	public function getPaket()
+	{
+		$this->db->order_by('namaPaket', 'asc');
+
+		return $this->db->get('paket')->result();
+	}
+
+	public function getGrooming($where = null)
+	{
+		$this->db->select('grooming.*, paket.namaPaket, paket.harga, user.name, ongkir.kecamatan, ongkir.harga as ongkir');
+		$this->db->join('paket', 'paket.id = grooming.idPaket', 'inner');
+		$this->db->join('user', 'user.id = grooming.idUser', 'inner');
+		$this->db->join('ongkir', 'ongkir.id = grooming.idOngkir', 'left');
+
+		if ($where) {
+			$this->db->where($where);
+		}
+
+		$this->db->order_by('grooming.createdAt', 'desc');
+
+		return $this->db->get('grooming')->result();
 	}
 }
 

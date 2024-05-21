@@ -22,11 +22,39 @@
 								</div>
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
+										<h6>Subdistrict</h6>
+										<div class="row">
+											<div class="col-md-10">
+												<div class="input-item">
+													<select name="idOngkir" id="idOngkir" class="form-control">
+														<option value="">-- Select Subdistrict --</option>
+														<?php foreach ($ongkir as $ong) : ?>
+															<option value="<?= $ong->id; ?>" data-harga="<?= $ong->harga; ?>" data-hargarp="<?= 'Rp. ' . number_format($ong->harga, 0, ',', '.'); ?>"><?= $ong->kecamatan; ?></option>
+														<?php endforeach; ?>
+													</select>
+												</div>
+											</div>
+											<div class="col-md-2">
+												<button type="button" class="btn btn-primary" id="cek-ongkir">Chack</button>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-lg-12 col-md-12">
 										<h6>Address</h6>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="input-item">
-													<textarea type="text" name="alamat" placeholder="House number and street name"></textarea>
+													<textarea name="alamat" placeholder="House number and street name"></textarea>
+												</div>
+											</div>
+										</div>
+										<h6>Link Google Maps</h6>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="input-item">
+													<input type="text" name="link_maps" placeholder="Link google maps" autocomplete="off">
 												</div>
 											</div>
 										</div>
@@ -112,14 +140,23 @@
 									</div>
 								<?php endforeach; ?>
 								<tr>
-									<td><strong>Order Total</strong></td>
+									<td><strong>Sub Total</strong></td>
 									<td><strong><?= 'Rp. ' . number_format($subTotal, 0, ',', '.'); ?></strong></td>
+									<input type="hidden" id="subTotal" value="<?= $subTotal; ?>">
 								</tr>
-								<input type="hidden" name="total" value="<?= $subTotal; ?>" id="totalInput">
+								<tr>
+									<td>Shipping</td>
+									<td id="shipping"></td>
+								</tr>
+								<tr>
+									<td><strong>Order Total</strong></td>
+									<td><strong id="totalInputrp"></strong></td>
+								</tr>
+								<input type="hidden" name="total" id="totalInput">
 							</tbody>
 						</table>
 
-						<button class="btn theme-btn-1 btn-effect-1 text-uppercase btn-block" type="submit">Place order</button>
+						<button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase btn-block btn-order" disabled>Place order</button>
 					</div>
 				</div>
 			</div>
@@ -138,5 +175,35 @@
 
 	$('#cod').click(function() {
 		$('#payment').val(3);
+	});
+
+	$('#cek-ongkir').click(function() {
+		const idOngkir = $('#idOngkir').find(':selected').val();
+		const harga = $('#idOngkir').find(':selected').data('harga');
+		const hargarp = $('#idOngkir').find(':selected').data('hargarp');
+		const subTotal = $('#subTotal').val();
+
+		if (idOngkir) {
+			let rupiah = new Intl.NumberFormat('id-ID', {
+				style: 'currency',
+				currency: 'IDR'
+			});
+
+			let total = Number(harga) + Number(subTotal);
+
+			$('#shipping').text(hargarp);
+			$('#totalInputrp').text(rupiah.format(total));
+			$('#totalInput').val(total);
+
+			$('.btn-order').attr('disabled', false);
+		} else {
+			let total = Number(subTotal);
+
+			$('#shipping').text('');
+			$('#totalInputrp').text('');
+			$('#totalInput').val('');
+
+			$('.btn-order').attr('disabled', true);
+		}
 	});
 </script>

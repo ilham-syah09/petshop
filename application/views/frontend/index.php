@@ -74,8 +74,8 @@
                                             </li>
                                             <li class="menu-icon"><a href="#">Grooming</a>
                                                 <ul>
-                                                    <li><a href="<?= base_url('booked'); ?>">List Booked</a></li>
-                                                    <li><a href="<?= base_url('grooming'); ?>">Booking Grooming</a></li>
+                                                    <li><a href="<?= base_url('grooming/order'); ?>">Order</a></li>
+                                                    <li><a href="<?= base_url('grooming/list'); ?>">List Grooming</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="<?= base_url('contact'); ?>">Contact</a></li>

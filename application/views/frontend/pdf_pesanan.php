@@ -221,8 +221,15 @@
 					<td align="right"><?= 'Rp. ' . number_format(($psn->harga * $psn->total), 0, ',', '.'); ?></td>
 				</tr>
 			<?php endforeach; ?>
+			<tr class="heading">
+				<td colspan="5">Shipping</td>
+			</tr>
+			<tr>
+				<td colspan="4"><?= $pesanan[0]->kecamatan; ?></td>
+				<td><?= "Rp. " . number_format($pesanan[0]->ongkir, 0, ',', '.'); ?></td>
+			</tr>
 
-			<?php $finalHarga = 'Rp. ' . number_format(($totalHarga), 0, ',', '.');; ?>
+			<?php $finalHarga = 'Rp. ' . number_format(($pesanan[0]->ongkir + $totalHarga), 0, ',', '.');; ?>
 
 			<tr class="heading">
 				<td>Total</td>

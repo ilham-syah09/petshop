@@ -53,6 +53,11 @@
 </style>
 <!-- Cart Start -->
 <div class="container-fluid pt-5">
+	<div class="row">
+		<div class="col-xl-12 text-center">
+			<h2>List Order</h2>
+		</div>
+	</div>
 	<div class="row px-xl-5">
 		<div class="col-lg-12 table-responsive mb-5">
 			<table class="table table-bordered text-center mb-0">
@@ -68,7 +73,9 @@
 					<?php foreach ($orders as $order) : ?>
 						<tr>
 							<td><?= date('d M Y - H:i:s', strtotime($order->createdAt)); ?></td>
-							<td><?= $order->alamat; ?></td>
+							<td>
+								<a href="<?= ($order->link_maps) ? $order->link_maps : 'javascript:void(0)'; ?>" target="maps" class="text-dark"><?= $order->alamat; ?></a>
+							</td>
 							<td><?= $order->catatan; ?></td>
 							<td class="align-middle">
 								<button type="button" class="tombol-detail detail_btn" data-toggle="modal" title="Detail Product" data-target="#detailProduct" data-idkhusus="<?= $order->idKhusus; ?>" data-link="<?= base_url('print/' . $order->idKhusus); ?>"><i class="fa fa-info"></i></button>
@@ -290,7 +297,16 @@
 							);
 						});
 
-						finalHarga = rupiah.format(Number(totalHarga));
+						$("#tabel_detail").append(
+							"<tr class='tr_ongkir'>" +
+							"<td colspan='3' class='text-center'>Shipping</td>" +
+							"<td>" + res.data[0].kecamatan + "</td>" +
+							"<td>" + rupiah.format(res.data[0].ongkir) + "</td>" +
+							"<td></td>" +
+							"<tr>"
+						);
+
+						finalHarga = rupiah.format(Number(totalHarga) + Number(res.data[0].ongkir));
 
 						$("#tabel_detail").append(
 							"<tr class='tr_total'>" +

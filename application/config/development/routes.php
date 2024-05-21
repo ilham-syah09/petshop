@@ -87,3 +87,8 @@ $route['message']        = 'frontend/message';
 $route['review']         = 'frontend/review';
 $route['changeProfile']  = 'frontend/changeProfile';
 $route['changePassword'] = 'frontend/changePassword';
+
+$route['grooming/order']  = 'frontend/groomingOrder';
+$route['grooming/list']   = 'frontend/groomingList';
+$route['grooming/store']  = 'frontend/groomingStore';
+$route['grooming/upload'] = 'frontend/groomingUpload';

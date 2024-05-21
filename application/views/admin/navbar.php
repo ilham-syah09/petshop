@@ -35,7 +35,7 @@
                      <a href="#" class="nav-link">
                          <i class="nav-icon fas fa-list"></i>
                          <p>
-                             Data Barang
+                             Data Master
                              <i class="fas fa-angle-left right"></i>
                          </p>
                      </a>
@@ -50,6 +50,12 @@
                              <a href="<?= base_url('admin/barang'); ?>" class="nav-link">
                                  <i class="far fa-circle nav-icon"></i>
                                  <p>Daftar Barang</p>
+                             </a>
+                         </li>
+                         <li class="nav-item">
+                             <a href="<?= base_url('admin/paket'); ?>" class="nav-link">
+                                 <i class="far fa-circle nav-icon"></i>
+                                 <p>Daftar Paket Grooming</p>
                              </a>
                          </li>
                      </ul>
@@ -81,6 +87,14 @@
                      </a>
                  </li>
                  <li class="nav-item">
+                     <a href="<?= base_url('admin/grooming'); ?>" class="nav-link">
+                         <i class="nav-icon fas fa-cat"></i>
+                         <p>
+                             Grooming
+                         </p>
+                     </a>
+                 </li>
+                 <li class="nav-item">
                      <a href="<?= base_url('admin/pesan'); ?>" class="nav-link">
                          <i class="nav-icon fas fa-message"></i>
                          <p>
@@ -107,6 +121,14 @@
                      </a>
                  </li>
                  <li class="nav-header">Setting</li>
+                 <li class="nav-item">
+                     <a href="<?= base_url('admin/ongkir'); ?>" class="nav-link">
+                         <i class="nav-icon fas fa-money-bill"></i>
+                         <p>
+                             Ongkir
+                         </p>
+                     </a>
+                 </li>
                  <li class="nav-item">
                      <a href="<?= base_url('admin/profile'); ?>" class="nav-link">
                          <i class="nav-icon fas fa-user"></i>

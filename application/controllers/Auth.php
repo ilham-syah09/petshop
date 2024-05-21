@@ -121,7 +121,7 @@ class Auth extends CI_Controller
         $config['newline'] = "\r\n";
         $config['wordwrap'] = TRUE;
         $this->email->initialize($config);
-        $this->email->from($config['smtp_user'], 'Citra Bakery');
+        $this->email->from($config['smtp_user'], 'Pet Shop');
         $this->email->to($this->input->post('email'));
 
         if ($type == 'verify') {

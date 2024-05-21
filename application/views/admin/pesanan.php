@@ -245,7 +245,16 @@
                             );
                         });
 
-                        finalHarga = rupiah.format(Number(totalHarga));
+                        $("#tabel_detail").append(
+                            "<tr class='tr_ongkir'>" +
+                            "<td colspan='3' class='text-center'>Shipping</td>" +
+                            "<td>" + res.data[0].kecamatan + "</td>" +
+                            "<td>" + rupiah.format(res.data[0].ongkir) + "</td>" +
+                            "<td></td>" +
+                            "<tr>"
+                        );
+
+                        finalHarga = rupiah.format(Number(totalHarga) + Number(res.data[0].ongkir));
 
                         $("#tabel_detail").append(
                             "<tr class='tr_total'>" +

@@ -54,7 +54,7 @@ class Frontend extends CI_Controller
     public function index()
     {
         $data = [
-            'title'           => 'Home | Petshop',
+            'title'           => 'Home | Pet Shop',
             'page'            => 'frontend/home',
             'kategori'        => $this->front->getKategori(),
             'productsPopuler' => $this->front->getPopularProducts(),
@@ -82,7 +82,7 @@ class Frontend extends CI_Controller
         $total_rows = $this->front->getCountProduct($where);
 
         $data = [
-            'title'           => 'Shop | Petshop',
+            'title'           => 'Shop | Pet Shop',
             'page'            => 'frontend/shop',
             'kategori'        => $this->front->getKategori(),
             'productsPopuler' => $this->front->getPopularProducts(),
@@ -125,7 +125,7 @@ class Frontend extends CI_Controller
         ];
 
         $productRandom = $this->front->getProductRandom([
-            'id <>' => $id,
+            'id <>'       => $id,
             'kategori_id' => $kategori->id
         ], 8);
 
@@ -133,7 +133,7 @@ class Frontend extends CI_Controller
         // die;
 
         $data = [
-            'title'             => 'Shop Detail | Citra Bakery',
+            'title'             => 'Shop Detail | Pet Shop',
             'page'              => 'frontend/detail',
             'kategori'          => $this->front->getKategori(),
             'kategori_sekarang' => $kategori,
@@ -151,7 +151,7 @@ class Frontend extends CI_Controller
     public function contact()
     {
         $data = [
-            'title'    => 'Contact | Citra Bakery',
+            'title'    => 'Contact | Pet Shop',
             'page'     => 'frontend/contact',
             'kategori' => $this->front->getKategori()
         ];
@@ -169,7 +169,7 @@ class Frontend extends CI_Controller
         ]);
 
         $data = [
-            'title'    => 'Cart | Citra Bakery',
+            'title'    => 'Cart | Pet Shop',
             'page'     => 'frontend/cart',
             'kategori' => $this->front->getKategori(),
             'cart'     => $cart
@@ -188,9 +188,10 @@ class Frontend extends CI_Controller
         ]);
 
         $data = [
-            'title'    => 'Checkout | Citra Bakery',
+            'title'    => 'Checkout | Pet Shop',
             'page'     => 'frontend/checkout',
             'kategori' => $this->front->getKategori(),
+            'ongkir'   => $this->front->getOngkir(),
             'cart'     => $cart
         ];
 
@@ -206,7 +207,7 @@ class Frontend extends CI_Controller
         ]);
 
         $data = [
-            'title'    => 'List Orders | Citra Bakery',
+            'title'    => 'List Orders | Pet Shop',
             'page'     => 'frontend/orders',
             'kategori' => $this->front->getKategori(),
             'orders'   => $orders
@@ -333,12 +334,12 @@ class Frontend extends CI_Controller
     {
         $this->_authentication();
 
-        $alamat           = $this->input->post('alamat');
-        $catatan          = $this->input->post('catatan');
-        // $tanggal          = $this->input->post('tanggal');
+        $alamat    = $this->input->post('alamat');
+        $catatan   = $this->input->post('catatan');
+        $link_maps = $this->input->post('link_maps');
         // $jam              = $this->input->post('jam');
         // $opsi             = $this->input->post('opsi');
-        // $idOngkir         = $this->input->post('idOngkir');
+        $idOngkir         = $this->input->post('idOngkir');
         $metodePembayaran = $this->input->post('payment');
         $totalBiaya       = $this->input->post('total');
 
@@ -364,14 +365,14 @@ class Frontend extends CI_Controller
                 'idUser'           => $this->dt_user->id,
                 'idKeranjang'      => $c->id,
                 'alamat'           => $alamat,
+                'link_maps'        => $link_maps,
                 'catatan'          => $catatan,
-                // 'idOngkir'         => $idOngkir,
+                'idOngkir'         => $idOngkir,
                 'metodePembayaran' => $metodePembayaran,
-                // 'tanggal'          => $tanggal,
                 // 'jam'              => $jam,
                 // 'opsi'             => $opsi,
-                'idKhusus'         => $idKhusus,
-                'totalBiaya'       => $totalBiaya
+                'idKhusus'   => $idKhusus,
+                'totalBiaya' => $totalBiaya
             ]);
         }
 
@@ -424,7 +425,7 @@ class Frontend extends CI_Controller
             $this->load->library('upload');
             $config['upload_path']   = './upload/bukti';
             $config['allowed_types'] = 'jpg|jpeg|png';
-            // $config['max_size']             = 3072; // 3 mb
+            $config['max_size']      = 10000;             // 10 mb
             $config['remove_spaces'] = TRUE;
             $config['detect_mime']   = TRUE;
             $config['encrypt_name']  = TRUE;
@@ -545,6 +546,196 @@ class Frontend extends CI_Controller
         redirect('contact', 'refresh');
     }
 
+    public function groomingOrder()
+    {
+        $this->_authentication();
+
+        $cart = $this->front->getCart([
+            'keranjang.idUser' => $this->dt_user->id,
+            'keranjang.status' => 0
+        ]);
+
+        $data = [
+            'title'  => 'Order | Pet Shop',
+            'page'   => 'frontend/groomingOrder',
+            'paket'  => $this->front->getPaket(),
+            'ongkir' => $this->front->getOngkir(),
+        ];
+
+        $this->load->view('frontend/index', $data);
+    }
+
+    public function groomingStore()
+    {
+        $this->_authentication();
+
+        $img = $_FILES['image']['name'];
+
+        $alamat    = $this->input->post('alamat');
+        $deskripsi = $this->input->post('deskripsi');
+        $link_maps = $this->input->post('link_maps');
+        $idPaket   = $this->input->post('idPaket');
+        $jenis     = $this->input->post('jenis');
+        $idOngkir  = $this->input->post('idOngkir');
+        $mulai     = $this->input->post('mulai');
+        $selesai   = $this->input->post('selesai');
+
+        $this->db->select('harga');
+        $this->db->where('id', $idPaket);
+        $paket = $this->db->get('paket')->row();
+
+        $this->db->select('harga');
+        $this->db->where('id', $idOngkir);
+        $ongkir = $this->db->get('ongkir')->row();
+
+        if ($mulai == 1 || $selesai == 1) {
+            $totalBiaya = ($paket->harga + $ongkir->harga);
+        } else {
+            $totalBiaya = $paket->harga;
+        }
+
+        if ($img) {
+            $config['upload_path']   = 'upload/gambar';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size']      = 10000;
+            $config['remove_spaces'] = TRUE;
+            $config['encrypt_name']  = TRUE;
+
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('image')) {
+                $this->session->set_flashdata('toastr-error', $this->upload->display_errors());
+
+                redirect($_SERVER['HTTP_REFERER'], 'refresh');
+            } else {
+                $upload_data = $this->upload->data();
+
+                $data = [
+                    'idUser'     => $this->dt_user->id,
+                    'idPaket'    => $idPaket,
+                    'idOngkir'   => $idOngkir,
+                    'jenis'      => $jenis,
+                    'mulai'      => $mulai,
+                    'selesai'    => $selesai,
+                    'deskripsi'  => $deskripsi,
+                    'foto'       => $upload_data['file_name'],
+                    'totalBiaya' => $totalBiaya,
+                    'alamat'     => $alamat,
+                    'link_maps'  => $link_maps
+                ];
+            }
+        } else {
+            $alamat    = $this->input->post('alamat');
+            $deskripsi = $this->input->post('deskripsi');
+            $link_maps = $this->input->post('link_maps');
+            $idPaket   = $this->input->post('idPaket');
+            $jenis     = $this->input->post('jenis');
+            $idOngkir  = $this->input->post('idOngkir');
+            $mulai     = $this->input->post('mulai');
+            $selesai   = $this->input->post('selesai');
+
+            $data = [
+                'idUser'     => $this->dt_user->id,
+                'idPaket'    => $idPaket,
+                'idOngkir'   => $idOngkir,
+                'jenis'      => $jenis,
+                'mulai'      => $mulai,
+                'selesai'    => $selesai,
+                'deskripsi'  => $deskripsi,
+                'totalBiaya' => $totalBiaya,
+                'alamat'     => $alamat,
+                'link_maps'  => $link_maps
+            ];
+        }
+
+        $insert = $this->db->insert('grooming', $data);
+
+        if ($insert) {
+            $this->session->set_flashdata('toastr-success', 'Grooming has been successfully booked');
+        } else {
+            $this->session->set_flashdata('toastr-error', 'Grooming has failed to be ordered!!');
+        }
+
+        redirect('groomingList', 'refresh');
+    }
+
+    public function groomingList()
+    {
+        $this->_authentication();
+
+        $grooming = $this->front->getGrooming([
+            'grooming.idUser' => $this->dt_user->id
+        ]);
+
+        $data = [
+            'title'    => 'List Grooming | Pet Shop',
+            'page'     => 'frontend/groomingList',
+            'grooming' => $grooming
+        ];
+
+        // echo json_encode($grooming);
+        // die;
+        $this->load->view('frontend/index', $data);
+    }
+
+    public function groomingUpload()
+    {
+        $this->_authentication();
+
+        $gambar = $_FILES['gambar']['name'];
+
+        if ($gambar) {
+            $this->load->library('upload');
+            $config['upload_path']   = './upload/bukti';
+            $config['allowed_types'] = 'jpg|jpeg|png';
+            $config['max_size']      = 10000;             // 10 mb
+            $config['remove_spaces'] = TRUE;
+            $config['detect_mime']   = TRUE;
+            $config['encrypt_name']  = TRUE;
+
+            $this->load->library('upload', $config);
+            $this->upload->initialize($config);
+
+            if (!$this->upload->do_upload('gambar')) {
+                $this->session->set_flashdata('toastr-error', $this->upload->display_errors());
+
+                redirect('grooming/list', 'refresh');
+            } else {
+                $upload_data = $this->upload->data();
+
+                $data = [
+                    'bukti' => $upload_data['file_name']
+                ];
+            }
+        } else {
+            $this->session->set_flashdata('toastr-error', 'File cannot be empty');
+
+            redirect('grooming/list', 'refresh');
+        }
+
+        $where = [
+            'id' => $this->input->post('id')
+        ];
+
+        $this->db->where($where);
+        $grooming = $this->db->get('grooming')->row();
+
+        $this->db->where($where);
+        $update = $this->db->update('grooming', $data);
+
+        if ($update) {
+            if ($grooming->bukti != null) {
+                unlink(FCPATH . 'upload/bukti/' . $grooming->bukti);
+            }
+            $this->session->set_flashdata('toastr-success', 'File uploaded successfully');
+        } else {
+            $this->session->set_flashdata('toastr-error', 'File failed to upload');
+        }
+
+        redirect('grooming/list', 'refresh');
+    }
+
     private function _paging_offset($page, $limit)
     {
         if ($page > 1) {
@@ -598,7 +789,7 @@ class Frontend extends CI_Controller
     public function profile()
     {
         $data = [
-            'title' => 'Profile | Citra Bakery',
+            'title' => 'Profile | Pet Shop',
             'page'  => 'frontend/profile',
         ];
 
@@ -696,4 +887,4 @@ class Frontend extends CI_Controller
     }
 }
 
-      /* End of file Frontend.php */
+        /* End of file Frontend.php */
