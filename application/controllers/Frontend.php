@@ -588,7 +588,7 @@ class Frontend extends CI_Controller
         $this->db->where('id', $idOngkir);
         $ongkir = $this->db->get('ongkir')->row();
 
-        if ($mulai == 1 || $selesai == 1) {
+        if ($mulai == 2 || $selesai == 2) {
             $totalBiaya = ($paket->harga + $ongkir->harga);
         } else {
             $totalBiaya = $paket->harga;

@@ -89,7 +89,7 @@
 							</td>
 							<td><?= $order->deskripsi; ?></td>
 							<td>
-								<?php if ($order->mulai == 1 || $order->selesai == 1) : ?>
+								<?php if ($order->mulai == 2 || $order->selesai == 2) : ?>
 									<?= $order->kecamatan . ' - Rp. ' . number_format($order->ongkir, 0, ',', '.'); ?>
 								<?php else : ?>
 									-

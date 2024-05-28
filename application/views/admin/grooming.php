@@ -69,7 +69,7 @@
 												</td>
 												<td><?= $gro->deskripsi; ?></td>
 												<td>
-													<?php if ($gro->mulai == 1 || $gro->selesai == 1) : ?>
+													<?php if ($gro->mulai == 2 || $gro->selesai == 2) : ?>
 														<?= $gro->kecamatan . ' - Rp. ' . number_format($gro->ongkir, 0, ',', '.'); ?>
 													<?php else : ?>
 														-

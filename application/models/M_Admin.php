@@ -120,7 +120,12 @@ class M_Admin extends CI_Model
         $this->db->limit(1);
 
         $data = $this->db->get('orders')->row();
-        return $data->tahun;
+
+        if ($data) {
+            return $data->tahun;
+        } else {
+            return date('Y');
+        }
     }
 
     public function getBulanIni($tahun)
@@ -132,7 +137,11 @@ class M_Admin extends CI_Model
         $this->db->limit(1);
 
         $data = $this->db->get('orders')->row();
-        return $data->bulan;
+        if ($data) {
+            return $data->bulan;
+        } else {
+            return date('m');
+        }
     }
 
     public function getTahun()
