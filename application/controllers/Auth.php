@@ -115,8 +115,8 @@ class Auth extends CI_Controller
         $config['smtp_port'] = "465";
         $config['smtp_timeout'] = "5";
         $config['priority'] = 3;
-        $config['smtp_user'] = "hazelnutbanget@gmail.com";
-        $config['smtp_pass'] = 'mvwqlppilwrvcmbw';
+        $config['smtp_user'] = "ramantyo10@gmail.com";
+        $config['smtp_pass'] = 'axiexawkmpphtdqf';
         $config['crlf'] = "\r\n";
         $config['newline'] = "\r\n";
         $config['wordwrap'] = TRUE;

@@ -65,6 +65,15 @@ class Progress extends CI_Controller
 
         redirect($_SERVER['HTTP_REFERER'], 'refresh');
     }
+
+    public function delete($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('progres');
+        $this->session->set_flashdata('toastr-success', 'Berhasil tambah progres');
+
+        redirect($_SERVER['HTTP_REFERER'], 'refresh');
+    }
 }
 
 /* End of file Home.php */

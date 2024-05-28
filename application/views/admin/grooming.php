@@ -101,7 +101,7 @@
 												</td>
 												<td>
 													<a href="#" class="badge badge-success statusPem_btn" data-toggle="modal" data-target="#statusPembayaranModal" data-id="<?= $gro->id; ?>" data-statuspembayaran="<?= $gro->statusPembayaran; ?>">Pembayaran</a>
-													<a href="<?= base_url('admin/pesanan/delete/' . $gro->id); ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" class="badge badge-danger">Delete</a>
+													<a href="<?= base_url('admin/grooming/delete/' . $gro->id); ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" class="badge badge-danger">Delete</a>
 												</td>
 											</tr>
 										<?php endforeach; ?>

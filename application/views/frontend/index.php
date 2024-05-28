@@ -4,13 +4,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Broccoli - Organic Food HTML Template</title>
+    <title><?= $title; ?></title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Place favicon.png in the root directory -->
-    <link rel="shortcut icon" href="<?= base_url(); ?>assets/user/img/favicon.png" type="image/x-icon" />
+    <link href="<?= base_url('assets/logo/logo.png'); ?>" rel="icon">
     <!-- Font Icons css -->
     <link rel="stylesheet" href="<?= base_url(); ?>assets/user/css/font-icons.css">
     <!-- plugins css -->
@@ -47,7 +47,7 @@
                         <div class="col">
                             <div class="site-logo-wrap">
                                 <div class="site-logo">
-                                    <a href="index.html"><img src="<?= base_url(); ?>assets/user/img/logo-2.png" alt="Logo"></a>
+                                    <a href="index.html"><img src="<?= base_url('assets/logo/logo.png'); ?>" class="img-fluid" width="100" alt="Logo"></a>
                                 </div>
                             </div>
                         </div>
@@ -56,29 +56,28 @@
                                 <nav>
                                     <div class="ltn__main-menu">
                                         <ul>
-                                            <li><a href="<?= base_url('home'); ?>">Home</a></li>
-                                            <li><a href="contact.html">About</a></li>
-                                            <li class="menu-icon"><a href="#">Shop</a>
+                                            <li><a href="<?= base_url('home'); ?>">Beranda</a></li>
+                                            <li class="menu-icon"><a href="#">Belanja</a>
                                                 <ul>
                                                     <?php foreach ($this->kategori as $kat) : ?>
                                                         <li><a href="<?= base_url('shop/') . $kat->id; ?>"><?= $kat->kategori; ?></a></li>
                                                     <?php endforeach; ?>
                                                 </ul>
                                             </li>
-                                            <li class="menu-icon"><a href="#">Orders</a>
+                                            <li class="menu-icon"><a href="#">Pesanan</a>
                                                 <ul>
-                                                    <li><a href="<?= base_url('cart'); ?>">Shopping Cart</a></li>
+                                                    <li><a href="<?= base_url('cart'); ?>">Keranjang Pesanan</a></li>
                                                     <li><a href="javascript:void(0)">Checkout</a></li>
-                                                    <li><a href="<?= base_url('orders'); ?>">List Order</a></li>
+                                                    <li><a href="<?= base_url('orders'); ?>">Daftar Pesanan</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-icon"><a href="#">Grooming</a>
                                                 <ul>
-                                                    <li><a href="<?= base_url('grooming/order'); ?>">Order</a></li>
-                                                    <li><a href="<?= base_url('grooming/list'); ?>">List Grooming</a></li>
+                                                    <li><a href="<?= base_url('grooming/order'); ?>">Booking Grooming</a></li>
+                                                    <li><a href="<?= base_url('grooming/list'); ?>">Daftar Grooming</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="<?= base_url('contact'); ?>">Contact</a></li>
+                                            <li><a href="<?= base_url('contact'); ?>">Kontak</a></li>
                                         </ul>
                                     </div>
                                 </nav>
@@ -93,11 +92,11 @@
                                         <a href="#"><i class="icon-user"></i></a>
                                         <ul>
                                             <?php if (empty($this->session->userdata('log_user'))) : ?>
-                                                <li><a href="<?= base_url('auth'); ?>">Sign in</a></li>
+                                                <li><a href="<?= base_url('auth'); ?>">Masuk</a></li>
                                                 <li><a href="<?= base_url('auth/registrasi'); ?>">Register</a></li>
                                             <?php else : ?>
-                                                <li><a href="<?= base_url('profile'); ?>">My Account</a></li>
-                                                <li><a href="<?= base_url('auth/logout'); ?>">Sign Out</a></li>
+                                                <li><a href="<?= base_url('profile'); ?>">Akun Saya</a></li>
+                                                <li><a href="<?= base_url('auth/logout'); ?>">Keluar</a></li>
                                             <?php endif; ?>
                                         </ul>
                                     </li>
@@ -135,7 +134,7 @@
         <div id="ltn__utilize-cart-menu" class="ltn__utilize ltn__utilize-cart-menu">
             <div class="ltn__utilize-menu-inner ltn__scrollbar">
                 <div class="ltn__utilize-menu-head">
-                    <span class="ltn__utilize-menu-title">Cart</span>
+                    <span class="ltn__utilize-menu-title">Keranjang</span>
                     <button class="ltn__utilize-close">×</button>
                 </div>
                 <?php if ($this->cart) : ?>
@@ -159,7 +158,7 @@
                             <h5>Subtotal: <span><?= 'Rp. ' . number_format($total, 0, ',', '.'); ?></span></h5>
                         </div>
                         <div class="btn-wrapper">
-                            <a href="<?= base_url('cart'); ?>" class="theme-btn-1 btn btn-effect-1">View Cart</a>
+                            <a href="<?= base_url('cart'); ?>" class="theme-btn-1 btn btn-effect-1">Lihat Keranjang</a>
                             <a href="<?= base_url('checkout'); ?>" class="theme-btn-2 btn btn-effect-2">Checkout</a>
                         </div>
                     </div>
@@ -178,20 +177,14 @@
         <div class="ltn__utilize-overlay"></div>
 
         <!-- BREADCRUMB AREA START -->
-        <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image plr--9---" data-bg="<?= base_url(); ?>assets/user/img/bg/9.jpg">
+        <div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image plr--9---" data-bg="<?= base_url(); ?>assets/image/banner.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
                             <div class="section-title-area ltn__section-title-2">
-                                <h6 class="section-subtitle ltn__secondary-color">// Welcome to our company</h6>
-                                <h1 class="section-title white-color">Shop Left Sidebar</h1>
-                            </div>
-                            <div class="ltn__breadcrumb-list">
-                                <ul>
-                                    <li><a href="<?= base_url('home'); ?>">Home</a></li>
-                                    <li>Shop Left Sidebar</li>
-                                </ul>
+                                <h6 class="section-subtitle ltn__secondary-color">// Selamat Datang</h6>
+                                <h1 class="section-title white-color">Di Kotaro Petshop</h1>
                             </div>
                         </div>
                     </div>
@@ -205,7 +198,7 @@
         <!-- PRODUCT DETAILS AREA END -->
 
         <!-- FEATURE AREA START ( Feature - 3) -->
-        <div class="ltn__feature-area before-bg-bottom-2 mb--30--- plr--5">
+        <!-- <div class="ltn__feature-area before-bg-bottom-2 mb--30--- plr--5">
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
@@ -217,7 +210,7 @@
                                             <img src="<?= base_url(); ?>assets/user/img/product/11.png" alt="#">
                                         </div>
                                         <div class="ltn__feature-info">
-                                            <h4>Curated Products</h4>
+                                            <h4>Produk Murah dan Berkualitas</h4>
                                             <p>Provide Curated Products for
                                                 all product over $100</p>
                                         </div>
@@ -264,7 +257,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- FEATURE AREA END -->
 
         <!-- FOOTER AREA START -->
@@ -276,10 +269,9 @@
                             <div class="footer-widget footer-about-widget">
                                 <div class="footer-logo">
                                     <div class="site-logo">
-                                        <img src="<?= base_url(); ?>assets/user/img/logo.png" alt="Logo">
+                                        <img src="<?= base_url('assets/logo/logo.png'); ?>" class="img-fluid" width="100" alt="Logo">
                                     </div>
                                 </div>
-                                <p>Lorem Ipsum is simply dummy text of the and typesetting industry. Lorem Ipsum is dummy text of the printing.</p>
                                 <div class="footer-address">
                                     <ul>
                                         <li>
@@ -318,16 +310,7 @@
                     <div class="row">
                         <div class="col-md-6 col-12">
                             <div class="ltn__copyright-design clearfix">
-                                <p>All Rights Reserved @ Company <span class="current-year"></span></p>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-12 align-self-center">
-                            <div class="ltn__copyright-menu text-right">
-                                <ul>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Claim</a></li>
-                                    <li><a href="#">Privacy & Policy</a></li>
-                                </ul>
+                                <p>Kotaro Petshop @ <span class="current-year"></span></p>
                             </div>
                         </div>
                     </div>

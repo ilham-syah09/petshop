@@ -657,7 +657,7 @@ class Frontend extends CI_Controller
             $this->session->set_flashdata('toastr-error', 'Grooming has failed to be ordered!!');
         }
 
-        redirect('groomingList', 'refresh');
+        redirect('grooming/list', 'refresh');
     }
 
     public function groomingList()

@@ -63,16 +63,16 @@
 			<table class="table table-bordered text-center mb-0">
 				<thead class="bg-secondary text-dark">
 					<tr>
-						<th>Package Name</th>
-						<th>Price</th>
-						<th>Pet Type</th>
-						<th>Photo</th>
-						<th>Description</th>
-						<th>Shipping</th>
-						<th>Note</th>
-						<th>Address</th>
-						<th>Total Price</th>
-						<th>Grooming Date</th>
+						<th>Nama Paket</th>
+						<th>Harga</th>
+						<th>Jenis Hewan</th>
+						<th>Foto</th>
+						<th>Deskripsi</th>
+						<th>Penjemputan</th>
+						<th>Catatan</th>
+						<th>Alamat</th>
+						<th>Total Harga</th>
+						<th>Tanggal Grooming</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -145,8 +145,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
 					</div>
 				</div>
 			</form>
@@ -159,7 +159,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">View transfer</h5>
+				<h5 class="modal-title">Lihat bukti transfer</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -168,14 +168,14 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>Picture</label>
+							<label>Gambr</label>
 							<br>
 							<img src="" alt="Picture invoice" class="img-thumbnail" width="100%" id="image-file">
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 				</div>
 			</div>
 		</div>

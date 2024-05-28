@@ -14,10 +14,9 @@
         </div>
         <div class="ltn__utilize-menu">
             <ul>
-                <li><a href="<?= base_url('home'); ?>">Home</a></li>
-                <li><a href="<?= base_url('about'); ?>">About</a></li>
+                <li><a href="<?= base_url('home'); ?>">Beranda</a></li>
 
-                <li><a href="#">Shop</a>
+                <li><a href="#">Belanja</a>
                     <ul class="sub-menu">
                         <?php foreach ($this->kategori as $kat) : ?>
                             <li><a href="<?= base_url('shop/') . $kat->id; ?>"><?= $kat->kategori; ?></a></li>
@@ -26,19 +25,19 @@
                 </li>
                 <li><a href="#">Orders</a>
                     <ul class="sub-menu">
-                        <li><a href="<?= base_url('cart'); ?>">Shopping Cart</a></li>
+                        <li><a href="<?= base_url('cart'); ?>">Keranjang Pesanan</a></li>
                         <li><a href="javascript:void(0)">Checkout</a></li>
-                        <li><a href="<?= base_url('orders'); ?>">List Order</a></li>
+                        <li><a href="<?= base_url('orders'); ?>">Daftar Pesanan</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Grooming</a>
                     <ul class="sub-menu">
-                        <li><a href="<?= base_url('booked'); ?>">List Booked</a></li>
-                        <li><a href="<?= base_url('grooming'); ?>">Booking Grooming</a></li>
+                        <li><a href="<?= base_url('grooming/order'); ?>">Booking Grooming</a></li>
+                        <li><a href="<?= base_url('grooming/list'); ?>">Daftar Grooming</a></li>
                     </ul>
                 </li>
 
-                <li><a href="<?= base_url('contact'); ?>">Contact</a></li>
+                <li><a href="<?= base_url('contact'); ?>">Kontak</a></li>
             </ul>
         </div>
         <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
@@ -48,7 +47,7 @@
                         <span class="utilize-btn-icon">
                             <i class="far fa-user"></i>
                         </span>
-                        My Account
+                        Akun Saya
                     </a>
                 </li>
                 <?php if ($this->session->userdata('log_user')) : ?>
@@ -58,7 +57,7 @@
                                 <i class="fas fa-shopping-cart"></i>
                                 <sup><?= count($this->cart); ?></sup>
                             </span>
-                            Shoping Cart
+                            Keranjang Belanja
                         </a>
                     </li>
                 <?php endif; ?>

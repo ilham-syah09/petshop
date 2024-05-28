@@ -5,9 +5,9 @@
 				<div class="col-lg-12">
 					<div class="ltn__checkout-inner">
 						<div class="ltn__checkout-single-content">
-							<h4 class="title-2">Billing Details</h4>
+							<h4 class="title-2">Detail Pembayaran</h4>
 							<div class="ltn__checkout-single-content-info">
-								<h6>Personal Information</h6>
+								<h6>Informasi Pribadi</h6>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="input-item input-item-name ltn__custom-icon">
@@ -22,12 +22,12 @@
 								</div>
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
-										<h6>Subdistrict</h6>
+										<h6>Wilayah</h6>
 										<div class="row">
 											<div class="col-md-10">
 												<div class="input-item">
 													<select name="idOngkir" id="idOngkir" class="form-control">
-														<option value="">-- Select Subdistrict --</option>
+														<option value="">-- Select Wilayah --</option>
 														<?php foreach ($ongkir as $ong) : ?>
 															<option value="<?= $ong->id; ?>" data-harga="<?= $ong->harga; ?>" data-hargarp="<?= 'Rp. ' . number_format($ong->harga, 0, ',', '.'); ?>"><?= $ong->kecamatan; ?></option>
 														<?php endforeach; ?>
@@ -35,14 +35,14 @@
 												</div>
 											</div>
 											<div class="col-md-2">
-												<button type="button" class="btn btn-primary" id="cek-ongkir">Chack</button>
+												<button type="button" class="btn btn-primary" id="cek-ongkir">Cek</button>
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
-										<h6>Address</h6>
+										<h6>Alamat</h6>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="input-item">
@@ -60,7 +60,7 @@
 										</div>
 									</div>
 								</div>
-								<h6>Order Notes (optional)</h6>
+								<h6>Catatan (optional)</h6>
 								<div class="input-item input-item-textarea ltn__custom-icon">
 									<textarea name="catatan" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
 								</div>
@@ -70,7 +70,7 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="ltn__checkout-payment-method mt-50">
-						<h4 class="title-2">Payment Method</h4>
+						<h4 class="title-2">Metode Pembayaran</h4>
 						<input type="hidden" name="payment" id="payment">
 						<div id="checkout_accordion_1">
 							<!-- card -->
@@ -120,13 +120,13 @@
 							</div>
 						</div>
 						<div class="ltn__payment-note mt-30 mb-30">
-							<p>Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our privacy policy.</p>
+							<p>Data pribadi Anda akan digunakan untuk memproses pesanan Anda, mendukung pengalaman Anda di seluruh situs web ini, dan untuk tujuan lain yang dijelaskan dalam kebijakan privasi kami.</p>
 						</div>
 					</div>
 				</div>
 				<div class="col-lg-6">
 					<div class="shoping-cart-total mt-50">
-						<h4 class="title-2">Cart Totals</h4>
+						<h4 class="title-2">Total Keranjang</h4>
 						<table class="table">
 							<tbody>
 								<?php $subTotal = 0; ?>
@@ -145,7 +145,7 @@
 									<input type="hidden" id="subTotal" value="<?= $subTotal; ?>">
 								</tr>
 								<tr>
-									<td>Shipping</td>
+									<td>Pengiriman</td>
 									<td id="shipping"></td>
 								</tr>
 								<tr>

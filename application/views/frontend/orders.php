@@ -63,9 +63,9 @@
 			<table class="table table-bordered text-center mb-0">
 				<thead class="bg-secondary text-dark">
 					<tr>
-						<th>Order Date</th>
-						<th>Address</th>
-						<th>Note</th>
+						<th>Tanggal Pesanan</th>
+						<th>Alamat</th>
+						<th>Catatan</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -103,7 +103,7 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Detail Product</h5>
+				<h5 class="modal-title ml-3 mt-3">Detail Produk</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -117,12 +117,12 @@
 									<table class="table table-bordered table-hover table-vcenter" id="tabel_detail">
 										<thead>
 											<tr>
-												<th class="text-center">#</th>
-												<th>Product</th>
-												<th>Quantity</th>
-												<th>Price</th>
+												<th class="text-center">No</th>
+												<th>Produk</th>
+												<th>Jumlah</th>
+												<th>Harga</th>
 												<th>Subtotal</th>
-												<th>View Product</th>
+												<th>Liat Produk</th>
 											</tr>
 										</thead>
 										<tbody id="isi_table">
@@ -136,8 +136,8 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<a class="btn btn-primary" target="print" id="cetak-btn">Print</a>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+				<a class="btn btn-primary" target="print" id="cetak-btn">Cetak</a>
 			</div>
 		</div>
 	</div>
@@ -148,7 +148,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Upload transfer invoice</h5>
+				<h5 class="modal-title ml-3 mt-3">Upload transfer invoice</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -165,8 +165,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+						<button type="submit" class="btn btn-primary">Simpan</button>
 					</div>
 				</div>
 			</form>
@@ -179,7 +179,7 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">View transfer invoice</h5>
+				<h5 class="modal-title ml-3 mt-3">Lihat Bukti Transfer</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -188,14 +188,14 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label>Picture</label>
+							<label>Gambar</label>
 							<br>
 							<img src="" alt="Picture invoice" class="img-thumbnail" width="100%" id="image-file">
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 				</div>
 			</div>
 		</div>
@@ -207,7 +207,7 @@
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Progres Order</h5>
+				<h5 class="modal-title ml-3 mt-3">Progres Pesanan</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -221,9 +221,9 @@
 									<table class="table table-bordered table-hover table-vcenter" id="tabel-progres">
 										<thead>
 											<tr>
-												<th class="text-center">#</th>
+												<th class="text-center">No</th>
 												<th>Status</th>
-												<th>Date</th>
+												<th>Tanggal</th>
 											</tr>
 										</thead>
 										<tbody id="isi_table-progres">
@@ -237,7 +237,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
 			</div>
 		</div>
 	</div>

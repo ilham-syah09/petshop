@@ -115,7 +115,7 @@
 				<aside class="sidebar ltn__shop-sidebar">
 					<!-- Category Widget -->
 					<div class="widget ltn__menu-widget">
-						<h4 class="ltn__widget-title ltn__widget-title-border">Product categories</h4>
+						<h4 class="ltn__widget-title ltn__widget-title-border">Kategori Produk</h4>
 						<ul>
 							<?php foreach ($kategori as $kat) : ?>
 								<li><a href="<?= base_url('shop/') . $kat->id; ?>"><?= $kat->kategori; ?> <span><i class="fas fa-long-arrow-alt-right"></i></span></a></li>
@@ -125,7 +125,7 @@
 
 					<!-- Top Rated Product Widget -->
 					<div class="widget ltn__top-rated-product-widget">
-						<h4 class="ltn__widget-title ltn__widget-title-border">Most Popular Products</h4>
+						<h4 class="ltn__widget-title ltn__widget-title-border">Produk Paling Laris</h4>
 						<ul>
 							<?php foreach ($productsPopuler as $product) : ?>
 								<li>

@@ -1,7 +1,7 @@
  <!-- Contact Start -->
  <div class="container-fluid pt-5">
      <div class="text-center mb-4">
-         <h2 class="section-title px-5"><span class="px-2">Your Profile</span></h2>
+         <h2 class="section-title px-5"><span class="px-2">Profile</span></h2>
      </div>
      <div class="row px-xl-5">
          <div class="col-lg-6 mb-5">
@@ -16,11 +16,11 @@
                              <input type="hidden" name="id" value="<?= $this->dt_user->id; ?>">
                              <input type="hidden" name="previmage" value="<?= $this->dt_user->image; ?>">
                              <div class="col-md-12 form-group">
-                                 <label>Image</label>
+                                 <label>Input Foto</label>
                                  <input class="form-control" type="file" name="image">
                              </div>
                              <div class="col-md-6 form-group">
-                                 <label>Name</label>
+                                 <label>Nama</label>
                                  <input class="form-control" type="text" value="<?= $this->dt_user->name; ?>" name="name">
                              </div>
                              <div class="col-md-6 form-group">
@@ -28,7 +28,7 @@
                                  <input class="form-control" type="text" value="<?= $this->dt_user->email; ?>" readonly name="email">
                              </div>
                              <div class="col-md-12 form-group">
-                                 <label>No Hp</label>
+                                 <label>No. Handphone/Whatsapp</label>
                                  <input class="form-control" type="text" value="<?= $this->dt_user->noHp; ?>" name="noHp">
                              </div>
                              <div class="col-md-12 form-group">
@@ -37,7 +37,7 @@
                              </div>
                          </div>
                          <div class="text-center">
-                             <button type="submit" class="btn btn-primary">save</button>
+                             <button type="submit" class="btn btn-primary">simpan</button>
                          </div>
                      </div>
                  </div>
@@ -47,23 +47,23 @@
              <form action="<?= base_url('changePassword'); ?>" method="post" enctype="multipart/form-data">
                  <div class="card">
                      <div class="card-body">
-                         <h4 class="font-weight-semi-bold mb-4">Change Password</h4>
+                         <h4 class="font-weight-semi-bold mb-4">Ganti Kata Sandi</h4>
                          <div class="row">
                              <div class="col-md-12 form-group">
-                                 <label>Current Password</label>
+                                 <label>Kata sandi saat ini</label>
                                  <input class="form-control" type="password" name="current_password">
                              </div>
                              <div class="col-md-12 form-group">
-                                 <label>New Password</label>
+                                 <label>Kata sandi baru</label>
                                  <input class="form-control" type="password" name="password">
                              </div>
                              <div class="col-md-12 form-group">
-                                 <label>Retype New Password</label>
+                                 <label>Ketik kembali kata sandi baru</label>
                                  <input class="form-control" type="password" name="retype_password">
                              </div>
                          </div>
                          <div class="text-center">
-                             <button type="submit" class="btn btn-primary">save</button>
+                             <button type="submit" class="btn btn-primary">simpan</button>
                          </div>
                      </div>
                  </div>
