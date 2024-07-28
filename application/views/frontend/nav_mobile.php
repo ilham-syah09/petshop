@@ -2,7 +2,7 @@
     <div class="ltn__utilize-menu-inner ltn__scrollbar">
         <div class="ltn__utilize-menu-head">
             <div class="site-logo">
-                <a href="index.html"><img src="<?= base_url(); ?>assets/user/img/logo.png" alt="Logo"></a>
+                <a href="index.html"><img src="<?= base_url('assets/logo/logo.png'); ?>" class="img-fluid" width="100" alt="Logo"></a>
             </div>
             <button class="ltn__utilize-close">×</button>
         </div>
@@ -27,7 +27,7 @@
                     <ul class="sub-menu">
                         <li><a href="<?= base_url('cart'); ?>">Keranjang Pesanan</a></li>
                         <li><a href="javascript:void(0)">Checkout</a></li>
-                        <li><a href="<?= base_url('orders'); ?>">Daftar Pesanan</a></li>
+                        <li><a href="<?= base_url('orders'); ?>">Pesanan Saya</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Grooming</a>

@@ -5,7 +5,7 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<title>Invoice Order | Petshop</title>
+	<title>Invoice Order | Kotaro Petshop</title>
 
 	<!-- Invoice styling -->
 	<style>
@@ -187,16 +187,8 @@
 				</tr>
 			<?php elseif ($pesanan[0]->metodePembayaran == 2) : ?>
 				<tr>
-					<td>BRI</td>
-					<td>999301005602533</td>
-				</tr>
-				<tr>
-					<td>BCA</td>
-					<td>4071677832</td>
-				</tr>
-				<tr>
-					<td>BNI</td>
-					<td>12345678</td>
+					<td>BCA a.n Satria Ujianto</td>
+					<td>3620512892</td>
 				</tr>
 			<?php endif; ?>
 		</table>
@@ -204,9 +196,9 @@
 		<table>
 			<tr class="heading">
 				<td>#</td>
-				<td>Product Menu</td>
-				<td>Price</td>
-				<td>Sum</td>
+				<td>Produk</td>
+				<td>Harga</td>
+				<td>Jumlah</td>
 				<td>Sub Total</td>
 			</tr>
 			<?php $totalHarga = 0;
@@ -240,7 +232,7 @@
 		<br />
 		<table>
 			<tr class="heading">
-				<td>Payment Status</td>
+				<td>Status Pembayaran</td>
 				<td>
 					<?php if ($pesanan[0]->statusPembayaran == 0) : ?>
 						<?= ($pesanan[0]->buktiPembayaran != null) ? 'Menunggu Konfirmasi' : 'Belum Dibayarkan'; ?>
@@ -257,13 +249,12 @@
 					<table>
 						<tr>
 							<td>
-								Jl. Kita Solusi no. 1<br />
-								Tegal, Jawa Tengah.
+								Jl. Dr. Sutomo No. 13 Slawi
 							</td>
 
 							<td>
-								PetShop Corp.<br />
-								admin@petshop.com
+								Kotaro PetShop<br />
+								kotaropetshop99@gmail.com
 							</td>
 						</tr>
 					</table>

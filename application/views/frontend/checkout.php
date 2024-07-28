@@ -81,6 +81,7 @@
 								<div id="faq-item-2-1" class="collapse" data-parent="#checkout_accordion_1">
 									<div class="card-body">
 										<p>Please scan the QRIS image on the invoice</p>
+										<img src="<?= base_url('assets/image/qris.jpg'); ?>" class="img-fluid" alt="">
 									</div>
 								</div>
 							</div>
@@ -90,20 +91,8 @@
 								</h5>
 								<div id="faq-item-2-2" class="collapse" data-parent="#checkout_accordion_1">
 									<div class="card-body">
-										<table>
-											<tr>
-												<td>BRI</td>
-												<td>999301005602533</td>
-											</tr>
-											<tr>
-												<td>BCA</td>
-												<td>4071677832</td>
-											</tr>
-											<tr>
-												<td>BNI</td>
-												<td>12345678</td>
-											</tr>
-										</table>
+										<h6>Bank BCA atas nama Satria Ujianto</h6>
+										<h6>Rekening : 3620512892</h6>
 									</div>
 								</div>
 							</div>
@@ -114,7 +103,7 @@
 								</h5>
 								<div id="faq-item-2-3" class="collapse" data-parent="#checkout_accordion_1">
 									<div class="card-body">
-										<p>Pay with cash upon delivery.</p>
+										<p>Bayar ketika pesananmu sampai</p>
 									</div>
 								</div>
 							</div>

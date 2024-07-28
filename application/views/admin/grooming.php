@@ -89,12 +89,14 @@
 														<span class="badge badge-warning">Belum Bayar</span>
 													<?php elseif ($gro->statusPembayaran == 1) : ?>
 														<span class="badge badge-success">Lunas</span>
+													<?php else : ?>
+														<span class="badge badge-danger">Booking di Cancel</span>
 													<?php endif; ?>
 												</td>
 												<td><?= 'Rp. ' . number_format($gro->totalBiaya, 0, ',', '.'); ?></td>
 												<td>
-													<p><?= ($gro->mulai == 1) ? 'Self Delivered' : 'Taken by Officers'; ?></p>
-													<p><?= ($gro->selesai == 1) ? 'Taken by Myself' : 'Delivered by The Officer'; ?></p>
+													<p><?= ($gro->mulai == 1) ? 'Di antar sendiri' : 'Di jemput pihak petshop'; ?></p>
+													<p><?= ($gro->selesai == 1) ? 'Di ambil sendiri' : 'Di antar pihak petshop'; ?></p>
 												</td>
 												<td>
 													<a href="<?= $gro->link_maps; ?>" class="text-dark" target="gmaps"><?= $gro->alamat; ?></a>
@@ -146,6 +148,7 @@
 								<select name="statusPembayaran" id="statusPembayaran" class="form-control">
 									<option value="0">Belum Bayar</option>
 									<option value="1">Lunas</option>
+									<option value="2">Cancel</option>
 								</select>
 							</div>
 						</div>

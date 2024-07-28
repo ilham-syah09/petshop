@@ -156,9 +156,9 @@ class Omset extends CI_Controller
 		$pdf->Image('assets/logo/logo.png', 18, 9, 18, 18);
 
 		$pdf->SetFont('Times', 'B', 12);
-		$pdf->Cell(190, 6, 'Pet Shop', 0, 1, 'C');
-		$pdf->Cell(190, 6, 'Jl. kita solusi', 0, 1, 'C');
-		$pdf->Cell(190, 6, '081234567898', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Kotaro Petshop', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Jl. Dr. Sutomo No. 13 Slawi (Sblh Timur RSUD. Susilo Slawi)', 0, 1, 'C');
+		$pdf->Cell(190, 6, '085641150844', 0, 1, 'C');
 
 		$pdf->SetLineWidth(1);
 		$pdf->Line(10, 30, 200, 30);
@@ -233,7 +233,7 @@ class Omset extends CI_Controller
 		$pdf->Cell(1, 5, '', 0, 1);
 
 		$pdf->Cell(128.6, 5, '', 0, 0);
-		$pdf->Cell(64.3, 5, '( SPV Pet Shop )', 0, 0);
+		$pdf->Cell(64.3, 5, '( Kotaro Petshop )', 0, 0);
 
 		$pdf->Output('Rekap-semua-omset.pdf', 'I');
 	}
@@ -248,9 +248,9 @@ class Omset extends CI_Controller
 		$pdf->Image('assets/logo/logo.png', 18, 9, 18, 18);
 
 		$pdf->SetFont('Times', 'B', 12);
-		$pdf->Cell(190, 6, 'Pet Shop', 0, 1, 'C');
-		$pdf->Cell(190, 6, 'Jl. kita solusi', 0, 1, 'C');
-		$pdf->Cell(190, 6, '081234567898', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Kotaro Petshop', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Jl. Dr. Sutomo No. 13 Slawi (Sblh Timur RSUD. Susilo Slawi)', 0, 1, 'C');
+		$pdf->Cell(190, 6, '085641150844', 0, 1, 'C');
 
 		$pdf->SetLineWidth(1);
 		$pdf->Line(10, 30, 200, 30);
@@ -329,7 +329,7 @@ class Omset extends CI_Controller
 		$pdf->Cell(1, 5, '', 0, 1);
 
 		$pdf->Cell(128.6, 5, '', 0, 0);
-		$pdf->Cell(64.3, 5, '( SPV Pet SHop )', 0, 0);
+		$pdf->Cell(64.3, 5, '( Kotaro Petshop )', 0, 0);
 
 		$pdf->Output('Rekap-omset-tahun-' . $th_ini . '.pdf', 'I');
 	}
@@ -344,9 +344,9 @@ class Omset extends CI_Controller
 		$pdf->Image('assets/logo/logo.png', 18, 9, 18, 18);
 
 		$pdf->SetFont('Times', 'B', 12);
-		$pdf->Cell(190, 6, 'Pet Shop', 0, 1, 'C');
-		$pdf->Cell(190, 6, 'Jl. kita solusi', 0, 1, 'C');
-		$pdf->Cell(190, 6, '081234567898', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Kotaro Petshop', 0, 1, 'C');
+		$pdf->Cell(190, 6, 'Jl. Dr. Sutomo No. 13 Slawi (Sblh Timur RSUD. Susilo Slawi)', 0, 1, 'C');
+		$pdf->Cell(190, 6, '085641150844', 0, 1, 'C');
 
 		$pdf->SetLineWidth(1);
 		$pdf->Line(10, 30, 200, 30);
@@ -425,7 +425,7 @@ class Omset extends CI_Controller
 		$pdf->Cell(1, 5, '', 0, 1);
 
 		$pdf->Cell(128.6, 5, '', 0, 0);
-		$pdf->Cell(64.3, 5, '( SPV Pet Shop )', 0, 0);
+		$pdf->Cell(64.3, 5, '( Kotaro Petshop )', 0, 0);
 
 		$pdf->Output('Rekap-omset-tahun-' . $th_ini . '.pdf', 'I');
 	}

@@ -26,7 +26,7 @@
 								</div>
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
-										<h6>Jenis Hewan</h6>
+										<h6>Jenis Kucing</h6>
 										<div class="row">
 											<div class="col-md-12">
 												<div class="input-item">
@@ -63,8 +63,8 @@
 													<label>Pulang</label>
 													<select name="selesai" id="selesai" class="form-control" required>
 														<option value="">-- Pilih --</option>
-														<option value="1">Di antar sendiri</option>
-														<option value="2">Di jemput pihak petshop</option>
+														<option value="1">Di ambil sendiri</option>
+														<option value="2">Di antar pihak petshop</option>
 													</select>
 												</div>
 											</div>

@@ -2,7 +2,7 @@
  <aside class="main-sidebar sidebar-light-primary elevation-1">
      <!-- Brand Logo -->
      <a href="<?= base_url('admin'); ?>" class="brand-link text-center">
-         <span class="brand-text font-weight-bold"><i class="fa fa-github-alt"></i> PETSHOP</span>
+         <span class="brand-text font-weight-bold"></i>KOTARO PETSHOP</span>
      </a>
 
      <!-- Sidebar -->

@@ -7,7 +7,7 @@
 						<img src="<?= base_url(); ?>/assets/user/img/icons/10.png" alt="Icon Image">
 					</div>
 					<h3>Alamat Email</h3>
-					<p>kotaro_petshop@gmail.com</p>
+					<p>kotaropetshop99@gmail.com</p>
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -16,7 +16,7 @@
 						<img src="<?= base_url(); ?>/assets/user/img/icons/11.png" alt="Icon Image">
 					</div>
 					<h3>No. Handphoe</h3>
-					<p>081234567890</p>
+					<p>085641150844</p>
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -25,8 +25,9 @@
 						<img src="<?= base_url(); ?>/assets/user/img/icons/12.png" alt="Icon Image">
 					</div>
 					<h3>Alamat Lengkap</h3>
-					<p>Jl. Kita Solusi no. 1 <br>
-						Tegal, Jawa Tengah.</p>
+					<p>Jl. Dr. Sutomo No. 13 Slawi
+						(Sblh Timur RSUD. Susilo Slawi)
+					</p>
 				</div>
 			</div>
 		</div>

@@ -58,7 +58,9 @@
                                                 <td><?= date('d M Y - H:i', strtotime($psn->createdAt)); ?></td>
                                                 <td><?= $psn->noHp; ?></td>
                                                 <td><?= $psn->catatan; ?></td>
-                                                <td><?= $psn->alamat; ?></td>
+                                                <td>
+													<a href="<?= $psn->link_maps; ?>" class="text-dark" target="gmaps"><?= $psn->alamat; ?></a>
+												</td>
                                                 <td>
                                                     <?php if ($psn->buktiPembayaran != null) : ?>
                                                         <a href="<?= base_url('upload/bukti/' . $psn->buktiPembayaran); ?>" target="bukti_pembayaran">

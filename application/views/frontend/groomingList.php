@@ -50,6 +50,19 @@
 		margin: 4px 2px;
 		cursor: pointer;
 	}
+
+	.tombol-view-danger {
+		background-color: red;
+		border: none;
+		color: white;
+		padding: 5px 10px;
+		text-align: center;
+		text-decoration: none;
+		display: inline-block;
+		font-size: 16px;
+		margin: 4px 2px;
+		cursor: pointer;
+	}
 </style>
 <!-- Cart Start -->
 <div class="container-fluid pt-5">
@@ -65,10 +78,10 @@
 					<tr>
 						<th>Nama Paket</th>
 						<th>Harga</th>
-						<th>Jenis Hewan</th>
+						<th>Jenis Kucing</th>
 						<th>Foto</th>
 						<th>Deskripsi</th>
-						<th>Penjemputan</th>
+						<th>Ongkir</th>
 						<th>Catatan</th>
 						<th>Alamat</th>
 						<th>Total Harga</th>
@@ -96,8 +109,8 @@
 								<?php endif; ?>
 							</td>
 							<td>
-								<p><?= ($order->mulai == 1) ? 'Self Delivered' : 'Taken by Officers'; ?></p>
-								<p><?= ($order->selesai == 1) ? 'Taken by Myself' : 'Delivered by The Officer'; ?></p>
+								<p><?= ($order->mulai == 1) ? 'Di antar sendiri' : 'Di jemput pihak petshop'; ?></p>
+								<p><?= ($order->selesai == 1) ? 'Di ambil sendiri' : 'Di antar pihak petshop'; ?></p>
 							</td>
 							<td>
 								<a href="<?= $order->link_maps; ?>" class="text-dark" target="gmaps"><?= $order->alamat; ?></a>
@@ -111,6 +124,9 @@
 									<?php endif; ?>
 									<?php if ($order->bukti != null) : ?>
 										<button type="button" class="tombol-view view_btn" data-toggle="modal" title="View transfer invoice" data-target="#viewFile" data-file="<?= $order->bukti; ?>"><i class="fa fa-eye"></i></button>
+									<?php endif; ?>
+									<?php if ($order->statusPembayaran != 2) : ?>
+										<a href="<?= base_url('frontend/cancelGrooming/' . $order->id); ?>" class="btn-danger tombol-view-danger" title="Batalkan" onclick="return confirm('Batalkan booking grooming?')"><i class="fa fa-times"></i></a>
 									<?php endif; ?>
 								</div>
 							</td>

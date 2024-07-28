@@ -68,7 +68,7 @@
                                                 <ul>
                                                     <li><a href="<?= base_url('cart'); ?>">Keranjang Pesanan</a></li>
                                                     <li><a href="javascript:void(0)">Checkout</a></li>
-                                                    <li><a href="<?= base_url('orders'); ?>">Daftar Pesanan</a></li>
+                                                    <li><a href="<?= base_url('orders'); ?>">Pesanan Saya</a></li>
                                                 </ul>
                                             </li>
                                             <li class="menu-icon"><a href="#">Grooming</a>
@@ -279,7 +279,9 @@
                                                 <i class="icon-placeholder"></i>
                                             </div>
                                             <div class="footer-address-info">
-                                                <p>Brooklyn, New York, United States</p>
+                                                <p>Jl. Dr. Sutomo No. 13 Slawi
+                                                    (Sblh Timur RSUD. Susilo Slawi)
+                                                </p>
                                             </div>
                                         </li>
                                         <li>
@@ -287,7 +289,7 @@
                                                 <i class="icon-call"></i>
                                             </div>
                                             <div class="footer-address-info">
-                                                <p><a href="tel:+0123-456789">+0123-456789</a></p>
+                                                <p><a href="https://wa.me/6285641150844">085641150844</a></p>
                                             </div>
                                         </li>
                                         <li>
@@ -295,7 +297,7 @@
                                                 <i class="icon-mail"></i>
                                             </div>
                                             <div class="footer-address-info">
-                                                <p><a href="mailto:example@example.com">example@example.com</a></p>
+                                                <p><a href="mailto:kotaropetshop99@gmail.com">kotaropetshop99@gmail.com</a></p>
                                             </div>
                                         </li>
                                     </ul>

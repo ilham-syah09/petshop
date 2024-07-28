@@ -885,6 +885,23 @@ class Frontend extends CI_Controller
             redirect('profile');
         }
     }
+
+    // revisi
+    public function cancelGrooming($id)
+    {
+        $data = [
+            'statusPembayaran'  => 2
+        ];
+
+        $this->db->where('id', $id);
+        $update = $this->db->update('grooming', $data);
+        if ($update) {
+            $this->session->set_flashdata('toastr-success', 'Booking grooming sukses dibatalkan!');
+        } else {
+            $this->session->set_flashdata('toastr-error', 'Booking grooming gagal dibatalkan!');
+        }
+        redirect('grooming/list');
+    }
 }
 
         /* End of file Frontend.php */

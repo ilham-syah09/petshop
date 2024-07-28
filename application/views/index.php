@@ -91,7 +91,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; <?= date('Y'); ?> <a href="<?= base_url(); ?>" target="_blank">PETSHOP</a></strong>
+            <strong>Copyright &copy; <?= date('Y'); ?> <a href="<?= base_url(); ?>" target="_blank">KOTARO PETSHOP</a></strong>
         </footer>
     </div>
     <!-- ./wrapper -->
