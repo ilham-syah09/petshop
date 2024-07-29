@@ -86,7 +86,7 @@
 												</td>
 												<td>
 													<?php if ($gro->statusPembayaran == 0) : ?>
-														<span class="badge badge-warning">Belum Bayar</span>
+														<span class="badge badge-warning">Menunggu Pembayaran</span>
 													<?php elseif ($gro->statusPembayaran == 1) : ?>
 														<span class="badge badge-success">Lunas</span>
 													<?php else : ?>

@@ -1,6 +1,6 @@
 <div class="ltn__checkout-area mb-105">
 	<div class="container">
-		<form action="<?= base_url('grooming/store'); ?>" method="POST" enctype="multipart/form-data">
+		<form action="<?= base_url('grooming/store'); ?>" method="POST" enctype="multipart/form-data" id="form-grooming">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="ltn__checkout-inner">
@@ -47,6 +47,9 @@
 								<div class="row">
 									<div class="col-lg-12 col-md-12">
 										<h6>Penjemputan</h6>
+										<div class="alert alert-info">
+											Jika di antar akan dikenakan biaya ongkir
+										</div>
 										<div class="row">
 											<div class="col-md-6">
 												<div class="input-item">
@@ -119,3 +122,62 @@
 		</form>
 	</div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+<script>
+	$('#form-grooming').validate({
+		rules: {
+			idPaket: {
+				selected: true,
+			},
+			jenis: {
+				required: true,
+			},
+			mulai: {
+				required: true,
+			},
+			selesai: {
+				required: true,
+			},
+			idOngkir: {
+				required: true
+			},
+			alamat: {
+				required: true
+			},
+			link_maps: {
+				required: true
+			},
+		},
+		messages: {
+			idPaket: {
+				selected: "Paket tidak boleh kosong",
+			},
+			jenis: {
+				required: "Jenis tidak boleh kosong",
+			},
+			alamat: {
+				required: "Alamat tidak boleh kosong!",
+			},
+			mulai: {
+				required: "mulai tidak boleh kosong!",
+			},
+			selesai: {
+				required: "selesai tidak boleh kosong!",
+			},
+			idOngkir: {
+				required: "Ongkir tidak boleh kosong!",
+			},
+			alamat: {
+				required: "alamat tidak boleh kosong!",
+			},
+			link_maps: {
+				required: "Link google maps tidak boleh kosong!",
+			},
+		},
+		errorElement: 'small',
+		errorClass: 'mb-2 text-danger'
+	});
+</script>

@@ -5,7 +5,7 @@
      </div>
      <div class="row px-xl-5">
          <div class="col-lg-6 mb-5">
-             <form action="<?= base_url('changeProfile'); ?>" method="post" enctype="multipart/form-data">
+             <form action="<?= base_url('changeProfile'); ?>" method="post" enctype="multipart/form-data" id="form-profile">
                  <div class="card">
                      <div class="card-body">
                          <h4 class="font-weight-semi-bold mb-4">Profile</h4>
@@ -72,3 +72,32 @@
      </div>
  </div>
  <!-- Contact End -->
+
+ <!-- Jquery Validation -->
+
+ <!-- jQuery CDN -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+ <script>
+     $('#form-profile').validate({
+         rules: {
+             noHp: {
+                 required: true,
+                 number: true,
+                 minlength: 10,
+                 maxlength: 13,
+             }
+         },
+         messages: {
+             noHp: {
+                 required: "Harap isi nomor hp",
+                 minlength: "Panjang nomor hp kurang dari 10 digit",
+                 maxlength: "Panjang nomor hp lebih dari 13 digit",
+                 number: "Nomor hp harus berupa angka",
+             }
+         },
+         errorElement: 'span',
+         errorClass: 'text-danger'
+     });
+ </script>

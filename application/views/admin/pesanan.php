@@ -59,8 +59,8 @@
                                                 <td><?= $psn->noHp; ?></td>
                                                 <td><?= $psn->catatan; ?></td>
                                                 <td>
-													<a href="<?= $psn->link_maps; ?>" class="text-dark" target="gmaps"><?= $psn->alamat; ?></a>
-												</td>
+                                                    <a href="<?= $psn->link_maps; ?>" class="text-dark" target="gmaps"><?= $psn->alamat; ?></a>
+                                                </td>
                                                 <td>
                                                     <?php if ($psn->buktiPembayaran != null) : ?>
                                                         <a href="<?= base_url('upload/bukti/' . $psn->buktiPembayaran); ?>" target="bukti_pembayaran">
@@ -72,9 +72,11 @@
                                                 </td>
                                                 <td>
                                                     <?php if ($psn->statusPembayaran == 0) : ?>
-                                                        <span class="badge badge-warning">Belum Bayar</span>
+                                                        <span class="badge badge-warning">Menunggu Pembayaran</span>
                                                     <?php elseif ($psn->statusPembayaran == 1) : ?>
                                                         <span class="badge badge-success">Lunas</span>
+                                                    <?php elseif ($psn->statusPembayaran == 2) : ?>
+                                                        <span class="badge badge-success">Cancel</span>
                                                     <?php endif; ?>
                                                 </td>
                                                 <td><?= 'Rp. ' . number_format($psn->totalBiaya, 0, ',', '.'); ?></td>

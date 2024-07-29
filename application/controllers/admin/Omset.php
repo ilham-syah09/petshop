@@ -48,7 +48,7 @@ class Omset extends CI_Controller
 			foreach ($tahun as $th) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
 				$this->db->where('YEAR(createdAt)', $th->tahun);
-
+				$this->db->where('statusPembayaran', 1);
 				$this->db->group_by('idKhusus');
 				$tahunan = $this->db->get('orders')->result();
 
@@ -81,6 +81,7 @@ class Omset extends CI_Controller
 				$this->db->group_start();
 				$this->db->where('YEAR(createdAt)', $th_ini);
 				$this->db->where('MONTH(createdAt)', $bl->bulan);
+				$this->db->where('statusPembayaran', 1);
 				$this->db->group_end();
 				$this->db->group_by('idKhusus');
 				$bulanan = $this->db->get('orders')->result();
@@ -115,6 +116,7 @@ class Omset extends CI_Controller
 			foreach ($hari as $hr) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
 				$this->db->where('DATE(createdAt)', $hr->tanggal);
+				$this->db->where('statusPembayaran', 1);
 				$this->db->group_by('idKhusus');
 				$harian = $this->db->get('orders')->result();
 
@@ -187,7 +189,7 @@ class Omset extends CI_Controller
 			foreach ($tahun as $th) {
 				$this->db->select('idKhusus, totalBiaya as subTotal');
 				$this->db->where('YEAR(createdAt)', $th->tahun);
-
+				$this->db->where('statusPembayaran', 1);
 				$this->db->group_by('idKhusus');
 				$tahunan = $this->db->get('orders')->result();
 
@@ -269,6 +271,7 @@ class Omset extends CI_Controller
 
 		$this->db->select('MONTH(createdAt) as bulan');
 		$this->db->where('YEAR(createdAt)', $th_ini);
+		$this->db->where('statusPembayaran', 1);
 		$this->db->group_by('bulan');
 		$this->db->order_by('bulan', 'asc');
 
@@ -282,6 +285,7 @@ class Omset extends CI_Controller
 				$this->db->group_start();
 				$this->db->where('YEAR(createdAt)', $th_ini);
 				$this->db->where('MONTH(createdAt)', $bl->bulan);
+				$this->db->where('statusPembayaran', 1);
 				$this->db->group_end();
 				$this->db->group_by('idKhusus');
 				$bulanan = $this->db->get('orders')->result();
@@ -367,6 +371,7 @@ class Omset extends CI_Controller
 		$this->db->group_start();
 		$this->db->where('YEAR(createdAt)', $th_ini);
 		$this->db->where('MONTH(createdAt)', $bln_ini);
+		$this->db->where('statusPembayaran', 1);
 		$this->db->group_end();
 		$this->db->group_by('tanggal');
 		$this->db->order_by('tanggal', 'asc');

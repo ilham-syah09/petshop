@@ -189,6 +189,17 @@ class M_Admin extends CI_Model
 
         return $this->db->get('grooming')->result();
     }
+
+    public function getLaporanPenjualan($where)
+    {
+        $this->db->select('keranjang.idBarang, orders.createdAt, barang.nama_barang, COUNT(barang.nama_barang) as jumlah');
+        $this->db->from('orders');
+        $this->db->join('keranjang', 'orders.idKeranjang = keranjang.id', 'inner');
+        $this->db->join('barang', 'keranjang.idBarang = barang.id', 'left');
+        $this->db->where($where);
+        $this->db->group_by('keranjang.idBarang, orders.createdAt, barang.nama_barang');
+        return $this->db->get()->result();
+    }
 }
 
 /* End of file M_Admin.php */

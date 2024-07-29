@@ -86,6 +86,7 @@
 						<th>Alamat</th>
 						<th>Total Harga</th>
 						<th>Tanggal Grooming</th>
+						<th>Status</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -117,6 +118,15 @@
 							</td>
 							<td><?= 'Rp. ' . number_format($order->totalBiaya, 0, ',', '.'); ?></td>
 							<td><?= date('d M Y - H:i:s', strtotime($order->createdAt)); ?></td>
+							<td>
+								<?php if ($order->statusPembayaran == 0) : ?>
+									<span class="btn btn-sm btn-warning">Menunggu Konfirmasi Pembayaran</span>
+								<?php elseif ($order->statusPembayaran == 1) : ?>
+									<span class="btn btn-sm btn-success">Sukses</span>
+								<?php elseif ($order->statusPembayaran == 2) : ?>
+									<span class="btn btn-sm btn-danger">Cancel</span>
+								<?php endif; ?>
+							</td>
 							<td class="align-middle">
 								<div class="btn-group">
 									<?php if ($order->statusPembayaran == 0) : ?>

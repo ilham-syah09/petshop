@@ -489,6 +489,25 @@ class Frontend extends CI_Controller
         echo json_encode($result);
     }
 
+    public function cancelOrders($id)
+    {
+        $this->_authentication();
+
+
+        $data = [
+            'statusPembayaran'  => 2
+        ];
+
+        $this->db->where('id', $id);
+        $update = $this->db->update('orders', $data);
+        if ($update) {
+            $this->session->set_flashdata('toastr-success', 'Booking grooming sukses dibatalkan!');
+        } else {
+            $this->session->set_flashdata('toastr-error', 'Booking grooming gagal dibatalkan!');
+        }
+        redirect('orders');
+    }
+
     public function review()
     {
         $this->_authentication();

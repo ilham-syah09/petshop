@@ -111,12 +111,20 @@
                          </p>
                      </a>
                  </li>
-                 <li class="nav-header">Omset</li>
+                 <li class="nav-header">Laporan</li>
                  <li class="nav-item">
                      <a href="<?= base_url('admin/omset'); ?>" class="nav-link">
                          <i class="nav-icon fas fa-money-check-alt"></i>
                          <p>
                              Rekap Omset
+                         </p>
+                     </a>
+                 </li>
+                 <li class="nav-item">
+                     <a href="<?= base_url('admin/laporan'); ?>" class="nav-link">
+                         <i class="nav-icon fas fa-boxes"></i>
+                         <p>
+                             Lap. Penjualan Barang
                          </p>
                      </a>
                  </li>

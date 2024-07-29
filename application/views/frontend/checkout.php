@@ -1,6 +1,6 @@
 <div class="ltn__checkout-area mb-105">
 	<div class="container">
-		<form action="<?= base_url('placeOrder'); ?>" method="POST">
+		<form action="<?= base_url('placeOrder'); ?>" method="POST" id="form-pesanan">
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="ltn__checkout-inner">
@@ -41,28 +41,24 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-lg-12 col-md-12">
-										<h6>Alamat</h6>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="input-item">
-													<textarea name="alamat" placeholder="House number and street name"></textarea>
-												</div>
-											</div>
-										</div>
-										<h6>Link Google Maps</h6>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="input-item">
-													<input type="text" name="link_maps" placeholder="Link google maps" autocomplete="off">
-												</div>
-											</div>
+									<div class="col-md-12 mt-3">
+										<div class="input-item">
+											<label class="fw-bold">Alamat</label>
+											<textarea name="alamat" placeholder="House number and street name"></textarea>
 										</div>
 									</div>
-								</div>
-								<h6>Catatan (optional)</h6>
-								<div class="input-item input-item-textarea ltn__custom-icon">
-									<textarea name="catatan" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+									<div class="col-md-12 mt-3">
+										<div class="input-item">
+											<label class="fw-bold">Link Google Maps</label>
+											<input type="text" name="link_maps" placeholder="Link google maps" autocomplete="off">
+										</div>
+									</div>
+									<div class="col-md-12 mt-3">
+										<div class="input-item">
+											<label class="fw-bold">Catatan (opsional)</label>
+											<textarea name="catatan" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -152,6 +148,58 @@
 		</form>
 	</div>
 </div>
+
+
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+
+<script>
+	$('#form-pesanan').validate({
+		rules: {
+			name: {
+				required: true,
+			},
+			noHp: {
+				required: true,
+				number: true,
+				minlength: 10,
+				maxlength: 13,
+			},
+			idOngkir: {
+				required: true,
+			},
+			alamat: {
+				required: true,
+			},
+			link_maps: {
+				required: true
+			},
+			payment: {
+				required: true
+			}
+		},
+		messages: {
+			noHp: {
+				required: "Harap isi nomor hp",
+				minlength: "Panjang nomor hp kurang dari 10 digit",
+				maxlength: "Panjang nomor hp lebih dari 13 digit",
+				number: "Nomor hp harus berupa angka",
+			},
+			alamat: {
+				required: "Alamat tidak boleh kosong!",
+			},
+			link_maps: {
+				required: "Link google maps tidak boleh kosong!",
+			},
+			payment: {
+				required: "Harap pilih metode pembayaran!",
+			},
+		},
+		errorElement: 'small',
+		errorClass: 'mb-2 text-danger'
+	});
+</script>
 
 <script>
 	$('#qris').click(function() {

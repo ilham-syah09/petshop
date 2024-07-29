@@ -66,6 +66,7 @@
 						<th>Tanggal Pesanan</th>
 						<th>Alamat</th>
 						<th>Catatan</th>
+						<th>Status</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -77,6 +78,15 @@
 								<a href="<?= ($order->link_maps) ? $order->link_maps : 'javascript:void(0)'; ?>" target="maps" class="text-dark"><?= $order->alamat; ?></a>
 							</td>
 							<td><?= $order->catatan; ?></td>
+							<td>
+								<?php if ($order->statusPembayaran == 0) : ?>
+									<span class="btn btn-sm btn-warning">Menunggu Konfirmasi Pembayaran</span>
+								<?php elseif ($order->statusPembayaran == 1) : ?>
+									<span class="btn btn-sm btn-success">Sukses</span>
+								<?php elseif ($order->statusPembayaran == 2) : ?>
+									<span class="btn btn-sm btn-danger">Cancel</span>
+								<?php endif; ?>
+							</td>
 							<td class="align-middle">
 								<button type="button" class="tombol-detail detail_btn" data-toggle="modal" title="Detail Product" data-target="#detailProduct" data-idkhusus="<?= $order->idKhusus; ?>" data-link="<?= base_url('print/' . $order->idKhusus); ?>"><i class="fa fa-info"></i></button>
 								<?php if ($order->statusPembayaran == 0) : ?>
@@ -87,6 +97,9 @@
 								<?php endif; ?>
 								<?php if ($order->statusPembayaran == 1) : ?>
 									<button type="button" class="tombol-progres progres_btn" data-toggle="modal" title="View Progress Order" data-target="#progresModal" data-idkhusus="<?= $order->idKhusus; ?>"><i class="fa fa-circle-notch"></i></button>
+								<?php endif; ?>
+								<?php if ($order->statusPembayaran != 2) : ?>
+									<a href="<?= base_url('frontend/cancelOrder/' . $order->id); ?>" class="tombol-view bg-danger" title="Batalkan" onclick="return confirm('Batalkan Pesanan?')"><i class="fa fa-times"></i></a>
 								<?php endif; ?>
 							</td>
 						</tr>
