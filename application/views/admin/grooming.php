@@ -49,6 +49,7 @@
 											<th>Total Biaya</th>
 											<th>Catatan</th>
 											<th>Alamat</th>
+											<th>Tanggal</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -101,8 +102,10 @@
 												<td>
 													<a href="<?= $gro->link_maps; ?>" class="text-dark" target="gmaps"><?= $gro->alamat; ?></a>
 												</td>
+												<td><?= date('d M Y - H:i', strtotime($gro->tanggal . ' ' . $gro->jam)); ?></td>
 												<td>
 													<a href="#" class="badge badge-success statusPem_btn" data-toggle="modal" data-target="#statusPembayaranModal" data-id="<?= $gro->id; ?>" data-statuspembayaran="<?= $gro->statusPembayaran; ?>">Pembayaran</a>
+													<a href="#" class="badge badge-info progresBtn" data-toggle="modal" data-target="#progres-modal" data-id="<?= $gro->id; ?>" data-progres="<?= $gro->progres; ?>">Progres</a>
 													<a href="<?= base_url('admin/grooming/delete/' . $gro->id); ?>" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" class="badge badge-danger">Delete</a>
 												</td>
 											</tr>
@@ -163,6 +166,41 @@
 	</div>
 </div>
 
+<!-- modal progres -->
+<div class="modal fade" id="progres-modal" tabindex="-1" role="dialog" aria-labelledby="progres-modalTitle" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Progres Grooming</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form action="<?= base_url('admin/grooming/progres'); ?>" method="POST">
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<input type="hidden" name="id" id="id-2">
+								<label>Status</label>
+								<select name="progres" id="progres" class="form-control">
+									<option value="0">Menunggu</option>
+									<option value="2">Di Proses</option>
+									<option value="1">Selesai</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save changes</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <script>
 	$('#by_tanggal').change(function() {
 		let tanggal = $(this).val();
@@ -179,6 +217,18 @@
 
 			$('#id').val(id);
 			$('#statusPembayaran').val(statusPembayaran);
+		});
+	});
+
+	let progresBtn = $('.progresBtn');
+
+	$(progresBtn).each(function(i) {
+		$(progresBtn[i]).click(function() {
+			let id = $(this).data('id');
+			let progres = $(this).data('progres');
+
+			$('#id-2').val(id);
+			$('#progres').val(progres);
 		});
 	});
 </script>

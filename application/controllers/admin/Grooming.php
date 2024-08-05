@@ -31,7 +31,7 @@ class Grooming extends CI_Controller
 			'navbar'   => 'admin/navbar',
 			'page'     => 'admin/grooming',
 			'grooming' => $this->admin->getGrooming([
-				'DATE(grooming.createdAt)' => $date
+				'tanggal' => $date
 			]),
 			'date' => $date
 		];
@@ -55,6 +55,27 @@ class Grooming extends CI_Controller
 			$this->session->set_flashdata('toastr-success', 'Status pembayaran berhasil diupdate');
 		} else {
 			$this->session->set_flashdata('toastr-error', 'Status pembayaran gagal diupdate');
+		}
+
+		redirect($_SERVER['HTTP_REFERER'], 'refresh');
+	}
+
+	public function progres()
+	{
+		$data = [
+			'progres' => $this->input->post('progres')
+		];
+
+		$this->db->where([
+			'id' => $this->input->post('id')
+		]);
+
+		$update = $this->db->update('grooming', $data);
+
+		if ($update) {
+			$this->session->set_flashdata('toastr-success', 'Status progres berhasil diupdate');
+		} else {
+			$this->session->set_flashdata('toastr-error', 'Status progres gagal diupdate');
 		}
 
 		redirect($_SERVER['HTTP_REFERER'], 'refresh');

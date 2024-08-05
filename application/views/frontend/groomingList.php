@@ -87,6 +87,7 @@
 						<th>Total Harga</th>
 						<th>Tanggal Grooming</th>
 						<th>Status</th>
+						<th>Progres</th>
 						<th>Action</th>
 					</tr>
 				</thead>
@@ -117,7 +118,7 @@
 								<a href="<?= $order->link_maps; ?>" class="text-dark" target="gmaps"><?= $order->alamat; ?></a>
 							</td>
 							<td><?= 'Rp. ' . number_format($order->totalBiaya, 0, ',', '.'); ?></td>
-							<td><?= date('d M Y - H:i:s', strtotime($order->createdAt)); ?></td>
+							<td><?= date('d M Y - H:i', strtotime($order->tanggal . ' ' . $order->jam)); ?></td>
 							<td>
 								<?php if ($order->statusPembayaran == 0) : ?>
 									<span class="btn btn-sm btn-warning">Menunggu Konfirmasi Pembayaran</span>
@@ -125,6 +126,15 @@
 									<span class="btn btn-sm btn-success">Sukses</span>
 								<?php elseif ($order->statusPembayaran == 2) : ?>
 									<span class="btn btn-sm btn-danger">Cancel</span>
+								<?php endif; ?>
+							</td>
+							<td>
+								<?php if ($order->progres == 0) : ?>
+									<span class="btn btn-sm btn-warning">Menunggu</span>
+								<?php elseif ($order->progres == 1) : ?>
+									<span class="btn btn-sm btn-success">Selesai</span>
+								<?php elseif ($order->progres == 2) : ?>
+									<span class="btn btn-sm btn-primary">Di Proses</span>
 								<?php endif; ?>
 							</td>
 							<td class="align-middle">

@@ -95,7 +95,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="input-item">
-													<textarea name="alamat" placeholder="Alamat lengkap rumah anda"></textarea>
+													<textarea name="alamat" placeholder="Alamat lengkap rumah anda" id="alamat"></textarea>
 												</div>
 											</div>
 										</div>
@@ -103,7 +103,29 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="input-item">
-													<input type="text" name="link_maps" placeholder="Link google maps" autocomplete="off">
+													<input type="text" name="link_maps" placeholder="Link google maps" autocomplete="off" id="link_maps">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-lg-6 col-md-6">
+										<h6>Tanggal</h6>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="input-item">
+													<input class="form-control" id="tanggal" type="date" name="tanggal" required autocomplete="off">
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6">
+										<h6>Jam</h6>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="input-item">
+													<input class="js-masked-time form-control" id="jam" name="jam" required placeholder="00:00" autocomplete="off">
 												</div>
 											</div>
 										</div>
@@ -115,16 +137,20 @@
 								</div>
 							</div>
 						</div>
+						<button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase btn-block">Order</button>
 					</div>
-					<button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase btn-block">Order</button>
 				</div>
-			</div>
 		</form>
 	</div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+<script src="<?= base_url('assets/plugins/jquery.maskedinput/jquery.maskedinput.min.js'); ?>"></script>
+
+<script>
+	$('.js-masked-time').mask('99:99');
+</script>
 
 <script>
 	$('#form-grooming').validate({
@@ -148,6 +174,12 @@
 				required: true
 			},
 			link_maps: {
+				required: true
+			},
+			tanggal: {
+				required: true
+			},
+			jam: {
 				required: true
 			},
 		},
@@ -175,6 +207,12 @@
 			},
 			link_maps: {
 				required: "Link google maps tidak boleh kosong!",
+			},
+			tanggal: {
+				required: "Tanggal tidak boleh kosong!",
+			},
+			jam: {
+				required: "Jam tidak boleh kosong!",
 			},
 		},
 		errorElement: 'small',

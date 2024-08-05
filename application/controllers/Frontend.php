@@ -598,37 +598,70 @@ class Frontend extends CI_Controller
         $idOngkir  = $this->input->post('idOngkir');
         $mulai     = $this->input->post('mulai');
         $selesai   = $this->input->post('selesai');
+        $tanggal   = $this->input->post('tanggal');
+        $jam       = $this->input->post('jam');
 
-        $this->db->select('harga');
-        $this->db->where('id', $idPaket);
-        $paket = $this->db->get('paket')->row();
+        $this->db->where('tanggal', $tanggal);
+        $this->db->where('jam', $jam . ':00');
+        $cek = $this->db->get('grooming', 1)->row();
 
-        $this->db->select('harga');
-        $this->db->where('id', $idOngkir);
-        $ongkir = $this->db->get('ongkir')->row();
+        if (!$cek) {
+            $this->db->select('harga');
+            $this->db->where('id', $idPaket);
+            $paket = $this->db->get('paket')->row();
 
-        if ($mulai == 2 || $selesai == 2) {
-            $totalBiaya = ($paket->harga + $ongkir->harga);
-        } else {
-            $totalBiaya = $paket->harga;
-        }
+            $this->db->select('harga');
+            $this->db->where('id', $idOngkir);
+            $ongkir = $this->db->get('ongkir')->row();
 
-        if ($img) {
-            $config['upload_path']   = 'upload/gambar';
-            $config['allowed_types'] = 'jpg|jpeg|png';
-            $config['max_size']      = 10000;
-            $config['remove_spaces'] = TRUE;
-            $config['encrypt_name']  = TRUE;
-
-            $this->load->library('upload', $config);
-            $this->upload->initialize($config);
-
-            if (!$this->upload->do_upload('image')) {
-                $this->session->set_flashdata('toastr-error', $this->upload->display_errors());
-
-                redirect($_SERVER['HTTP_REFERER'], 'refresh');
+            if ($mulai == 2 || $selesai == 2) {
+                $totalBiaya = ($paket->harga + $ongkir->harga);
             } else {
-                $upload_data = $this->upload->data();
+                $totalBiaya = $paket->harga;
+            }
+
+            if ($img) {
+                $config['upload_path']   = 'upload/gambar';
+                $config['allowed_types'] = 'jpg|jpeg|png';
+                $config['max_size']      = 10000;
+                $config['remove_spaces'] = TRUE;
+                $config['encrypt_name']  = TRUE;
+
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+
+                if (!$this->upload->do_upload('image')) {
+                    $this->session->set_flashdata('toastr-error', $this->upload->display_errors());
+
+                    redirect($_SERVER['HTTP_REFERER'], 'refresh');
+                } else {
+                    $upload_data = $this->upload->data();
+
+                    $data = [
+                        'idUser'     => $this->dt_user->id,
+                        'idPaket'    => $idPaket,
+                        'idOngkir'   => $idOngkir,
+                        'jenis'      => $jenis,
+                        'mulai'      => $mulai,
+                        'selesai'    => $selesai,
+                        'deskripsi'  => $deskripsi,
+                        'foto'       => $upload_data['file_name'],
+                        'totalBiaya' => $totalBiaya,
+                        'alamat'     => $alamat,
+                        'link_maps'  => $link_maps,
+                        'tanggal'    => $tanggal,
+                        'jam'        => $jam
+                    ];
+                }
+            } else {
+                $alamat    = $this->input->post('alamat');
+                $deskripsi = $this->input->post('deskripsi');
+                $link_maps = $this->input->post('link_maps');
+                $idPaket   = $this->input->post('idPaket');
+                $jenis     = $this->input->post('jenis');
+                $idOngkir  = $this->input->post('idOngkir');
+                $mulai     = $this->input->post('mulai');
+                $selesai   = $this->input->post('selesai');
 
                 $data = [
                     'idUser'     => $this->dt_user->id,
@@ -638,42 +671,23 @@ class Frontend extends CI_Controller
                     'mulai'      => $mulai,
                     'selesai'    => $selesai,
                     'deskripsi'  => $deskripsi,
-                    'foto'       => $upload_data['file_name'],
                     'totalBiaya' => $totalBiaya,
                     'alamat'     => $alamat,
-                    'link_maps'  => $link_maps
+                    'link_maps'  => $link_maps,
+                    'tanggal'    => $tanggal,
+                    'jam'        => $jam
                 ];
             }
+
+            $insert = $this->db->insert('grooming', $data);
+
+            if ($insert) {
+                $this->session->set_flashdata('toastr-success', 'Grooming has been successfully booked');
+            } else {
+                $this->session->set_flashdata('toastr-error', 'Grooming has failed to be ordered!!');
+            }
         } else {
-            $alamat    = $this->input->post('alamat');
-            $deskripsi = $this->input->post('deskripsi');
-            $link_maps = $this->input->post('link_maps');
-            $idPaket   = $this->input->post('idPaket');
-            $jenis     = $this->input->post('jenis');
-            $idOngkir  = $this->input->post('idOngkir');
-            $mulai     = $this->input->post('mulai');
-            $selesai   = $this->input->post('selesai');
-
-            $data = [
-                'idUser'     => $this->dt_user->id,
-                'idPaket'    => $idPaket,
-                'idOngkir'   => $idOngkir,
-                'jenis'      => $jenis,
-                'mulai'      => $mulai,
-                'selesai'    => $selesai,
-                'deskripsi'  => $deskripsi,
-                'totalBiaya' => $totalBiaya,
-                'alamat'     => $alamat,
-                'link_maps'  => $link_maps
-            ];
-        }
-
-        $insert = $this->db->insert('grooming', $data);
-
-        if ($insert) {
-            $this->session->set_flashdata('toastr-success', 'Grooming has been successfully booked');
-        } else {
-            $this->session->set_flashdata('toastr-error', 'Grooming has failed to be ordered!!');
+            $this->session->set_flashdata('toastr-error', 'The schedule has been booked, please choose a different date and time!!');
         }
 
         redirect('grooming/list', 'refresh');

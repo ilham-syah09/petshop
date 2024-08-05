@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 05 Jun 2024 pada 02.00
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.4.1
+-- Generation Time: May 22, 2024 at 03:15 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
@@ -40,20 +40,19 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `barang`
+-- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`id`, `kategori_id`, `nama_barang`, `deskripsi`, `harga`, `stok`, `createdAt`, `updatedAt`) VALUES
-(1, 2, 'Cat Choize 800gram', 'makanan kucing \r\n', 15000, 27, '2024-03-19 12:29:42', '2024-05-30 07:52:51'),
-(2, 1, 'Kandang Kucing ukuran standar 60x40x50', 'Kandang hewan ukuran 60X40X50', 150000, 8, '2024-03-19 12:39:20', '2024-05-30 07:52:39'),
-(14, 2, 'whiskas', 'whiskas makanan kucing 800gram \r\n', 30000, 40, '2024-03-19 12:29:42', '2024-05-30 07:53:04'),
-(16, 1, 'pet cargo', 'kandang hewan peliharaan', 85000, 10, '2024-05-30 07:48:22', '2024-05-30 07:52:25'),
-(17, 2, 'Royal Canin Puppy Giant', 'makanan untuk anjing', 20000, 30, '2024-05-30 07:50:09', '2024-05-30 07:51:57');
+(1, 2, 'Royal Canin 1Kg', 'Royal Canin untuk pakan kucing berat 1 Kilogram\r\n', 12000, 2, '2024-03-19 12:29:42', '2024-05-21 02:29:28'),
+(2, 1, 'Kandang Macan', 'Kandang untuk anak macan ukuran 2m x 2m', 1000000, 0, '2024-03-19 12:39:20', '2024-05-21 02:29:28'),
+(14, 2, 'Royal Canin 2Kg', 'Royal Canin untuk pakan kucing berat 2 Kilogram\r\n', 22000, 5, '2024-03-19 12:29:42', '2024-05-09 14:46:48'),
+(15, 1, 'Kandang Kucing Kanggora', 'Kandang untuk kucing Kanggora ukuran 1m x 1m', 450000, 17, '2024-05-09 14:02:02', '2024-05-09 14:46:48');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `gambar`
+-- Table structure for table `gambar`
 --
 
 CREATE TABLE `gambar` (
@@ -65,20 +64,19 @@ CREATE TABLE `gambar` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `gambar`
+-- Dumping data for table `gambar`
 --
 
 INSERT INTO `gambar` (`id`, `idBarang`, `gambar`, `createdAt`, `updatedAt`) VALUES
-(20, 2, 'd5ab523a8ef901ecae999caf2b290eac.jpg', '2024-05-30 07:44:35', NULL),
-(21, 14, 'f615bffbd0cb07389367719f3ca663c1.jpg', '2024-05-30 07:48:54', NULL),
-(22, 17, '99f3693d4a5d498b7157f79ecb71580d.jpg', '2024-05-30 07:50:40', NULL),
-(23, 16, '3942054e646067a433449138ce704bf2.jpg', '2024-05-30 07:50:57', NULL),
-(24, 1, '125fcfdaaf04e06bd084f08c5dee9a4f.jpg', '2024-05-30 07:51:36', NULL);
+(1, 1, 'af14a1d7b4cf967fce8461a0c9fd66c5.png', '2024-03-19 12:38:09', NULL),
+(3, 2, 'fa6abbcf542ecbcb0d3f56cdbbfb98d7.png', '2024-05-04 07:15:36', NULL),
+(18, 14, 'af14a1d7b4cf967fce8461a0c9fd66c5.png', '2024-03-19 12:38:09', NULL),
+(19, 15, 'fa6abbcf542ecbcb0d3f56cdbbfb98d7.png', '2024-05-04 07:15:36', '2024-05-09 14:03:28');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `grooming`
+-- Table structure for table `grooming`
 --
 
 CREATE TABLE `grooming` (
@@ -103,7 +101,7 @@ CREATE TABLE `grooming` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
 CREATE TABLE `kategori` (
@@ -114,7 +112,7 @@ CREATE TABLE `kategori` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id`, `kategori`, `createdAt`, `updatedAt`) VALUES
@@ -124,7 +122,7 @@ INSERT INTO `kategori` (`id`, `kategori`, `createdAt`, `updatedAt`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `keranjang`
+-- Table structure for table `keranjang`
 --
 
 CREATE TABLE `keranjang` (
@@ -140,7 +138,7 @@ CREATE TABLE `keranjang` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ongkir`
+-- Table structure for table `ongkir`
 --
 
 CREATE TABLE `ongkir` (
@@ -152,19 +150,18 @@ CREATE TABLE `ongkir` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ongkir`
+-- Dumping data for table `ongkir`
 --
 
 INSERT INTO `ongkir` (`id`, `kecamatan`, `harga`, `createdAt`, `updatedAt`) VALUES
-(1, 'Adiwerna', 15000, '2023-06-08 05:50:57', '2024-06-03 10:56:03'),
-(2, 'Tegal', 20000, '2023-06-08 05:51:06', '2024-06-03 10:56:37'),
-(3, 'Jatibarang', 15000, '2023-06-08 05:51:16', '2024-06-03 10:55:31'),
-(5, 'Slawi', 5000, '2024-06-03 10:54:26', '2024-06-03 10:54:58');
+(1, 'Tegal Selatan', 10000, '2023-06-08 05:50:57', '2024-05-21 01:27:28'),
+(2, 'Tegal Timur', 30000, '2023-06-08 05:51:06', '2024-05-21 01:27:54'),
+(3, 'Jatibarang', 60000, '2023-06-08 05:51:16', '2024-05-21 01:28:01');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `orders`
+-- Table structure for table `orders`
 --
 
 CREATE TABLE `orders` (
@@ -188,7 +185,7 @@ CREATE TABLE `orders` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `paket`
+-- Table structure for table `paket`
 --
 
 CREATE TABLE `paket` (
@@ -200,23 +197,17 @@ CREATE TABLE `paket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `paket`
+-- Dumping data for table `paket`
 --
 
 INSERT INTO `paket` (`id`, `namaPaket`, `harga`, `createdAt`, `updatedAt`) VALUES
 (1, 'Grooming Basic Small', 50000, '2024-05-21 03:19:35', '2024-05-21 03:21:36'),
-(2, 'Grooming Premium Large', 100000, '2024-05-21 03:21:22', NULL),
-(4, 'Grooming Basic Large', 60000, '2024-05-30 07:56:17', NULL),
-(5, 'Grooming Medicate Small', 65000, '2024-05-30 07:56:38', NULL),
-(6, 'Grooming Medicate Large', 75000, '2024-05-30 07:56:56', NULL),
-(7, 'Grooming Treatment Small', 75000, '2024-05-30 07:57:43', NULL),
-(8, 'Grooming Treatment Large', 85000, '2024-05-30 07:58:17', NULL),
-(9, 'Grooming Premium Small', 85000, '2024-05-30 07:58:43', NULL);
+(2, 'Grooming Premium Large', 100000, '2024-05-21 03:21:22', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pesan`
+-- Table structure for table `pesan`
 --
 
 CREATE TABLE `pesan` (
@@ -231,7 +222,7 @@ CREATE TABLE `pesan` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `progres`
+-- Table structure for table `progres`
 --
 
 CREATE TABLE `progres` (
@@ -246,7 +237,7 @@ CREATE TABLE `progres` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `review`
+-- Table structure for table `review`
 --
 
 CREATE TABLE `review` (
@@ -261,7 +252,7 @@ CREATE TABLE `review` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -278,17 +269,16 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `name`, `email`, `noHp`, `password`, `image`, `alamat`, `role`, `is_active`, `created_at`) VALUES
-(1, 'superadmin', 'superadmin@gmail.com', NULL, '$2y$10$7pyTCt1Y3lkAo4duy7Y8YekrA2.lkYPVVfNMgsEv7HQ3DEMyyiyde', 'default.jpg', NULL, 1, 1, '2023-03-07 04:17:36'),
-(4, 'Ramantyo Pangestu', 'ramantyo10@gmail.com', NULL, '$2y$10$BeG35hGzfwTiJGxsjwSeoevbN6NgRZ0.HN4ImD8x.EQa/vY/atBLu', 'default.jpg', NULL, 2, 1, '2024-05-30 07:59:37');
+(1, 'superadmin', 'superadmin@gmail.com', NULL, '$2y$10$7pyTCt1Y3lkAo4duy7Y8YekrA2.lkYPVVfNMgsEv7HQ3DEMyyiyde', 'default.jpg', NULL, 1, 1, '2023-03-07 04:17:36');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_token`
+-- Table structure for table `user_token`
 --
 
 CREATE TABLE `user_token` (
@@ -299,176 +289,168 @@ CREATE TABLE `user_token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user_token`
---
-
-INSERT INTO `user_token` (`id`, `email`, `token`, `date_created`) VALUES
-(1, 'ramantyo10@gmail.com', '0RgWeH4JB0loTg0J1QD4X+1595ejia8/vjOusVUTGOc=', 1717055977),
-(2, 'ramantyo16@gmail.com', 'a/A+o8KOv+D1mdtNN+I54FgwaEye3lncNjhKXgXTZ6M=', 1717131159);
-
---
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `gambar`
+-- Indexes for table `gambar`
 --
 ALTER TABLE `gambar`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `grooming`
+-- Indexes for table `grooming`
 --
 ALTER TABLE `grooming`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `kategori`
+-- Indexes for table `kategori`
 --
 ALTER TABLE `kategori`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `keranjang`
+-- Indexes for table `keranjang`
 --
 ALTER TABLE `keranjang`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `ongkir`
+-- Indexes for table `ongkir`
 --
 ALTER TABLE `ongkir`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `orders`
+-- Indexes for table `orders`
 --
 ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `paket`
+-- Indexes for table `paket`
 --
 ALTER TABLE `paket`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `pesan`
+-- Indexes for table `pesan`
 --
 ALTER TABLE `pesan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `progres`
+-- Indexes for table `progres`
 --
 ALTER TABLE `progres`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `review`
+-- Indexes for table `review`
 --
 ALTER TABLE `review`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user_token`
+-- Indexes for table `user_token`
 --
 ALTER TABLE `user_token`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `barang`
+-- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT untuk tabel `gambar`
+-- AUTO_INCREMENT for table `gambar`
 --
 ALTER TABLE `gambar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
--- AUTO_INCREMENT untuk tabel `grooming`
+-- AUTO_INCREMENT for table `grooming`
 --
 ALTER TABLE `grooming`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- AUTO_INCREMENT untuk tabel `kategori`
+-- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `keranjang`
+-- AUTO_INCREMENT for table `keranjang`
 --
 ALTER TABLE `keranjang`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- AUTO_INCREMENT untuk tabel `ongkir`
+-- AUTO_INCREMENT for table `ongkir`
 --
 ALTER TABLE `ongkir`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `orders`
+-- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `paket`
+-- AUTO_INCREMENT for table `paket`
 --
 ALTER TABLE `paket`
-  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `pesan`
+-- AUTO_INCREMENT for table `pesan`
 --
 ALTER TABLE `pesan`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `progres`
+-- AUTO_INCREMENT for table `progres`
 --
 ALTER TABLE `progres`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `review`
+-- AUTO_INCREMENT for table `review`
 --
 ALTER TABLE `review`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `user_token`
+-- AUTO_INCREMENT for table `user_token`
 --
 ALTER TABLE `user_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
