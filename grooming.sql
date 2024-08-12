@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 05, 2024 at 05:31 AM
+-- Generation Time: Aug 12, 2024 at 03:10 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -40,6 +40,7 @@ CREATE TABLE `grooming` (
   `bukti` text DEFAULT NULL,
   `statusPembayaran` int(1) NOT NULL DEFAULT 0,
   `totalBiaya` int(11) DEFAULT NULL,
+  `metodePembayaran` int(1) NOT NULL,
   `alamat` text DEFAULT NULL,
   `link_maps` text DEFAULT NULL,
   `tanggal` date NOT NULL,
@@ -53,9 +54,9 @@ CREATE TABLE `grooming` (
 -- Dumping data for table `grooming`
 --
 
-INSERT INTO `grooming` (`id`, `idUser`, `idPaket`, `idOngkir`, `jenis`, `mulai`, `selesai`, `deskripsi`, `foto`, `bukti`, `statusPembayaran`, `totalBiaya`, `alamat`, `link_maps`, `tanggal`, `jam`, `progres`, `createdAt`, `updatedAt`) VALUES
-(14, 4, 2, 1, 'Kanggo ora', 1, 2, 'Tidak ada catatan', NULL, 'a70c3fafbbb5e0576240645b863ba8ee.png', 1, 110000, 'Tegal selatan cak', 'https://maps.app.goo.gl/ffUozM5L88T93G5j6', '2024-08-05', '10:00:00', 1, '2024-08-05 02:54:44', '2024-08-05 03:13:52'),
-(15, 4, 2, 1, 'lll', 1, 2, 'lklk', NULL, NULL, 0, 110000, 'lglg', 'lkglk', '2024-08-07', '12:00:00', 0, '2024-08-05 03:04:04', NULL);
+INSERT INTO `grooming` (`id`, `idUser`, `idPaket`, `idOngkir`, `jenis`, `mulai`, `selesai`, `deskripsi`, `foto`, `bukti`, `statusPembayaran`, `totalBiaya`, `metodePembayaran`, `alamat`, `link_maps`, `tanggal`, `jam`, `progres`, `createdAt`, `updatedAt`) VALUES
+(14, 4, 2, 1, 'Kanggo ora', 1, 2, 'Tidak ada catatan', NULL, 'a70c3fafbbb5e0576240645b863ba8ee.png', 1, 110000, 1, 'Tegal selatan cak', 'https://maps.app.goo.gl/ffUozM5L88T93G5j6', '2024-08-05', '10:00:00', 1, '2024-08-05 02:54:44', '2024-08-12 01:03:27'),
+(15, 4, 2, 1, 'lll', 1, 2, 'lklk', NULL, NULL, 0, 110000, 2, 'lglg', 'lkglk', '2024-08-07', '12:00:00', 0, '2024-08-05 03:04:04', '2024-08-12 01:03:30');
 
 --
 -- Indexes for dumped tables

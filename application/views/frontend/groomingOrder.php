@@ -135,6 +135,53 @@
 								<div class="input-item input-item-textarea ltn__custom-icon">
 									<textarea name="deskripsi"></textarea>
 								</div>
+								<div class="row">
+									<div class="col-lg-6">
+										<div class="ltn__checkout-payment-method mt-50">
+											<h4 class="title-2">Metode Pembayaran</h4>
+											<input type="hidden" name="payment" id="payment">
+											<div id="checkout_accordion_1">
+												<!-- card -->
+												<div class="card">
+													<h5 class="collapsed ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-1" aria-expanded="false" id="qris">
+														QRIS
+													</h5>
+													<div id="faq-item-2-1" class="collapse" data-parent="#checkout_accordion_1">
+														<div class="card-body">
+															<p>Please scan the QRIS image on the invoice</p>
+															<img src="<?= base_url('assets/image/qris.jpg'); ?>" class="img-fluid" alt="">
+														</div>
+													</div>
+												</div>
+												<div class="card">
+													<h5 class="collapsed ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-2" aria-expanded="false" id="b_t">
+														Bank Transfer
+													</h5>
+													<div id="faq-item-2-2" class="collapse" data-parent="#checkout_accordion_1">
+														<div class="card-body">
+															<h6>Bank BCA atas nama Satria Ujianto</h6>
+															<h6>Rekening : 3620512892</h6>
+														</div>
+													</div>
+												</div>
+												<!-- card -->
+												<div class="card">
+													<h5 class="ltn__card-title" data-toggle="collapse" data-target="#faq-item-2-3" aria-expanded="false" id="cod">
+														Cash on delivery
+													</h5>
+													<div id="faq-item-2-3" class="collapse" data-parent="#checkout_accordion_1">
+														<div class="card-body">
+															<p>Bayar ketika pesananmu sampai</p>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="ltn__payment-note mt-30 mb-30">
+												<p>Data pribadi Anda akan digunakan untuk memproses pesanan Anda, mendukung pengalaman Anda di seluruh situs web ini, dan untuk tujuan lain yang dijelaskan dalam kebijakan privasi kami.</p>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<button type="submit" class="btn theme-btn-1 btn-effect-1 text-uppercase btn-block">Order</button>
@@ -149,6 +196,18 @@
 <script src="<?= base_url('assets/plugins/jquery.maskedinput/jquery.maskedinput.min.js'); ?>"></script>
 
 <script>
+	$('#qris').click(function() {
+		$('#payment').val(1);
+	});
+
+	$('#b_t').click(function() {
+		$('#payment').val(2);
+	});
+
+	$('#cod').click(function() {
+		$('#payment').val(3);
+	});
+
 	$('.js-masked-time').mask('99:99');
 </script>
 

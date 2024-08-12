@@ -187,16 +187,8 @@
 				</tr>
 			<?php elseif ($pesanan[0]->metodePembayaran == 2) : ?>
 				<tr>
-					<td>BRI</td>
-					<td>999301005602533</td>
-				</tr>
-				<tr>
-					<td>BCA</td>
-					<td>4071677832</td>
-				</tr>
-				<tr>
-					<td>BNI</td>
-					<td>12345678</td>
+					<td>BCA a.n Satria Ujianto</td>
+					<td>3620512892</td>
 				</tr>
 			<?php endif; ?>
 		</table>

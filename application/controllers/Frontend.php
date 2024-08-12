@@ -590,16 +590,17 @@ class Frontend extends CI_Controller
 
         $img = $_FILES['image']['name'];
 
-        $alamat    = $this->input->post('alamat');
-        $deskripsi = $this->input->post('deskripsi');
-        $link_maps = $this->input->post('link_maps');
-        $idPaket   = $this->input->post('idPaket');
-        $jenis     = $this->input->post('jenis');
-        $idOngkir  = $this->input->post('idOngkir');
-        $mulai     = $this->input->post('mulai');
-        $selesai   = $this->input->post('selesai');
-        $tanggal   = $this->input->post('tanggal');
-        $jam       = $this->input->post('jam');
+        $alamat           = $this->input->post('alamat');
+        $deskripsi        = $this->input->post('deskripsi');
+        $link_maps        = $this->input->post('link_maps');
+        $idPaket          = $this->input->post('idPaket');
+        $jenis            = $this->input->post('jenis');
+        $idOngkir         = $this->input->post('idOngkir');
+        $mulai            = $this->input->post('mulai');
+        $selesai          = $this->input->post('selesai');
+        $tanggal          = $this->input->post('tanggal');
+        $jam              = $this->input->post('jam');
+        $metodePembayaran = $this->input->post('payment');
 
         $this->db->where('tanggal', $tanggal);
         $this->db->where('jam', $jam . ':00');
@@ -638,44 +639,37 @@ class Frontend extends CI_Controller
                     $upload_data = $this->upload->data();
 
                     $data = [
-                        'idUser'     => $this->dt_user->id,
-                        'idPaket'    => $idPaket,
-                        'idOngkir'   => $idOngkir,
-                        'jenis'      => $jenis,
-                        'mulai'      => $mulai,
-                        'selesai'    => $selesai,
-                        'deskripsi'  => $deskripsi,
-                        'foto'       => $upload_data['file_name'],
-                        'totalBiaya' => $totalBiaya,
-                        'alamat'     => $alamat,
-                        'link_maps'  => $link_maps,
-                        'tanggal'    => $tanggal,
-                        'jam'        => $jam
+                        'idUser'           => $this->dt_user->id,
+                        'idPaket'          => $idPaket,
+                        'idOngkir'         => $idOngkir,
+                        'jenis'            => $jenis,
+                        'mulai'            => $mulai,
+                        'selesai'          => $selesai,
+                        'deskripsi'        => $deskripsi,
+                        'foto'             => $upload_data['file_name'],
+                        'totalBiaya'       => $totalBiaya,
+                        'metodePembayaran' => $metodePembayaran,
+                        'alamat'           => $alamat,
+                        'link_maps'        => $link_maps,
+                        'tanggal'          => $tanggal,
+                        'jam'              => $jam
                     ];
                 }
             } else {
-                $alamat    = $this->input->post('alamat');
-                $deskripsi = $this->input->post('deskripsi');
-                $link_maps = $this->input->post('link_maps');
-                $idPaket   = $this->input->post('idPaket');
-                $jenis     = $this->input->post('jenis');
-                $idOngkir  = $this->input->post('idOngkir');
-                $mulai     = $this->input->post('mulai');
-                $selesai   = $this->input->post('selesai');
-
                 $data = [
-                    'idUser'     => $this->dt_user->id,
-                    'idPaket'    => $idPaket,
-                    'idOngkir'   => $idOngkir,
-                    'jenis'      => $jenis,
-                    'mulai'      => $mulai,
-                    'selesai'    => $selesai,
-                    'deskripsi'  => $deskripsi,
-                    'totalBiaya' => $totalBiaya,
-                    'alamat'     => $alamat,
-                    'link_maps'  => $link_maps,
-                    'tanggal'    => $tanggal,
-                    'jam'        => $jam
+                    'idUser'           => $this->dt_user->id,
+                    'idPaket'          => $idPaket,
+                    'idOngkir'         => $idOngkir,
+                    'jenis'            => $jenis,
+                    'mulai'            => $mulai,
+                    'selesai'          => $selesai,
+                    'deskripsi'        => $deskripsi,
+                    'totalBiaya'       => $totalBiaya,
+                    'metodePembayaran' => $metodePembayaran,
+                    'alamat'           => $alamat,
+                    'link_maps'        => $link_maps,
+                    'tanggal'          => $tanggal,
+                    'jam'              => $jam
                 ];
             }
 

@@ -47,6 +47,7 @@
 											<th>Bukti Pembayaran</th>
 											<th>Status Pembayaran</th>
 											<th>Total Biaya</th>
+											<th>Metode Pembayaran</th>
 											<th>Catatan</th>
 											<th>Alamat</th>
 											<th>Tanggal</th>
@@ -95,6 +96,15 @@
 													<?php endif; ?>
 												</td>
 												<td><?= 'Rp. ' . number_format($gro->totalBiaya, 0, ',', '.'); ?></td>
+												<td>
+													<?php if ($gro->metodePembayaran == 1) : ?>
+														<span>QRIS</span>
+													<?php elseif ($gro->metodePembayaran == 2) : ?>
+														<span>Bank Transfer</span>
+													<?php elseif ($gro->metodePembayaran == 3) : ?>
+														<span>Cash on Delivery</span>
+													<?php endif; ?>
+												</td>
 												<td>
 													<p><?= ($gro->mulai == 1) ? 'Di antar sendiri' : 'Di jemput pihak petshop'; ?></p>
 													<p><?= ($gro->selesai == 1) ? 'Di ambil sendiri' : 'Di antar pihak petshop'; ?></p>
