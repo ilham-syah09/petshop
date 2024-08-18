@@ -99,7 +99,7 @@
 									<button type="button" class="tombol-progres progres_btn" data-toggle="modal" title="View Progress Order" data-target="#progresModal" data-idkhusus="<?= $order->idKhusus; ?>"><i class="fa fa-circle-notch"></i></button>
 								<?php endif; ?>
 								<?php if ($order->statusPembayaran != 2) : ?>
-									<a href="<?= base_url('frontend/cancelOrder/' . $order->id); ?>" class="tombol-view bg-danger" title="Batalkan" onclick="return confirm('Batalkan Pesanan?')"><i class="fa fa-times"></i></a>
+									<a href="<?= base_url('frontend/cancelOrders/' . $order->id); ?>" class="tombol-view bg-danger" title="Batalkan" onclick="return confirm('Batalkan Pesanan?')"><i class="fa fa-times"></i></a>
 								<?php endif; ?>
 							</td>
 						</tr>
