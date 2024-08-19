@@ -98,9 +98,13 @@
 							<td><?= 'Rp. ' . number_format($order->harga, 0, ',', '.'); ?></td>
 							<td><?= $order->jenis; ?></td>
 							<td>
-								<a href="<?= base_url('upload/gambar/' . $order->foto); ?>" target="photo">
-									<img src="<?= base_url('upload/gambar/' . $order->foto); ?>" alt="Photo" class="img-thumbnail" width="180">
-								</a>
+								<?php if (empty($order->foto)) : ?>
+									<p>-</p>
+								<?php else : ?>
+									<a href="<?= base_url('upload/gambar/' . $order->foto); ?>" target="photo">
+										<img src="<?= base_url('upload/gambar/' . $order->foto); ?>" alt="Photo" class="img-thumbnail" width="180">
+									</a>
+								<?php endif; ?>
 							</td>
 							<td><?= $order->deskripsi; ?></td>
 							<td>

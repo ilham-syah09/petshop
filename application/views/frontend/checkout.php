@@ -199,6 +199,42 @@
 		errorElement: 'small',
 		errorClass: 'mb-2 text-danger'
 	});
+
+	$(document).ready(function() {
+		$('#form-pesanan').on('submit', function(e) {
+			var selectedPaymentMethod = $('input[name=payment]').val();
+
+			if (!selectedPaymentMethod) {
+				notify('Harap pilih metode pembayaran!');
+				e.preventDefault();
+				return false;
+			}
+
+			// If a payment method is selected, allow form submission
+			return true;
+		});
+
+		// Payment method selection
+		$('#qris, #b_t, #cod').on('click', function() {
+			var paymentMethod = $(this).attr('id');
+			$('input[name=payment]').val(paymentMethod); // Set the hidden input value to the selected payment method
+		});
+
+		function notify(message) {
+			toastr.options = {
+				"positionClass": "toast-top-center",
+				"closeButton": true,
+				"progressBar": true,
+				"timeOut": "3000",
+				"extendedTimeOut": "1000",
+				"showEasing": "swing",
+				"hideEasing": "linear",
+				"showMethod": "fadeIn",
+				"hideMethod": "fadeOut"
+			};
+			toastr.error(message, 'Error');
+		}
+	});
 </script>
 
 <script>
